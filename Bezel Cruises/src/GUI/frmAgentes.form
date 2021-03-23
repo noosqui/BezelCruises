@@ -384,22 +384,6 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="6c" green="4e" red="1a" type="rgb"/>
-            </Property>
-            <Property name="opaque" type="boolean" value="false"/>
-          </Properties>
-          <AccessibilityProperties>
-            <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
-          </AccessibilityProperties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="680" y="60" width="250" height="-1"/>
-            </Constraint>
-          </Constraints>
-        </Component>
         <Component class="javax.swing.JTextField" name="jTextField7">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -485,6 +469,13 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="400" y="10" width="-1" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser2">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="710" y="70" width="180" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>

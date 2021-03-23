@@ -15,7 +15,7 @@ public class frmAgentes extends javax.swing.JInternalFrame {
      * Creates new form frmAgentes
      */
     public frmAgentes() {
-          initComponents();
+        initComponents();
     }
 
     /**
@@ -49,12 +49,12 @@ public class frmAgentes extends javax.swing.JInternalFrame {
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jTextField7 = new javax.swing.JTextField();
         jTextField8 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
 
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
@@ -183,11 +183,6 @@ public class frmAgentes extends javax.swing.JInternalFrame {
         jTextField6.setBorder(null);
         jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 130, -1));
 
-        jDateChooser1.setBackground(new java.awt.Color(26, 78, 108));
-        jDateChooser1.setOpaque(false);
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 60, 250, -1));
-        jDateChooser1.getAccessibleContext().setAccessibleDescription("");
-
         jTextField7.setBackground(new java.awt.Color(26, 78, 108));
         jTextField7.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField7.setText("  ");
@@ -216,6 +211,7 @@ public class frmAgentes extends javax.swing.JInternalFrame {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Agentes");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, -1, 40));
+        jPanel1.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 70, 180, -1));
 
         getContentPane().add(jPanel1);
 
@@ -230,7 +226,7 @@ public class frmAgentes extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
