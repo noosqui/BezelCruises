@@ -30,7 +30,6 @@ public class frmLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         panel1 = new java.awt.Panel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         panel4 = new java.awt.Panel();
@@ -52,11 +51,6 @@ public class frmLogin extends javax.swing.JFrame {
 
         panel1.setBackground(new java.awt.Color(0, 90, 130));
         panel1.setLayout(null);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ICONO.png"))); // NOI18N
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panel1.add(jLabel1);
-        jLabel1.setBounds(10, 90, 0, 0);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ICONO.png"))); // NOI18N
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -99,10 +93,10 @@ public class frmLogin extends javax.swing.JFrame {
         txtusuario.setBorder(null);
         txtusuario.setCaretColor(new java.awt.Color(255, 255, 255));
         txtusuario.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 txtusuarioAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -208,7 +202,6 @@ public class frmLogin extends javax.swing.JFrame {
     private javax.swing.JButton Btningresar;
     private javax.swing.JPasswordField Pswusuario;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
