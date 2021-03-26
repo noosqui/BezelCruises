@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import Clases.ConexionBasedeDatos;
+
 /**
  *
  * @author Maykin Perdomo
@@ -97,10 +99,10 @@ public class frmLogin extends javax.swing.JFrame {
         txtusuario.setBorder(null);
         txtusuario.setCaretColor(new java.awt.Color(255, 255, 255));
         txtusuario.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 txtusuarioAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -142,10 +144,10 @@ public class frmLogin extends javax.swing.JFrame {
         jCheckBox1.setBackground(new java.awt.Color(33, 45, 62));
         jCheckBox1.setFont(new java.awt.Font("Consolas", 0, 10)); // NOI18N
         jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox1.setText("Mostrar Contraseña");
         jCheckBox1.setBorder(null);
-        jCheckBox1.setLabel("Recordar");
         panel4.add(jCheckBox1);
-        jCheckBox1.setBounds(50, 300, 90, 25);
+        jCheckBox1.setBounds(40, 300, 140, 25);
 
         getContentPane().add(panel4);
         panel4.setBounds(500, 130, 350, 460);
