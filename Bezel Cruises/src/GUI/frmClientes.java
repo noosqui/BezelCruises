@@ -29,10 +29,9 @@ public class frmClientes extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableClientes = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -43,25 +42,24 @@ public class frmClientes extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        txttelefono = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        jTextField9 = new javax.swing.JTextField();
+        txtapellido = new javax.swing.JTextField();
+        txtnombre = new javax.swing.JTextField();
+        txtdirec = new javax.swing.JTextField();
+        txtdirecdos = new javax.swing.JTextField();
+        txtPais = new javax.swing.JTextField();
+        txtPuesto = new javax.swing.JTextField();
 
         jPanel1.setBackground(new java.awt.Color(32, 98, 136));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setBackground(new java.awt.Color(26, 78, 108));
-        jTable1.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableClientes.setBackground(new java.awt.Color(26, 78, 108));
+        tableClientes.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        tableClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -72,147 +70,132 @@ public class frmClientes extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableClientes);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 850, 196));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 850, 196));
 
         jButton1.setBackground(new java.awt.Color(26, 78, 108));
         jButton1.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Agregar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 420, 150, 50));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 460, 150, 50));
 
         jButton2.setBackground(new java.awt.Color(26, 78, 108));
         jButton2.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Modificar");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 420, 150, 50));
-
-        jButton3.setBackground(new java.awt.Color(26, 78, 108));
-        jButton3.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Despedir");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 420, 150, 50));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 460, 150, 50));
 
         jButton4.setBackground(new java.awt.Color(26, 78, 108));
         jButton4.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Cancelar");
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 490, 150, 50));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 460, 150, 50));
 
         jLabel1.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Nombre");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
+        jLabel1.setText("Nombre:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Apellido");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, -1, -1));
+        jLabel2.setText("Apellido:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Telefono");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
+        jLabel3.setText("Telefono:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Direccion");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, -1, -1));
+        jLabel4.setText("Direccion:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 80, -1));
 
         jLabel5.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Direccion #2");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, -1, -1));
+        jLabel5.setText("Direccion #2:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Pais");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, -1, -1));
+        jLabel6.setText("Pais:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 170, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Fecha Nacimiento");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, -1, -1));
+        jLabel7.setText("Fecha Nacimiento:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 80, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Puesto");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, -1, -1));
+        jLabel8.setText("Puesto:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 130, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("???");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 170, -1, -1));
 
-        jTextField1.setBackground(new java.awt.Color(26, 78, 108));
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField1.setText("  ");
-        jTextField1.setBorder(null);
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 130, -1));
-
-        jTextField2.setBackground(new java.awt.Color(26, 78, 108));
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField2.setText("  ");
-        jTextField2.setBorder(null);
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 130, -1));
-
-        jTextField3.setBackground(new java.awt.Color(26, 78, 108));
-        jTextField3.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField3.setText("  ");
-        jTextField3.setBorder(null);
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 130, -1));
-
-        jTextField4.setBackground(new java.awt.Color(26, 78, 108));
-        jTextField4.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField4.setText("  ");
-        jTextField4.setBorder(null);
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, 130, -1));
-
-        jTextField5.setBackground(new java.awt.Color(26, 78, 108));
-        jTextField5.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField5.setText("  ");
-        jTextField5.setBorder(null);
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 130, -1));
-
-        jTextField6.setBackground(new java.awt.Color(26, 78, 108));
-        jTextField6.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField6.setText("  ");
-        jTextField6.setBorder(null);
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 130, -1));
+        txttelefono.setBackground(new java.awt.Color(26, 78, 108));
+        txttelefono.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txttelefono.setText("  ");
+        txttelefono.setBorder(null);
+        jPanel1.add(txttelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 130, 20));
 
         jDateChooser1.setBackground(new java.awt.Color(26, 78, 108));
         jDateChooser1.setOpaque(false);
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 60, 250, -1));
-
-        jTextField7.setBackground(new java.awt.Color(26, 78, 108));
-        jTextField7.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField7.setText("  ");
-        jTextField7.setBorder(null);
-        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 120, 130, -1));
-
-        jTextField8.setBackground(new java.awt.Color(26, 78, 108));
-        jTextField8.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField8.setText("  ");
-        jTextField8.setBorder(null);
-        jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 160, 130, -1));
-
-        jButton5.setBackground(new java.awt.Color(26, 78, 108));
-        jButton5.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Contratar");
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 420, 150, 50));
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, 200, -1));
 
         jButton6.setBackground(new java.awt.Color(26, 78, 108));
         jButton6.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("Guardar");
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 490, 150, 50));
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 460, 150, 50));
 
         jLabel10.setFont(new java.awt.Font("Gill Sans MT", 1, 36)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Clientes");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, -1, 40));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, 40));
+
+        jTextField9.setBackground(new java.awt.Color(26, 78, 108));
+        jTextField9.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTextField9.setText("  ");
+        jTextField9.setBorder(null);
+        jPanel1.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 160, 130, 20));
+
+        txtapellido.setBackground(new java.awt.Color(26, 78, 108));
+        txtapellido.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtapellido.setText("  ");
+        txtapellido.setBorder(null);
+        jPanel1.add(txtapellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 130, 20));
+
+        txtnombre.setBackground(new java.awt.Color(26, 78, 108));
+        txtnombre.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        txtnombre.setForeground(new java.awt.Color(204, 204, 204));
+        txtnombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtnombre.setBorder(null);
+        jPanel1.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 130, 20));
+
+        txtdirec.setBackground(new java.awt.Color(26, 78, 108));
+        txtdirec.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtdirec.setText("  ");
+        txtdirec.setBorder(null);
+        jPanel1.add(txtdirec, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, 130, 20));
+
+        txtdirecdos.setBackground(new java.awt.Color(26, 78, 108));
+        txtdirecdos.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtdirecdos.setText("  ");
+        txtdirecdos.setBorder(null);
+        jPanel1.add(txtdirecdos, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 130, 20));
+
+        txtPais.setBackground(new java.awt.Color(26, 78, 108));
+        txtPais.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtPais.setText("  ");
+        txtPais.setBorder(null);
+        jPanel1.add(txtPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, 130, 20));
+
+        txtPuesto.setBackground(new java.awt.Color(26, 78, 108));
+        txtPuesto.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtPuesto.setText("  ");
+        txtPuesto.setBorder(null);
+        jPanel1.add(txtPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 120, 130, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -242,9 +225,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
@@ -259,14 +240,14 @@ public class frmClientes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTable tableClientes;
+    private javax.swing.JTextField txtPais;
+    private javax.swing.JTextField txtPuesto;
+    private javax.swing.JTextField txtapellido;
+    private javax.swing.JTextField txtdirec;
+    private javax.swing.JTextField txtdirecdos;
+    private javax.swing.JTextField txtnombre;
+    private javax.swing.JTextField txttelefono;
     // End of variables declaration//GEN-END:variables
 }
