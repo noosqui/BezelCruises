@@ -136,6 +136,11 @@ public class frmLogin extends javax.swing.JFrame {
         Btningresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/btningresar.png"))); // NOI18N
         Btningresar.setBorderPainted(false);
         Btningresar.setContentAreaFilled(false);
+        Btningresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtningresarActionPerformed(evt);
+            }
+        });
         panel4.add(Btningresar);
         Btningresar.setBounds(70, 340, 190, 40);
 
@@ -165,6 +170,10 @@ public class frmLogin extends javax.swing.JFrame {
     private void txtusuarioAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtusuarioAncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_txtusuarioAncestorAdded
+
+    private void BtningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtningresarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtningresarActionPerformed
 
     /**
      * @param args the command line arguments
