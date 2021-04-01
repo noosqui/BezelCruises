@@ -72,7 +72,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tableClientes);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 850, 196));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 850, 196));
 
         jButton1.setBackground(new java.awt.Color(26, 78, 108));
         jButton1.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
@@ -147,7 +147,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
         jButton6.setBackground(new java.awt.Color(26, 78, 108));
         jButton6.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jButton6.setText("Guardar");
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 460, 150, 50));
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 460, 150, 50));
 
         jLabel10.setFont(new java.awt.Font("Gill Sans MT", 1, 36)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
