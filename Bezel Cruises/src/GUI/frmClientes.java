@@ -1,14 +1,25 @@
 
 package GUI;
 
-import java.sql.*;
 import Clases.ConexionBasedeDatos;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.ResultSetMetaData;
 import java.sql.Statement;
+import java.util.Calendar;
+import java.sql.CallableStatement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.Date;
+
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,14 +27,18 @@ import javax.swing.JOptionPane;
  */
 public class frmClientes extends javax.swing.JInternalFrame {
 
-   ConexionBasedeDatos cone = new ConexionBasedeDatos();
-   Connection con = cone.obtenerConexion();
+    PreparedStatement pp = null;
+    ConexionBasedeDatos cone = new ConexionBasedeDatos();
+    Connection cn= null;
+    ResultSet rs;
+    Statement st;
+    ResultSetMetaData rsmd;
+    DefaultTableModel model;
     
     public frmClientes() {
         initComponents();
     }
 
- 
  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -48,13 +63,30 @@ public class frmClientes extends javax.swing.JInternalFrame {
         jdcFechaNacimiento = new com.toedter.calendar.JDateChooser();
         bttnGuardar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        txtApellido = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         txtDirec = new javax.swing.JTextField();
         txtDirec2 = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
-        rbFemenino = new javax.swing.JRadioButton();
-        rbMasculino = new javax.swing.JRadioButton();
+        txtApellido = new javax.swing.JTextField();
+        cmbSexo = new javax.swing.JComboBox<>();
+
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(32, 98, 136));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -63,22 +95,15 @@ public class frmClientes extends javax.swing.JInternalFrame {
         tblClientes.setFont(new java.awt.Font("Gill Sans MT", 0, 14)); // NOI18N
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Id", "Nombre", "Apellido", "Sexo", "Telefono", "Fecha Nacimiento", "Direccion 1", "Direcccion 2", "Correo electronico"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false, false, true, true, false
+                false, false, false, false, false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -87,21 +112,27 @@ public class frmClientes extends javax.swing.JInternalFrame {
         tblClientes.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(tblClientes);
         tblClientes.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (tblClientes.getColumnModel().getColumnCount() > 0) {
+            tblClientes.getColumnModel().getColumn(0).setResizable(false);
+        }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 850, 196));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 860, 196));
 
         bttnLimpiar.setBackground(new java.awt.Color(26, 78, 108));
         bttnLimpiar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        bttnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
         bttnLimpiar.setText("Limpiar");
         jPanel1.add(bttnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 460, 150, 50));
 
         bttnModificar.setBackground(new java.awt.Color(26, 78, 108));
         bttnModificar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        bttnModificar.setForeground(new java.awt.Color(255, 255, 255));
         bttnModificar.setText("Modificar");
         jPanel1.add(bttnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 460, 150, 50));
 
         bttnEliminar.setBackground(new java.awt.Color(26, 78, 108));
         bttnEliminar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        bttnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         bttnEliminar.setText("Eliminar");
         jPanel1.add(bttnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 460, 150, 50));
 
@@ -149,7 +180,6 @@ public class frmClientes extends javax.swing.JInternalFrame {
         txtTelefono.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         txtTelefono.setForeground(new java.awt.Color(204, 204, 204));
         txtTelefono.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txtTelefono.setText("  ");
         txtTelefono.setBorder(null);
         jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 130, 20));
 
@@ -160,6 +190,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
 
         bttnGuardar.setBackground(new java.awt.Color(26, 78, 108));
         bttnGuardar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        bttnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         bttnGuardar.setText("Guardar");
         bttnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,24 +204,17 @@ public class frmClientes extends javax.swing.JInternalFrame {
         jLabel10.setText("Clientes");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, 40));
 
-        txtApellido.setBackground(new java.awt.Color(26, 78, 108));
-        txtApellido.setFont(new java.awt.Font("Gill Sans MT", 0, 14)); // NOI18N
-        txtApellido.setForeground(new java.awt.Color(204, 204, 204));
-        txtApellido.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txtApellido.setText("  ");
-        txtApellido.setBorder(null);
-        txtApellido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtApellidoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 130, 20));
-
         txtNombre.setBackground(new java.awt.Color(26, 78, 108));
         txtNombre.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         txtNombre.setForeground(new java.awt.Color(204, 204, 204));
         txtNombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtNombre.setText(" ");
         txtNombre.setBorder(null);
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 130, 20));
 
         txtDirec.setBackground(new java.awt.Color(26, 78, 108));
@@ -202,104 +226,174 @@ public class frmClientes extends javax.swing.JInternalFrame {
         jPanel1.add(txtDirec, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 130, 20));
 
         txtDirec2.setBackground(new java.awt.Color(26, 78, 108));
+        txtDirec2.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        txtDirec2.setForeground(new java.awt.Color(204, 204, 204));
         txtDirec2.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtDirec2.setText("  ");
         txtDirec2.setBorder(null);
         jPanel1.add(txtDirec2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, 130, 20));
 
         txtCorreo.setBackground(new java.awt.Color(26, 78, 108));
+        txtCorreo.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        txtCorreo.setForeground(new java.awt.Color(204, 204, 204));
         txtCorreo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtCorreo.setText("  ");
         txtCorreo.setBorder(null);
         jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 130, 130, 20));
 
-        rbFemenino.setBackground(new java.awt.Color(32, 98, 136));
-        buttonGroup1.add(rbFemenino);
-        rbFemenino.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        rbFemenino.setForeground(new java.awt.Color(255, 255, 255));
-        rbFemenino.setText("Femenino");
-        jPanel1.add(rbFemenino, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 180, -1, -1));
+        txtApellido.setBackground(new java.awt.Color(26, 78, 108));
+        txtApellido.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        txtApellido.setForeground(new java.awt.Color(204, 204, 204));
+        txtApellido.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtApellido.setText(" ");
+        txtApellido.setBorder(null);
+        txtApellido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtApellidoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 130, 20));
 
-        rbMasculino.setBackground(new java.awt.Color(32, 98, 136));
-        buttonGroup1.add(rbMasculino);
-        rbMasculino.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        rbMasculino.setForeground(new java.awt.Color(255, 255, 255));
-        rbMasculino.setText("Masculino");
-        jPanel1.add(rbMasculino, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, -1, -1));
+        cmbSexo.setFont(new java.awt.Font("Gill Sans MT", 0, 14)); // NOI18N
+        cmbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
+        cmbSexo.setName(""); // NOI18N
+        jPanel1.add(cmbSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 180, 130, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 978, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1101, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void bttnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnGuardarActionPerformed
+        
+        int dia, mes, año;  
+      
+        String nombreC = txtNombre.getText().trim();
+        String apellidoC = txtApellido.getText().trim();
+        String telefono = txtTelefono.getText().trim();
+        String direccion1 = txtDirec.getText().trim();
+        String direccion2 = txtDirec2.getText().trim();
+        String correo = txtCorreo.getText().trim();
+        String sexo = String.valueOf(cmbSexo.getSelectedItem());
+        //String sexo = "" + (cmbSexo.getSelectedIndex()+1);
+        dia = jdcFechaNacimiento.getCalendar().get(Calendar.DAY_OF_MONTH);
+        mes = jdcFechaNacimiento.getCalendar().get(Calendar.MONTH)+1;
+        año = jdcFechaNacimiento.getCalendar().get(Calendar.YEAR);
+        String fechaNac = año + "-" + mes + "-" + dia;
+        
+          try
+            {
+                CallableStatement cmd = cn.prepareCall("{CALL InsertCliente(?,?,?,?,?,?,?,?)}");
+                cmd.setString(1, nombreC);
+                cmd.setString(2, apellidoC);
+                cmd.setString(3, sexo);
+                cmd.setString(4, telefono);
+                cmd.setString(5, fechaNac);
+                cmd.setString(6, direccion1);
+                cmd.setString(7, direccion2);
+                cmd.setString(8, correo);
+                cmd.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Cliente Agregado Exitosamente");
+            }
+            catch(SQLException ex)
+            {
+                JOptionPane.showMessageDialog(null, "ERROR! No se pudo ingresar el Cliente! " + ex);
+            }
+            finally
+            {
+                txtNombre.setText(null);
+                txtApellido.setText(null);
+                cmbSexo.setSelectedIndex(-1);
+                txtTelefono.setText(null);
+                jdcFechaNacimiento.setCalendar(null);
+                txtDirec.setText(null);
+                txtDirec2.setText(null);
+                txtCorreo.setText(null);
+                listarCliente();
+            }    
+    }//GEN-LAST:event_bttnGuardarActionPerformed
+       
+
+      public Date convertirFecha(String fecha)
+    {
+        Date result = null;
+        
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        
+        try 
+        {
+            result = formato.parse(fecha);
+        } catch (ParseException ex) 
+        {
+            
+        }
+        
+        return result;
+    }
+     
+    
     private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidoActionPerformed
 
-    private void bttnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnGuardarActionPerformed
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        cn = cone.obtenerConexion(); 
+        listarCliente();
         
-        String nombre = txtNombre.getText();
-        String apellido = txtApellido.getText();
-        String telefono = txtTelefono.getText();
-        String correo = txtCorreo.getText();
-        String direccionUno = txtDirec.getText();
-        String direcccionDos = txtDirec2.getText();
-        String sexo;
-        if(rbMasculino.isSelected()==true)
-        {
-            sexo = "Masculino";
-        }else if(rbFemenino.isSelected()==true)
-        {
-            sexo = "Femenino";
-        }else
-        {
-            sexo = "Otro";
-        }
+    }//GEN-LAST:event_formInternalFrameOpened
+
+    public void listarCliente()
+    {
+        model = (DefaultTableModel) tblClientes.getModel();
+        model.setRowCount(0);
         
-            try {
-                Connection con = ConexionBasedeDatos.obtenerConexion();
-                PreparedStatement ps = (PreparedStatement) con.prepareStatement("INSERT INTO Clientes (nombre, apellido,telefono, correo, direccionUno, direccionDos, sexo) VALUES (?,?,?,?,?,?,?)");
-                
-                ps.setString(1,nombre);
-                ps.setString(2,apellido);
-                ps.setString(4,sexo);
-                ps.setString(3,telefono);
-                ps.setString(5,direccionUno);
-                ps.setString(6,direcccionDos);
-                ps.setString(7,correo);
-                ps.executeUpdate();
-                JOptionPane.showMessageDialog(null,"Registro Guardado");
-                
-            } catch (SQLException ex) 
+        try
+        {
+            pp =cn.prepareStatement("SELECT * FROM [dbo].[Clientes]");
+            rs = pp.executeQuery();
+            rsmd = rs.getMetaData();
+            int col = rsmd.getColumnCount();
+            
+            while(rs.next())
             {
-                 JOptionPane.showMessageDialog(null,ex.toString());
+                Object fil[] = new Object[col];
+                for(int i = 0; i < col; i++)
+                {
+                    fil[i] = rs.getObject(i+1);
+                }
+                model.addRow(fil);
             }
-    }//GEN-LAST:event_bttnGuardarActionPerformed
-
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "Los datos no se pudieron cargar a la tabla correctamente.");
+        }
+             
+    }
     
     
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bttnEliminar;
     private javax.swing.JButton bttnGuardar;
     private javax.swing.JButton bttnLimpiar;
     private javax.swing.JButton bttnModificar;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cmbSexo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -312,8 +406,6 @@ public class frmClientes extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private com.toedter.calendar.JDateChooser jdcFechaNacimiento;
-    private javax.swing.JRadioButton rbFemenino;
-    private javax.swing.JRadioButton rbMasculino;
     private javax.swing.JTable tblClientes;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCorreo;
@@ -324,13 +416,5 @@ public class frmClientes extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
  
-
-    
-
-
-   
-
- 
-
 
 }
