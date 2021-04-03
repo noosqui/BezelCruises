@@ -72,7 +72,7 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Iniciar Sesión");
         panel4.add(jLabel3);
-        jLabel3.setBounds(126, 42, 128, 28);
+        jLabel3.setBounds(126, 42, 143, 32);
         jLabel3.getAccessibleContext().setAccessibleName("Iniciar_Sesion");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -132,6 +132,11 @@ public class frmLogin extends javax.swing.JFrame {
         Btningresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/btningresar.png"))); // NOI18N
         Btningresar.setBorderPainted(false);
         Btningresar.setContentAreaFilled(false);
+        Btningresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtningresarActionPerformed(evt);
+            }
+        });
         panel4.add(Btningresar);
         Btningresar.setBounds(70, 340, 190, 40);
 
@@ -161,6 +166,14 @@ public class frmLogin extends javax.swing.JFrame {
     private void txtusuarioAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtusuarioAncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_txtusuarioAncestorAdded
+
+    private void BtningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtningresarActionPerformed
+        // TODO add your handling code here:
+        frmMenuPrincipal menu = new frmMenuPrincipal ();
+        menu.setVisible(true);
+        
+        
+    }//GEN-LAST:event_BtningresarActionPerformed
 
     /**
      * @param args the command line arguments

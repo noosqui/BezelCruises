@@ -12,7 +12,7 @@ public class ConexionBasedeDatos {
     
     public static Connection obtenerConexion()
     {
-        String url = "jdbc:sqlserver://JEFFERSON-PC:1433;databaseName=Cruceros";
+        String url = "jdbc:sqlserver://localhost:1433;databaseName=Cruceros [sa on dbo]";
         
         try
         {
@@ -25,7 +25,7 @@ public class ConexionBasedeDatos {
         
         try
         {
-            conn = DriverManager.getConnection(url, "sa", "jete");
+            conn = DriverManager.getConnection(url, "sa", "123");
             JOptionPane.showMessageDialog(null, "Conexion exitosa");
         }
         catch(Exception ex)
