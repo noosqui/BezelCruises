@@ -42,7 +42,7 @@ public class frmBuque extends javax.swing.JInternalFrame {
 
         jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        Btnlimpiar = new javax.swing.JButton();
+        Btninsertar = new javax.swing.JButton();
         BtnEliminar = new javax.swing.JButton();
         BtnActualizar = new javax.swing.JButton();
         BtnAgregar = new javax.swing.JButton();
@@ -58,13 +58,13 @@ public class frmBuque extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jLabel14 = new javax.swing.JLabel();
         txttamañob = new javax.swing.JTextField();
         txtnumcamarot = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        Btnlimpiar1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        Btnlimpiar2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         txtbuscar = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -79,18 +79,18 @@ public class frmBuque extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
 
-        Btnlimpiar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        Btnlimpiar.setForeground(new java.awt.Color(17, 51, 71));
-        Btnlimpiar.setText("Limpiar");
-        Btnlimpiar.setBorder(null);
-        Btnlimpiar.setBorderPainted(false);
-        Btnlimpiar.addActionListener(new java.awt.event.ActionListener() {
+        Btninsertar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        Btninsertar.setForeground(new java.awt.Color(17, 51, 71));
+        Btninsertar.setText("insertar");
+        Btninsertar.setBorder(null);
+        Btninsertar.setBorderPainted(false);
+        Btninsertar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnlimpiarActionPerformed(evt);
+                BtninsertarActionPerformed(evt);
             }
         });
-        jPanel1.add(Btnlimpiar);
-        Btnlimpiar.setBounds(610, 420, 150, 30);
+        jPanel1.add(Btninsertar);
+        Btninsertar.setBounds(710, 300, 60, 30);
 
         BtnEliminar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         BtnEliminar.setForeground(new java.awt.Color(17, 51, 71));
@@ -243,17 +243,6 @@ public class frmBuque extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel13);
         jLabel13.setBounds(430, 280, 120, 19);
 
-        jComboBox3.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox3);
-        jComboBox3.setBounds(600, 510, 210, 25);
-
-        jLabel14.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("Buque");
-        jPanel1.add(jLabel14);
-        jLabel14.setBounds(540, 510, 46, 19);
-
         txttamañob.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         txttamañob.setForeground(new java.awt.Color(51, 51, 51));
         txttamañob.setBorder(null);
@@ -281,9 +270,35 @@ public class frmBuque extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel7);
         jLabel7.setBounds(10, 470, 100, 110);
 
+        Btnlimpiar1.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        Btnlimpiar1.setForeground(new java.awt.Color(17, 51, 71));
+        Btnlimpiar1.setText("Limpiar");
+        Btnlimpiar1.setBorder(null);
+        Btnlimpiar1.setBorderPainted(false);
+        Btnlimpiar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btnlimpiar1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Btnlimpiar1);
+        Btnlimpiar1.setBounds(610, 420, 150, 30);
+
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/buques.jpg"))); // NOI18N
         jPanel1.add(jLabel3);
         jLabel3.setBounds(0, 0, 870, 710);
+
+        Btnlimpiar2.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        Btnlimpiar2.setForeground(new java.awt.Color(17, 51, 71));
+        Btnlimpiar2.setText("Limpiar");
+        Btnlimpiar2.setBorder(null);
+        Btnlimpiar2.setBorderPainted(false);
+        Btnlimpiar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btnlimpiar2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Btnlimpiar2);
+        Btnlimpiar2.setBounds(610, 420, 150, 30);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 60, 870, 566);
@@ -333,7 +348,7 @@ public class frmBuque extends javax.swing.JInternalFrame {
         );
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 0, 870, 66);
+        jPanel2.setBounds(0, 10, 870, 66);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -391,9 +406,10 @@ public class frmBuque extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_BtnActualizarActionPerformed
 
-    private void BtnlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnlimpiarActionPerformed
-        limpiar();
-    }//GEN-LAST:event_BtnlimpiarActionPerformed
+    private void BtninsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtninsertarActionPerformed
+      new frminsertabuqe().setVisible(true);
+     
+    }//GEN-LAST:event_BtninsertarActionPerformed
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
         BusquedaBuques();
@@ -441,6 +457,14 @@ public class frmBuque extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Solo ingrese numeros porfavor");
         }
     }//GEN-LAST:event_txtnivelesbKeyTyped
+
+    private void Btnlimpiar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btnlimpiar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btnlimpiar1ActionPerformed
+
+    private void Btnlimpiar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btnlimpiar2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btnlimpiar2ActionPerformed
 //////////////////////////////////////Funcionnnnnnnessss//////////////////////////////////
 
     //carga la tabla de Buques //
@@ -507,14 +531,14 @@ public class frmBuque extends javax.swing.JInternalFrame {
     private javax.swing.JButton BtnActualizar;
     private javax.swing.JButton BtnAgregar;
     private javax.swing.JButton BtnEliminar;
-    private javax.swing.JButton Btnlimpiar;
+    private javax.swing.JButton Btninsertar;
+    private javax.swing.JButton Btnlimpiar1;
+    private javax.swing.JButton Btnlimpiar2;
     private javax.swing.JButton btnbuscar;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

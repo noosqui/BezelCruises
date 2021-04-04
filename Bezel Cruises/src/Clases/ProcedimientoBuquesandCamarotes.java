@@ -28,6 +28,13 @@ public class ProcedimientoBuquesandCamarotes {
         datos.setString(4, Id_Buque);
         datos.execute();
     }
+    public static void insertTipoBuque(String DescripcionBuque, String Marca, String Modelo) throws SQLException {
+        CallableStatement datos = ConexionBasedeDatos.getConexion().prepareCall("{call insertTipoBuque(?,?,?)}");
+        datos.setString(1, DescripcionBuque);
+        datos.setString(2, Marca);
+        datos.setString(3, Modelo); 
+        datos.execute();
+    }
     //eliminar //
 
     public static void deletbuque(int id) throws SQLException {
@@ -35,6 +42,12 @@ public class ProcedimientoBuquesandCamarotes {
         dato.setInt(1, id);
         dato.execute();
     }
+     public static void DelettipoBuque(int id) throws SQLException {
+        CallableStatement dato = ConexionBasedeDatos.getConexion().prepareCall("{call DelettipoBuque(?)}");
+        dato.setInt(1, id);
+        dato.execute();
+    } 
+     
      public static void deletCamarotes(int id) throws SQLException {
         CallableStatement dato = ConexionBasedeDatos.getConexion().prepareCall("{call deletCamarote(?)}");
         dato.setInt(1, id);
@@ -62,7 +75,17 @@ public class ProcedimientoBuquesandCamarotes {
         datos.setString(5, Id_Buque);
         datos.execute();
     }
-
+    public static void Updatetipobuque(int id,String DescripcionBuque, String Marca, String Modelo) throws SQLException {
+        CallableStatement datos = ConexionBasedeDatos.getConexion().prepareCall("{call Updatetipobuque(?,?,?,?)}");
+        datos.setInt(1, id);
+        datos.setString(2, DescripcionBuque);
+        datos.setString(3, Marca);
+        datos.setString(4, Modelo); 
+        datos.execute();
+    }
+    
+    
+///busquedas///////////
     public static void busquedaBuque(int id) throws SQLException {
         CallableStatement dato = ConexionBasedeDatos.getConexion().prepareCall("{call busquedaBuque(?)}");
         dato.setInt(1, id);
