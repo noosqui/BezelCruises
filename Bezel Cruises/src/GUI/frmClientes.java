@@ -2,6 +2,7 @@
 package GUI;
 
 import Clases.ConexionBasedeDatos;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,11 +13,11 @@ import java.util.Calendar;
 import java.sql.CallableStatement;
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.util.Date;
 
+import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -36,8 +37,10 @@ public class frmClientes extends javax.swing.JInternalFrame {
     DefaultTableModel model;
     
     
+    
     public frmClientes() {
         initComponents();
+        
     }
  
     @SuppressWarnings("unchecked")
@@ -194,10 +197,21 @@ public class frmClientes extends javax.swing.JInternalFrame {
         txtTelefono.setForeground(new java.awt.Color(204, 204, 204));
         txtTelefono.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtTelefono.setBorder(null);
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 130, 20));
 
         jdcFechaNacimiento.setBackground(new java.awt.Color(26, 78, 108));
         jdcFechaNacimiento.setDateFormatString("yyyy-MM-dd");
+        jdcFechaNacimiento.setFont(new java.awt.Font("Gill Sans MT", 0, 14)); // NOI18N
+        jdcFechaNacimiento.setMaxSelectableDate(new java.util.Date(1072854102000L));
+        jdcFechaNacimiento.setMinSelectableDate(new java.util.Date(-1262278698000L));
         jdcFechaNacimiento.setOpaque(false);
         jPanel1.add(jdcFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 80, 180, -1));
 
@@ -228,6 +242,17 @@ public class frmClientes extends javax.swing.JInternalFrame {
                 txtNombreActionPerformed(evt);
             }
         });
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombreKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 130, 20));
 
         txtDirec.setBackground(new java.awt.Color(26, 78, 108));
@@ -236,6 +261,14 @@ public class frmClientes extends javax.swing.JInternalFrame {
         txtDirec.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtDirec.setText("  ");
         txtDirec.setBorder(null);
+        txtDirec.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDirecKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDirecKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtDirec, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 200, 20));
 
         txtDirec2.setBackground(new java.awt.Color(26, 78, 108));
@@ -244,6 +277,14 @@ public class frmClientes extends javax.swing.JInternalFrame {
         txtDirec2.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtDirec2.setText("  ");
         txtDirec2.setBorder(null);
+        txtDirec2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDirec2KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDirec2KeyTyped(evt);
+            }
+        });
         jPanel1.add(txtDirec2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, 200, 20));
 
         txtCorreo.setBackground(new java.awt.Color(26, 78, 108));
@@ -252,6 +293,19 @@ public class frmClientes extends javax.swing.JInternalFrame {
         txtCorreo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtCorreo.setText("  ");
         txtCorreo.setBorder(null);
+        txtCorreo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCorreoFocusLost(evt);
+            }
+        });
+        txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCorreoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCorreoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 130, 180, 20));
 
         txtApellido.setBackground(new java.awt.Color(26, 78, 108));
@@ -263,6 +317,17 @@ public class frmClientes extends javax.swing.JInternalFrame {
         txtApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtApellidoActionPerformed(evt);
+            }
+        });
+        txtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtApellidoKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtApellidoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidoKeyTyped(evt);
             }
         });
         jPanel1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 130, 20));
@@ -295,9 +360,9 @@ public class frmClientes extends javax.swing.JInternalFrame {
      int id;
      int seleccion;
  
-    
+     
     private void bttnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnGuardarActionPerformed
-        
+
         int dia, mes, año;  
       
         String nombreC = txtNombre.getText().trim();
@@ -312,7 +377,12 @@ public class frmClientes extends javax.swing.JInternalFrame {
         año = jdcFechaNacimiento.getCalendar().get(Calendar.YEAR);
         String fechaNac = año + "-" + mes + "-" + dia;
         
-        
+        if (txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty() || txtTelefono.getText().isEmpty() 
+            || txtDirec.getText().isEmpty() || txtDirec2.getText().isEmpty()|| txtCorreo.getText().isEmpty()||jdcFechaNacimiento.getDate()== null) {
+            JOptionPane.showMessageDialog(null, "Por favor llenar todos los campos con sus requerimientos", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+        } 
+        else 
+        {
             try
             {
                 CallableStatement cmd = cn.prepareCall("{CALL InsertCliente(?,?,?,?,?,?,?,?)}");
@@ -344,6 +414,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
                 listarCliente();
             }    
     }//GEN-LAST:event_bttnGuardarActionPerformed
+    }
     
 
       public Date convertirFecha(String fecha)
@@ -365,7 +436,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
      
     
     private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtApellidoActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
@@ -424,7 +495,6 @@ public class frmClientes extends javax.swing.JInternalFrame {
                 String direccion2 = txtDirec2.getText().trim();
                 String correo = txtCorreo.getText().trim();
                 String sexo = String.valueOf(cmbSexo.getSelectedItem());
-                //String sexo = "" + (cmbSexo.getSelectedIndex()+1);
                 dia = jdcFechaNacimiento.getCalendar().get(Calendar.DAY_OF_MONTH);
                 mes = jdcFechaNacimiento.getCalendar().get(Calendar.MONTH)+1;
                 año = jdcFechaNacimiento.getCalendar().get(Calendar.YEAR);
@@ -512,6 +582,114 @@ public class frmClientes extends javax.swing.JInternalFrame {
             }
     }//GEN-LAST:event_bttnEliminarActionPerformed
     }
+        
+    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
+       
+    }//GEN-LAST:event_txtNombreKeyPressed
+
+    private void txtApellidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyPressed
+     
+    }//GEN-LAST:event_txtApellidoKeyPressed
+
+    private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
+       
+    }//GEN-LAST:event_txtNombreKeyReleased
+
+    private void txtApellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyReleased
+     
+    }//GEN-LAST:event_txtApellidoKeyReleased
+
+    private void txtTelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyReleased
+       
+    }//GEN-LAST:event_txtTelefonoKeyReleased
+
+    private void txtDirecKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDirecKeyReleased
+      
+    }//GEN-LAST:event_txtDirecKeyReleased
+
+    private void txtDirec2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDirec2KeyReleased
+       
+    }//GEN-LAST:event_txtDirec2KeyReleased
+
+    private void txtCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyReleased
+       
+    }//GEN-LAST:event_txtCorreoKeyReleased
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        
+        char c = evt.getKeyChar();
+        
+        if(c < '0' || c > '9') evt.consume();
+       
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
+        
+        char c = evt.getKeyChar();
+        
+         if((c < 'a' || c > 'z')&& (c < 'A' || c > 'Z') ) evt.consume();
+         
+    }//GEN-LAST:event_txtApellidoKeyTyped
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        
+        char c = evt.getKeyChar();
+        
+         if((c < 'a' || c > 'z')&& (c < 'A' || c > 'Z') ) evt.consume();
+         
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtDirecKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDirecKeyTyped
+        
+        char c = evt.getKeyChar();
+        
+         if((c < 'a' || c > 'z')&& (c < 'A' || c > 'Z') 
+         && (c!=(char)KeyEvent.VK_BACK_SPACE) && (c!=(char)KeyEvent.VK_SPACE)) evt.consume();
+         
+         
+         
+    }//GEN-LAST:event_txtDirecKeyTyped
+
+    private void txtDirec2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDirec2KeyTyped
+        
+        char c = evt.getKeyChar();
+        
+         if((c < 'a' || c > 'z')&& (c < 'A' || c > 'Z')
+         && (c!=(char)KeyEvent.VK_BACK_SPACE) && (c!=(char)KeyEvent.VK_SPACE)) evt.consume();
+         
+         
+    }//GEN-LAST:event_txtDirec2KeyTyped
+
+    private void txtCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyTyped
+       
+    }//GEN-LAST:event_txtCorreoKeyTyped
+
+    public boolean isEmail(String correo){
+       Pattern pat = null;
+       Matcher mat = null;
+       pat = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+       mat = pat.matcher(correo);
+       if(mat.find())
+       {
+           return true;
+       }else{
+           return false;
+       }
+    }
+    
+    private void txtCorreoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCorreoFocusLost
+        
+        if(isEmail(txtCorreo.getText()))
+        {
+            
+        }else{
+           JOptionPane.showMessageDialog(null, "Correo Electronico incorrecto", "Complete el Email", JOptionPane.INFORMATION_MESSAGE);
+           txtCorreo.requestFocus();
+        }
+    }//GEN-LAST:event_txtCorreoFocusLost
+    
+    
         
     public void listarCliente()
     {
