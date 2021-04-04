@@ -107,6 +107,11 @@ public class frmDestinos extends javax.swing.JInternalFrame {
         BtnAgrgar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         BtnAgrgar.setForeground(new java.awt.Color(255, 255, 255));
         BtnAgrgar.setText("Agregar");
+        BtnAgrgar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAgrgarActionPerformed(evt);
+            }
+        });
         jPanel1.add(BtnAgrgar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 120, 60));
 
         jLabel3.setBackground(new java.awt.Color(21, 38, 76));
@@ -230,6 +235,10 @@ public class frmDestinos extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnAgrgarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgrgarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnAgrgarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

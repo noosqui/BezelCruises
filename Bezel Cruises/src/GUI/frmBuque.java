@@ -1,9 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
+
+import Clases.ConexionBasedeDatos;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import Clases.ProcedimientoBuquesandCamarotes;
+import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 
 /**
  *
@@ -11,12 +18,18 @@ package GUI;
  */
 public class frmBuque extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form Buque
-     */
+    ///variables para hacer busqueda///
+    Connection cn = ConexionBasedeDatos.getConexion();
+    DefaultTableModel modelo = new DefaultTableModel();
+    PreparedStatement ps = null;
+    Statement stModel = null;
+    ResultSet rsModelo = null;
+
     public frmBuque() {
         initComponents();
+        cargatablebuques();
     }
+    static ResultSet res;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,12 +41,8 @@ public class frmBuque extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        Btnsalir = new javax.swing.JButton();
+        Btnlimpiar = new javax.swing.JButton();
         BtnEliminar = new javax.swing.JButton();
         BtnActualizar = new javax.swing.JButton();
         BtnAgregar = new javax.swing.JButton();
@@ -56,6 +65,10 @@ public class frmBuque extends javax.swing.JInternalFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        txtbuscar = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        btnbuscar = new javax.swing.JButton();
 
         jLabel4.setFont(new java.awt.Font("Candara", 2, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -63,64 +76,32 @@ public class frmBuque extends javax.swing.JInternalFrame {
 
         getContentPane().setLayout(null);
 
-        jPanel2.setBackground(new java.awt.Color(38, 116, 162));
-
-        jTextField1.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField1.setBorder(null);
-
-        jLabel2.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lup32.png"))); // NOI18N
-
-        jLabel6.setFont(new java.awt.Font("Candara", 2, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Buscar Buque");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(194, 194, 194)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addContainerGap(298, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6)))
-                .addGap(19, 19, 19))
-        );
-
-        getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 0, 870, 66);
-
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
 
-        Btnsalir.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        Btnsalir.setForeground(new java.awt.Color(17, 51, 71));
-        Btnsalir.setText("Salir");
-        Btnsalir.setBorder(null);
-        Btnsalir.setBorderPainted(false);
-        jPanel1.add(Btnsalir);
-        Btnsalir.setBounds(610, 420, 150, 30);
+        Btnlimpiar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        Btnlimpiar.setForeground(new java.awt.Color(17, 51, 71));
+        Btnlimpiar.setText("Limpiar");
+        Btnlimpiar.setBorder(null);
+        Btnlimpiar.setBorderPainted(false);
+        Btnlimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnlimpiarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Btnlimpiar);
+        Btnlimpiar.setBounds(610, 420, 150, 30);
 
         BtnEliminar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         BtnEliminar.setForeground(new java.awt.Color(17, 51, 71));
         BtnEliminar.setText("Eliminar");
         BtnEliminar.setBorder(null);
         BtnEliminar.setBorderPainted(false);
+        BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEliminarActionPerformed(evt);
+            }
+        });
         jPanel1.add(BtnEliminar);
         BtnEliminar.setBounds(460, 420, 140, 30);
 
@@ -129,6 +110,11 @@ public class frmBuque extends javax.swing.JInternalFrame {
         BtnActualizar.setText("Actualizar");
         BtnActualizar.setBorder(null);
         BtnActualizar.setBorderPainted(false);
+        BtnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnActualizarActionPerformed(evt);
+            }
+        });
         jPanel1.add(BtnActualizar);
         BtnActualizar.setBounds(310, 420, 140, 30);
 
@@ -137,56 +123,89 @@ public class frmBuque extends javax.swing.JInternalFrame {
         BtnAgregar.setText("Agregar");
         BtnAgregar.setBorder(null);
         BtnAgregar.setBorderPainted(false);
+        BtnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAgregarActionPerformed(evt);
+            }
+        });
         jPanel1.add(BtnAgregar);
         BtnAgregar.setBounds(160, 420, 140, 30);
 
         jTable1.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(255, 255, 255));
+        jTable1.setForeground(new java.awt.Color(51, 51, 51));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nombre_Buque", "Tamaño", "Niveles", "Numeros_Camarotes", "ID Buque"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable1.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane2);
-        jScrollPane2.setBounds(0, 0, 870, 110);
+        jScrollPane2.setBounds(0, 0, 870, 100);
 
         txtidbuque.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        txtidbuque.setForeground(new java.awt.Color(255, 255, 255));
+        txtidbuque.setForeground(new java.awt.Color(51, 51, 51));
         txtidbuque.setBorder(null);
+        txtidbuque.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtidbuqueKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtidbuque);
-        txtidbuque.setBounds(240, 240, 160, 19);
+        txtidbuque.setBounds(240, 240, 160, 30);
 
         txtnombrebuque.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        txtnombrebuque.setForeground(new java.awt.Color(255, 255, 255));
+        txtnombrebuque.setForeground(new java.awt.Color(51, 51, 51));
         txtnombrebuque.setBorder(null);
         txtnombrebuque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtnombrebuqueActionPerformed(evt);
             }
         });
+        txtnombrebuque.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnombrebuqueKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtnombrebuque);
-        txtnombrebuque.setBounds(240, 360, 160, 19);
+        txtnombrebuque.setBounds(240, 300, 160, 30);
 
         txttipobuque.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        txttipobuque.setForeground(new java.awt.Color(255, 255, 255));
+        txttipobuque.setForeground(new java.awt.Color(51, 51, 51));
         txttipobuque.setBorder(null);
+        txttipobuque.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txttipobuqueKeyTyped(evt);
+            }
+        });
         jPanel1.add(txttipobuque);
-        txttipobuque.setBounds(540, 300, 160, 19);
+        txttipobuque.setBounds(540, 300, 160, 30);
 
         txtnivelesb.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        txtnivelesb.setForeground(new java.awt.Color(255, 255, 255));
+        txtnivelesb.setForeground(new java.awt.Color(51, 51, 51));
         txtnivelesb.setBorder(null);
+        txtnivelesb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnivelesbKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtnivelesb);
-        txtnivelesb.setBounds(540, 360, 160, 19);
+        txtnivelesb.setBounds(540, 360, 160, 30);
 
         jLabel5.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -198,13 +217,13 @@ public class frmBuque extends javax.swing.JInternalFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Nombre ");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(190, 340, 59, 19);
+        jLabel8.setBounds(190, 280, 59, 19);
 
         jLabel10.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Tamaño");
         jPanel1.add(jLabel10);
-        jLabel10.setBounds(190, 280, 54, 19);
+        jLabel10.setBounds(190, 340, 54, 19);
 
         jLabel11.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -214,9 +233,9 @@ public class frmBuque extends javax.swing.JInternalFrame {
 
         jLabel12.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Numero Camarote");
+        jLabel12.setText("Numero Camarotes");
         jPanel1.add(jLabel12);
-        jLabel12.setBounds(430, 220, 126, 19);
+        jLabel12.setBounds(430, 220, 140, 19);
 
         jLabel13.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
@@ -236,16 +255,21 @@ public class frmBuque extends javax.swing.JInternalFrame {
         jLabel14.setBounds(540, 510, 46, 19);
 
         txttamañob.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        txttamañob.setForeground(new java.awt.Color(255, 255, 255));
+        txttamañob.setForeground(new java.awt.Color(51, 51, 51));
         txttamañob.setBorder(null);
         jPanel1.add(txttamañob);
-        txttamañob.setBounds(240, 300, 160, 19);
+        txttamañob.setBounds(240, 360, 160, 30);
 
         txtnumcamarot.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        txtnumcamarot.setForeground(new java.awt.Color(255, 255, 255));
+        txtnumcamarot.setForeground(new java.awt.Color(51, 51, 51));
         txtnumcamarot.setBorder(null);
+        txtnumcamarot.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnumcamarotKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtnumcamarot);
-        txtnumcamarot.setBounds(540, 240, 160, 19);
+        txtnumcamarot.setBounds(540, 240, 160, 30);
 
         jLabel15.setFont(new java.awt.Font("Gill Sans MT", 1, 36)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
@@ -259,10 +283,57 @@ public class frmBuque extends javax.swing.JInternalFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/buques.jpg"))); // NOI18N
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(0, 110, 870, 710);
+        jLabel3.setBounds(0, 0, 870, 710);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 60, 870, 566);
+
+        jPanel2.setBackground(new java.awt.Color(38, 116, 162));
+
+        txtbuscar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        txtbuscar.setForeground(new java.awt.Color(51, 51, 51));
+        txtbuscar.setBorder(null);
+
+        jLabel6.setFont(new java.awt.Font("Candara", 2, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Buscar Buque");
+
+        btnbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lup32.png"))); // NOI18N
+        btnbuscar.setBorder(null);
+        btnbuscar.setBorderPainted(false);
+        btnbuscar.setContentAreaFilled(false);
+        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbuscarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(194, 194, 194)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(293, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
+        );
+
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(0, 0, 870, 66);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -271,12 +342,173 @@ public class frmBuque extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtnombrebuqueActionPerformed
 
+    private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
+        if (txtnombrebuque.getText().isEmpty() || txttamañob.getText().isEmpty() || txtnumcamarot.getText().isEmpty() || txttipobuque.getText().isEmpty() || txtnivelesb.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tienes datos por llenar", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            limpiar();
+        } else {
+            try {
+                ProcedimientoBuquesandCamarotes.insertBuque(txtnombrebuque.getText(), txttamañob.getText(), txtnivelesb.getText(), txtnumcamarot.getText(), txttipobuque.getText());
+            } catch (SQLException ex) {
+
+            }
+        }
+        cargatablebuques();
+
+    }//GEN-LAST:event_BtnAgregarActionPerformed
+
+    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
+        if (txtidbuque.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "ingrese el Id para Eliminar", "Error", JOptionPane.ERROR_MESSAGE);
+            limpiar();
+        } else {
+            int opc = JOptionPane.showConfirmDialog(this, "¿ESTAS SEGURO QUE DESEA ELIMINAR ESTE REGISTRO?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (opc == JOptionPane.YES_OPTION) {
+                try {
+                    ProcedimientoBuquesandCamarotes.deletbuque(Integer.parseInt(txtidbuque.getText()));
+                } catch (SQLException e) {
+                }
+                cargatablebuques();
+            }
+        }
+    }//GEN-LAST:event_BtnEliminarActionPerformed
+
+    private void BtnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnActualizarActionPerformed
+        if (txtidbuque.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "ingrese el Id para actualizar", "Error", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            int opc = JOptionPane.showConfirmDialog(this, "¿ESTAS SEGURO QUE DESEA ACTUALIZAR ESTE REGISTRO?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (opc == JOptionPane.YES_OPTION) {
+                try {
+                    ProcedimientoBuquesandCamarotes.Updatetbuque(Integer.parseInt(txtidbuque.getText()), txtnombrebuque.getText(), txttamañob.getText(), txtnivelesb.getText(), txtnumcamarot.getText(), txttipobuque.getText());
+                } catch (SQLException e) {
+                }
+                cargatablebuques();
+                JOptionPane.showMessageDialog(null, "LOS DATOS HAN SIDO ACTUALIZADOS");
+                limpiar();
+            }
+        }
+    }//GEN-LAST:event_BtnActualizarActionPerformed
+
+    private void BtnlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnlimpiarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_BtnlimpiarActionPerformed
+
+    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
+        BusquedaBuques();
+    }//GEN-LAST:event_btnbuscarActionPerformed
+
+    private void txtidbuqueKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtidbuqueKeyTyped
+        char vali = evt.getKeyChar();
+        if ((vali < '0' || vali > '9') && vali != KeyEvent.VK_BACK_SPACE) {
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo ingrese numeros porfavor");
+        }
+
+
+    }//GEN-LAST:event_txtidbuqueKeyTyped
+
+    private void txtnombrebuqueKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombrebuqueKeyTyped
+        char vali = evt.getKeyChar();
+        if (Character.isDigit(vali) == false) {
+        } else {
+            JOptionPane.showMessageDialog(null, "Solo ingrese Letras porfavor");
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtnombrebuqueKeyTyped
+
+    private void txtnumcamarotKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumcamarotKeyTyped
+       char vali = evt.getKeyChar();
+        if ((vali < '0' || vali > '9') && vali != KeyEvent.VK_BACK_SPACE) {
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo ingrese numeros porfavor");
+        }
+    }//GEN-LAST:event_txtnumcamarotKeyTyped
+
+    private void txttipobuqueKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttipobuqueKeyTyped
+        char vali = evt.getKeyChar();
+        if ((vali < '0' || vali > '9') && vali != KeyEvent.VK_BACK_SPACE) {
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo ingrese numeros porfavor");
+        }
+    }//GEN-LAST:event_txttipobuqueKeyTyped
+
+    private void txtnivelesbKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnivelesbKeyTyped
+    char vali = evt.getKeyChar();
+        if ((vali < '0' || vali > '9') && vali != KeyEvent.VK_BACK_SPACE) {
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo ingrese numeros porfavor");
+        }
+    }//GEN-LAST:event_txtnivelesbKeyTyped
+//////////////////////////////////////Funcionnnnnnnessss//////////////////////////////////
+
+    //carga la tabla de Buques //
+    private void cargatablebuques() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        res = Clases.ConexionBasedeDatos.Consulta("select * from Buques");
+        try {
+            while (res.next()) {
+                Vector v = new Vector();
+                v.add(res.getInt(1));
+                v.add(res.getString(2));
+                v.add(res.getString(3));
+                v.add(res.getString(4));
+                v.add(res.getString(5));
+                v.add(res.getString(6));
+                model.addRow(v);
+                jTable1.setModel(model);
+            }
+        } catch (SQLException e) {
+        }
+    }
+
+    //Limpia los datos de los txbox//    
+    private void limpiar() {
+
+        txtidbuque.setText("");
+        txttamañob.setText("");
+        txtnombrebuque.setText("");
+        txtnumcamarot.setText("");
+        txttipobuque.setText("");
+        txtnivelesb.setText("");
+        txtnombrebuque.requestFocus();
+    }
+// busqueda de datos buques//
+
+    private void BusquedaBuques() {
+
+        String consulta = "SELECT * FROM [dbo].[Buques]  WHERE [Id_Buque] LIKE '%" + txtbuscar.getText() + "%' "
+                + "OR [Nombre_Buque] LIKE '%" + txtbuscar.getText() + "%'";
+
+        Connection conect = ConexionBasedeDatos.getConexion();
+        try {
+            stModel = (Statement) conect.createStatement();
+            rsModelo = stModel.executeQuery(consulta);
+            while (rsModelo.next()) {
+                txtidbuque.setText(rsModelo.getString(1));
+                txtnombrebuque.setText(rsModelo.getString(2));
+                txttamañob.setText(rsModelo.getString(3));
+                txtnivelesb.setText(rsModelo.getString(4));
+                txtnumcamarot.setText(rsModelo.getString(5));
+                txttipobuque.setText(rsModelo.getString(6));
+
+                cargatablebuques();
+
+            }
+
+        } catch (SQLException ex) {
+
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnActualizar;
     private javax.swing.JButton BtnAgregar;
     private javax.swing.JButton BtnEliminar;
-    private javax.swing.JButton Btnsalir;
+    private javax.swing.JButton Btnlimpiar;
+    private javax.swing.JButton btnbuscar;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -284,7 +516,6 @@ public class frmBuque extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -295,7 +526,7 @@ public class frmBuque extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtbuscar;
     private javax.swing.JTextField txtidbuque;
     private javax.swing.JTextField txtnivelesb;
     private javax.swing.JTextField txtnombrebuque;

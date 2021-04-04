@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import Clases.ConexionBasedeDatos;
+
 /**
  *
  * @author Maykin Perdomo
@@ -28,9 +30,9 @@ public class frmLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         panel1 = new java.awt.Panel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         panel4 = new java.awt.Panel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -51,11 +53,6 @@ public class frmLogin extends javax.swing.JFrame {
         panel1.setBackground(new java.awt.Color(0, 90, 130));
         panel1.setLayout(null);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ICONO.png"))); // NOI18N
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panel1.add(jLabel1);
-        jLabel1.setBounds(10, 90, 0, 0);
-
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ICONO.png"))); // NOI18N
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         panel1.add(jLabel2);
@@ -65,6 +62,15 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel9.setToolTipText("");
         panel1.add(jLabel9);
         jLabel9.setBounds(10, 290, 210, 50);
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        panel1.add(jButton1);
+        jButton1.setBounds(120, 380, 73, 23);
 
         getContentPane().add(panel1);
         panel1.setBounds(280, 130, 220, 460);
@@ -147,10 +153,10 @@ public class frmLogin extends javax.swing.JFrame {
         jCheckBox1.setBackground(new java.awt.Color(33, 45, 62));
         jCheckBox1.setFont(new java.awt.Font("Consolas", 0, 10)); // NOI18N
         jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox1.setText("Mostrar Contraseña");
         jCheckBox1.setBorder(null);
-        jCheckBox1.setLabel("Recordar");
         panel4.add(jCheckBox1);
-        jCheckBox1.setBounds(50, 300, 90, 25);
+        jCheckBox1.setBounds(40, 300, 140, 25);
 
         getContentPane().add(panel4);
         panel4.setBounds(500, 130, 350, 460);
@@ -172,8 +178,16 @@ public class frmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtusuarioAncestorAdded
 
     private void BtningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtningresarActionPerformed
-        // TODO add your handling code here:
+  frmAgentes frm = new  frmAgentes();
+  frm.setVisible(true);
+  frm.dispose();
     }//GEN-LAST:event_BtningresarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+  frmMenuPrincipal frm1 = new  frmMenuPrincipal();
+  frm1.show(true);
+  this.hide();        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,8 +228,8 @@ public class frmLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btningresar;
     private javax.swing.JPasswordField Pswusuario;
+    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
