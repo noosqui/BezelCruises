@@ -69,7 +69,6 @@ public class frmCamarote extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         txtprecio3 = new javax.swing.JTextField();
-        btnbuscar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
 
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
@@ -287,13 +286,6 @@ public class frmCamarote extends javax.swing.JInternalFrame {
         jPanel1.add(txtprecio3);
         txtprecio3.setBounds(600, 340, 140, 20);
 
-        btnbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lup32.png"))); // NOI18N
-        btnbuscar.setBorder(null);
-        btnbuscar.setBorderPainted(false);
-        btnbuscar.setContentAreaFilled(false);
-        jPanel1.add(btnbuscar);
-        btnbuscar.setBounds(740, 400, 30, 17);
-
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Camarote1.jpg"))); // NOI18N
         jLabel9.setText("jLabel2");
         jPanel1.add(jLabel9);
@@ -487,7 +479,6 @@ public class frmCamarote extends javax.swing.JInternalFrame {
     private javax.swing.JButton Btndelet;
     private javax.swing.JButton Btnlimpiar;
     private javax.swing.JButton Btnupdate;
-    private javax.swing.JButton btnbuscar;
     private javax.swing.JButton btnbuscar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
