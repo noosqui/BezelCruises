@@ -35,10 +35,10 @@ public class frmClientes extends javax.swing.JInternalFrame {
     ResultSetMetaData rsmd;
     DefaultTableModel model;
     
+    
     public frmClientes() {
         initComponents();
     }
-
  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -48,7 +48,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblClientes = new javax.swing.JTable();
-        bttnLimpiar = new javax.swing.JButton();
+        bttnMostrar = new javax.swing.JButton();
         bttnModificar = new javax.swing.JButton();
         bttnEliminar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -98,7 +98,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Id", "Nombre", "Apellido", "Sexo", "Telefono", "Fecha Nacimiento", "Direccion 1", "Direcccion 2", "Correo electronico"
+                "Id", "Nombre", "Apellido", "Sexo", "Telefono", "Fecha Nacimiento", "Direccion #1", "Direcccion #2", "Correo electronico"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -109,31 +109,44 @@ public class frmClientes extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblClientes.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(tblClientes);
-        tblClientes.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (tblClientes.getColumnModel().getColumnCount() > 0) {
             tblClientes.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 860, 196));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 870, 196));
 
-        bttnLimpiar.setBackground(new java.awt.Color(26, 78, 108));
-        bttnLimpiar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        bttnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
-        bttnLimpiar.setText("Limpiar");
-        jPanel1.add(bttnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 460, 150, 50));
+        bttnMostrar.setBackground(new java.awt.Color(26, 78, 108));
+        bttnMostrar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        bttnMostrar.setForeground(new java.awt.Color(255, 255, 255));
+        bttnMostrar.setText("Mostrar");
+        bttnMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnMostrarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bttnMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 460, 150, 50));
 
         bttnModificar.setBackground(new java.awt.Color(26, 78, 108));
         bttnModificar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         bttnModificar.setForeground(new java.awt.Color(255, 255, 255));
         bttnModificar.setText("Modificar");
+        bttnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnModificarActionPerformed(evt);
+            }
+        });
         jPanel1.add(bttnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 460, 150, 50));
 
         bttnEliminar.setBackground(new java.awt.Color(26, 78, 108));
         bttnEliminar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         bttnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         bttnEliminar.setText("Eliminar");
+        bttnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnEliminarActionPerformed(evt);
+            }
+        });
         jPanel1.add(bttnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 460, 150, 50));
 
         jLabel1.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
@@ -169,12 +182,12 @@ public class frmClientes extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Fecha Nacimiento:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 80, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 80, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Correo electronico:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 130, 140, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, 140, -1));
 
         txtTelefono.setBackground(new java.awt.Color(26, 78, 108));
         txtTelefono.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
@@ -186,12 +199,12 @@ public class frmClientes extends javax.swing.JInternalFrame {
         jdcFechaNacimiento.setBackground(new java.awt.Color(26, 78, 108));
         jdcFechaNacimiento.setDateFormatString("yyyy-MM-dd");
         jdcFechaNacimiento.setOpaque(false);
-        jPanel1.add(jdcFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, 130, -1));
+        jPanel1.add(jdcFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 80, 180, -1));
 
         bttnGuardar.setBackground(new java.awt.Color(26, 78, 108));
         bttnGuardar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         bttnGuardar.setForeground(new java.awt.Color(255, 255, 255));
-        bttnGuardar.setText("Guardar");
+        bttnGuardar.setText("Agregar");
         bttnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bttnGuardarActionPerformed(evt);
@@ -223,7 +236,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
         txtDirec.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtDirec.setText("  ");
         txtDirec.setBorder(null);
-        jPanel1.add(txtDirec, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 130, 20));
+        jPanel1.add(txtDirec, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 200, 20));
 
         txtDirec2.setBackground(new java.awt.Color(26, 78, 108));
         txtDirec2.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
@@ -231,7 +244,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
         txtDirec2.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtDirec2.setText("  ");
         txtDirec2.setBorder(null);
-        jPanel1.add(txtDirec2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, 130, 20));
+        jPanel1.add(txtDirec2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, 200, 20));
 
         txtCorreo.setBackground(new java.awt.Color(26, 78, 108));
         txtCorreo.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
@@ -239,7 +252,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
         txtCorreo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtCorreo.setText("  ");
         txtCorreo.setBorder(null);
-        jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 130, 130, 20));
+        jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 130, 180, 20));
 
         txtApellido.setBackground(new java.awt.Color(26, 78, 108));
         txtApellido.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
@@ -278,7 +291,11 @@ public class frmClientes extends javax.swing.JInternalFrame {
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
-
+    
+     int id;
+     int seleccion;
+ 
+    
     private void bttnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnGuardarActionPerformed
         
         int dia, mes, año;  
@@ -290,13 +307,13 @@ public class frmClientes extends javax.swing.JInternalFrame {
         String direccion2 = txtDirec2.getText().trim();
         String correo = txtCorreo.getText().trim();
         String sexo = String.valueOf(cmbSexo.getSelectedItem());
-        //String sexo = "" + (cmbSexo.getSelectedIndex()+1);
         dia = jdcFechaNacimiento.getCalendar().get(Calendar.DAY_OF_MONTH);
         mes = jdcFechaNacimiento.getCalendar().get(Calendar.MONTH)+1;
         año = jdcFechaNacimiento.getCalendar().get(Calendar.YEAR);
         String fechaNac = año + "-" + mes + "-" + dia;
         
-          try
+        
+            try
             {
                 CallableStatement cmd = cn.prepareCall("{CALL InsertCliente(?,?,?,?,?,?,?,?)}");
                 cmd.setString(1, nombreC);
@@ -327,7 +344,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
                 listarCliente();
             }    
     }//GEN-LAST:event_bttnGuardarActionPerformed
-       
+    
 
       public Date convertirFecha(String fecha)
     {
@@ -357,6 +374,145 @@ public class frmClientes extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_formInternalFrameOpened
 
+    private void bttnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnMostrarActionPerformed
+        
+        try
+        {
+            seleccion = tblClientes.getSelectedRow();
+             
+            if(seleccion == -1)
+            {
+                JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila para poder mostrar los datos.");
+            }
+            else
+            { 
+                id = (Integer)tblClientes.getValueAt(seleccion, 0);
+                txtNombre.setText((String)tblClientes.getValueAt(seleccion, 1));
+                txtApellido.setText((String)tblClientes.getValueAt(seleccion, 2));
+                cmbSexo.setSelectedItem((String)tblClientes.getValueAt(seleccion,3));
+                txtTelefono.setText((String)tblClientes.getValueAt(seleccion, 4));
+                jdcFechaNacimiento.setDate(convertirFecha("" + tblClientes.getValueAt(seleccion, 5)));
+                txtDirec.setText((String)tblClientes.getValueAt(seleccion, 6));
+                txtDirec2.setText((String)tblClientes.getValueAt(seleccion, 7));
+                txtCorreo.setText((String)tblClientes.getValueAt(seleccion, 8));           
+            }     
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "No se han podido mostrar los datos, Intentelo nuevamente.");
+        }
+        
+       
+    }//GEN-LAST:event_bttnMostrarActionPerformed
+
+    private void bttnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnModificarActionPerformed
+        
+         try
+        { 
+            if(seleccion == -1)
+            {
+                JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila para poder modificar los datos.");
+            }
+            else
+            { 
+                int dia, mes, año;  
+      
+                String nombreC = txtNombre.getText().trim();
+                String apellidoC = txtApellido.getText().trim();
+                String telefono = txtTelefono.getText().trim();
+                String direccion1 = txtDirec.getText().trim();
+                String direccion2 = txtDirec2.getText().trim();
+                String correo = txtCorreo.getText().trim();
+                String sexo = String.valueOf(cmbSexo.getSelectedItem());
+                //String sexo = "" + (cmbSexo.getSelectedIndex()+1);
+                dia = jdcFechaNacimiento.getCalendar().get(Calendar.DAY_OF_MONTH);
+                mes = jdcFechaNacimiento.getCalendar().get(Calendar.MONTH)+1;
+                año = jdcFechaNacimiento.getCalendar().get(Calendar.YEAR);
+                String fechaNac = año + "-" + mes + "-" + dia;
+            
+                try
+                {
+                    CallableStatement cmd = cn.prepareCall("{CALL ActualizarCliente(?,?,?,?,?,?,?,?,?)}");
+                    
+                    cmd.setString(1, ""+id);
+                    cmd.setString(2, nombreC);
+                    cmd.setString(3, apellidoC);
+                    cmd.setString(4, sexo);
+                    cmd.setString(5, telefono);
+                    cmd.setString(6, fechaNac);
+                    cmd.setString(7, direccion1);
+                    cmd.setString(8, direccion2);
+                    cmd.setString(9, correo);
+                    cmd.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Registro de Cliente Modificado Exitosamente");                      
+                }
+                catch(SQLException ex)
+                {
+                    JOptionPane.showMessageDialog(null, "ERROR! Al modificar los datos del Cliente! " + ex);
+                }
+                finally
+                {
+                   txtNombre.setText(null);
+                   txtApellido.setText(null);
+                   cmbSexo.setSelectedIndex(-1);
+                   txtTelefono.setText(null);
+                   jdcFechaNacimiento.setCalendar(null);
+                   txtDirec.setText(null);
+                   txtDirec2.setText(null);
+                   txtCorreo.setText(null);
+                   listarCliente();
+                  
+                }
+                
+            }   
+            
+        }
+        catch(Exception ex)
+        {
+            
+        }
+        
+        
+    }//GEN-LAST:event_bttnModificarActionPerformed
+
+    private void bttnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnEliminarActionPerformed
+         
+        if(seleccion == -1)
+            {
+                
+                JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila para poder eliminar los datos.");
+            }
+        else
+        {
+            try
+            {
+                CallableStatement cmd = cn.prepareCall("{CALL EliminarCliente(?)}");
+
+                cmd.setString(1, ""+id);
+                cmd.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Cliente Eliminado Exitosamente");
+                
+            }
+            catch(SQLException ex)
+            {
+                JOptionPane.showMessageDialog(null, "Error al eliminar el cliente! " + ex);
+            }
+            finally
+            {
+                txtNombre.setText(null);
+                txtApellido.setText(null);
+                cmbSexo.setSelectedIndex(-1);
+                txtTelefono.setText(null);
+                jdcFechaNacimiento.setCalendar(null);
+                txtDirec.setText(null);
+                txtDirec2.setText(null);
+                txtCorreo.setText(null);
+                tblClientes.clearSelection();
+                listarCliente();
+            }
+    }//GEN-LAST:event_bttnEliminarActionPerformed
+    }
+        
     public void listarCliente()
     {
         model = (DefaultTableModel) tblClientes.getModel();
@@ -390,8 +546,8 @@ public class frmClientes extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bttnEliminar;
     private javax.swing.JButton bttnGuardar;
-    private javax.swing.JButton bttnLimpiar;
     private javax.swing.JButton bttnModificar;
+    private javax.swing.JButton bttnMostrar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cmbSexo;
     private javax.swing.JLabel jLabel1;
