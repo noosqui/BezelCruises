@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import Clases.ConexionBasedeDatos;
+
 /**
  *
  * @author Maykin Perdomo
@@ -28,7 +30,6 @@ public class frmLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         panel1 = new java.awt.Panel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         panel4 = new java.awt.Panel();
@@ -51,11 +52,6 @@ public class frmLogin extends javax.swing.JFrame {
         panel1.setBackground(new java.awt.Color(0, 90, 130));
         panel1.setLayout(null);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ICONO.png"))); // NOI18N
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panel1.add(jLabel1);
-        jLabel1.setBounds(10, 90, 0, 0);
-
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ICONO.png"))); // NOI18N
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         panel1.add(jLabel2);
@@ -76,7 +72,7 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Iniciar Sesión");
         panel4.add(jLabel3);
-        jLabel3.setBounds(126, 42, 128, 28);
+        jLabel3.setBounds(126, 42, 143, 32);
         jLabel3.getAccessibleContext().setAccessibleName("Iniciar_Sesion");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -136,16 +132,21 @@ public class frmLogin extends javax.swing.JFrame {
         Btningresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/btningresar.png"))); // NOI18N
         Btningresar.setBorderPainted(false);
         Btningresar.setContentAreaFilled(false);
+        Btningresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtningresarActionPerformed(evt);
+            }
+        });
         panel4.add(Btningresar);
         Btningresar.setBounds(70, 340, 190, 40);
 
         jCheckBox1.setBackground(new java.awt.Color(33, 45, 62));
         jCheckBox1.setFont(new java.awt.Font("Consolas", 0, 10)); // NOI18N
         jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox1.setText("Mostrar Contraseña");
         jCheckBox1.setBorder(null);
-        jCheckBox1.setLabel("Recordar");
         panel4.add(jCheckBox1);
-        jCheckBox1.setBounds(50, 300, 90, 25);
+        jCheckBox1.setBounds(40, 300, 140, 25);
 
         getContentPane().add(panel4);
         panel4.setBounds(500, 130, 350, 460);
@@ -165,6 +166,14 @@ public class frmLogin extends javax.swing.JFrame {
     private void txtusuarioAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtusuarioAncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_txtusuarioAncestorAdded
+
+    private void BtningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtningresarActionPerformed
+        // TODO add your handling code here:
+        frmMenuPrincipal menu = new frmMenuPrincipal ();
+        menu.setVisible(true);
+        
+        
+    }//GEN-LAST:event_BtningresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,7 +215,6 @@ public class frmLogin extends javax.swing.JFrame {
     private javax.swing.JButton Btningresar;
     private javax.swing.JPasswordField Pswusuario;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
