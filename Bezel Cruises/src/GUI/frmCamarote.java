@@ -33,6 +33,8 @@ public class frmCamarote extends javax.swing.JInternalFrame {
     Statement stModel = null;
     ResultSet rsModelo = null;
     String id;
+    String precio;
+    String descripcion;
     //////////////////////////
 
     public frmCamarote() {
@@ -63,7 +65,6 @@ public class frmCamarote extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         txtidcamarote = new javax.swing.JTextField();
         txtxantdadCamar = new javax.swing.JTextField();
-        txtDescCam = new javax.swing.JTextField();
         txtprecio1 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         txtbusqueda = new javax.swing.JTextField();
@@ -73,6 +74,7 @@ public class frmCamarote extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
         Cmbidbuque = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
+        CmbDescripcama = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
 
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
@@ -114,7 +116,7 @@ public class frmCamarote extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(Btnagregar);
-        Btnagregar.setBounds(300, 480, 100, 30);
+        Btnagregar.setBounds(410, 480, 100, 30);
 
         Btnupdate.setBackground(new java.awt.Color(204, 204, 204));
         Btnupdate.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
@@ -127,7 +129,7 @@ public class frmCamarote extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(Btnupdate);
-        Btnupdate.setBounds(420, 480, 100, 30);
+        Btnupdate.setBounds(520, 480, 100, 30);
 
         Btndelet.setBackground(new java.awt.Color(204, 204, 204));
         Btndelet.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
@@ -140,7 +142,7 @@ public class frmCamarote extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(Btndelet);
-        Btndelet.setBounds(420, 520, 100, 30);
+        Btndelet.setBounds(410, 520, 100, 30);
 
         Btnlimpiar.setBackground(new java.awt.Color(204, 204, 204));
         Btnlimpiar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
@@ -153,7 +155,7 @@ public class frmCamarote extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(Btnlimpiar);
-        Btnlimpiar.setBounds(530, 520, 100, 30);
+        Btnlimpiar.setBounds(520, 520, 100, 30);
 
         jLabel1.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -207,14 +209,7 @@ public class frmCamarote extends javax.swing.JInternalFrame {
         jPanel1.add(txtxantdadCamar);
         txtxantdadCamar.setBounds(250, 360, 140, 30);
 
-        txtDescCam.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtDescCamKeyTyped(evt);
-            }
-        });
-        jPanel1.add(txtDescCam);
-        txtDescCam.setBounds(250, 420, 140, 30);
-
+        txtprecio1.setEnabled(false);
         txtprecio1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtprecio1KeyTyped(evt);
@@ -308,6 +303,15 @@ public class frmCamarote extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel13);
         jLabel13.setBounds(560, 340, 140, 19);
 
+        CmbDescripcama.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "seleccionar", "Interior", "Vista al Oseano", "Balcon", "Suite" }));
+        CmbDescripcama.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CmbDescripcamaItemStateChanged(evt);
+            }
+        });
+        jPanel1.add(CmbDescripcama);
+        CmbDescripcama.setBounds(250, 430, 140, 30);
+
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Camarote1.jpg"))); // NOI18N
         jLabel9.setText("jLabel2");
         jPanel1.add(jLabel9);
@@ -320,13 +324,14 @@ public class frmCamarote extends javax.swing.JInternalFrame {
 
     private void BtnagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnagregarActionPerformed
 
-        if (txtxantdadCamar.getText().isEmpty() || txtDescCam.getText().isEmpty() || txtprecio1.getText().isEmpty() || txtdescrpBuque.getText().isEmpty()) {
+        if (txtxantdadCamar.getText().isEmpty() || txtprecio1.getText().isEmpty() || txtdescrpBuque.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Tienes datos por llenar", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 
         } else {
             try {
                 String Dato = Cmbidbuque.getSelectedItem().toString();
-                ProcedimientoBuquesandCamarotes.insertCamarotes(txtxantdadCamar.getText(), txtDescCam.getText(), txtprecio1.getText(), Dato);
+
+                ProcedimientoBuquesandCamarotes.insertCamarotes(txtxantdadCamar.getText(), descripcion, precio, Dato);
             } catch (SQLException ex) {
 
             }
@@ -345,7 +350,7 @@ public class frmCamarote extends javax.swing.JInternalFrame {
                 try {
                     String Dato = Cmbidbuque.getSelectedItem().toString();
                     ProcedimientoBuquesandCamarotes.UpdateCamarotes(Integer.parseInt(txtidcamarote.getText()),
-                            txtxantdadCamar.getText(), txtDescCam.getText(), txtprecio1.getText(), Dato);
+                            txtxantdadCamar.getText(), descripcion, txtprecio1.getText(), Dato);
                 } catch (SQLException e) {
                 }
                 cargatablebCamarotes();
@@ -432,15 +437,6 @@ public class frmCamarote extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtdescrpBuqueKeyTyped
 
-    private void txtDescCamKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescCamKeyTyped
-        char vali = evt.getKeyChar();
-        if (Character.isDigit(vali) == false) {
-        } else {
-            JOptionPane.showMessageDialog(null, "Solo ingrese Letras porfavor");
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtDescCamKeyTyped
-
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         id = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 0));
         busqueda(id);
@@ -449,6 +445,29 @@ public class frmCamarote extends javax.swing.JInternalFrame {
     private void CmbidbuqueItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CmbidbuqueItemStateChanged
         BusquedaBuque(Cmbidbuque.getSelectedItem().toString());
     }//GEN-LAST:event_CmbidbuqueItemStateChanged
+
+    private void CmbDescripcamaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CmbDescripcamaItemStateChanged
+
+        descripcion = CmbDescripcama.getSelectedItem().toString();
+
+        if (descripcion == "Interior") {
+
+            precio = "50";
+            txtprecio1.setText(precio);
+        } else if (descripcion == "Vista al Oseano") {
+            precio = "75";
+            txtprecio1.setText(precio);
+        } else if (descripcion == "Balcon") {
+            precio = "100";
+            txtprecio1.setText(precio);
+        } else if (descripcion == "Suite") {
+            precio = "150";
+            txtprecio1.setText(precio);
+        } else if (descripcion == "seleccionar") {
+            txtprecio1.setText("");
+        }
+        
+    }//GEN-LAST:event_CmbDescripcamaItemStateChanged
 
 ///////////////
     private void cargatablebCamarotes() {
@@ -476,7 +495,7 @@ public class frmCamarote extends javax.swing.JInternalFrame {
 
         txtidcamarote.setText("");
         txtxantdadCamar.setText("");
-        txtDescCam.setText("");
+        CmbDescripcama.setSelectedIndex(0);
         txtprecio1.setText("");
         txtdescrpBuque.setText("");
         txtidcamarote.requestFocus();
@@ -495,7 +514,7 @@ public class frmCamarote extends javax.swing.JInternalFrame {
             while (rsModelo.next()) {
                 txtidcamarote.setText(rsModelo.getString(1));
                 txtxantdadCamar.setText(rsModelo.getString(2));
-                txtDescCam.setText(rsModelo.getString(3));
+                CmbDescripcama.setSelectedItem(rsModelo.getString(3));
                 txtprecio1.setText(rsModelo.getString(4));
                 Cmbidbuque.setSelectedItem(rsModelo.getString(5));
 
@@ -554,6 +573,7 @@ public class frmCamarote extends javax.swing.JInternalFrame {
     private javax.swing.JButton Btndelet;
     private javax.swing.JButton Btnlimpiar;
     private javax.swing.JButton Btnupdate;
+    private javax.swing.JComboBox<String> CmbDescripcama;
     private javax.swing.JComboBox<String> Cmbidbuque;
     private javax.swing.JButton btnbuscar1;
     private javax.swing.JLabel jLabel1;
@@ -568,7 +588,6 @@ public class frmCamarote extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField txtDescCam;
     private javax.swing.JTextField txtbusqueda;
     private javax.swing.JTextField txtdescrpBuque;
     private javax.swing.JTextField txtidcamarote;
