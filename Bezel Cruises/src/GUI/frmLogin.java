@@ -1,11 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package GUI;
 
 import Clases.ConexionBasedeDatos;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,7 +22,12 @@ public class frmLogin extends javax.swing.JFrame {
     public frmLogin() {
         initComponents();
     }
-
+    
+    PreparedStatement pp = null;
+    ConexionBasedeDatos cone = new ConexionBasedeDatos();
+    Connection cn = null;
+    ResultSet rs;
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,6 +55,13 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1098, 678));
+        setSize(new java.awt.Dimension(1098, 678));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         panel1.setBackground(new java.awt.Color(0, 90, 130));
@@ -154,7 +169,7 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/crucero.jpg"))); // NOI18N
         jLabel8.setText("jLabel8");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(0, 0, 1100, 690);
+        jLabel8.setBounds(0, 0, 1100, 680);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -167,11 +182,50 @@ public class frmLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtusuarioAncestorAdded
 
-    private void BtningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtningresarActionPerformed
-        // TODO add your handling code here:
-        frmMenuPrincipal menu = new frmMenuPrincipal ();
-        menu.setVisible(true);
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        
+        cn = cone.obtenerConexion();
+        
+    }//GEN-LAST:event_formWindowOpened
+
+    private void BtningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtningresarActionPerformed
+
+        int enc;
+        
+        try
+        {
+            pp = cn.prepareStatement("Select count(*)[encontrado] from Usuarios where Nombre_Usuario = ? and Contrasenia = ?");
+            pp.setString(1, txtusuario.getText());
+            pp.setString(2, Pswusuario.getText());
+            rs = pp.executeQuery();
+            
+            if(rs.next())
+            {
+                
+                enc = rs.getInt("Encontrado");
+                
+                if(enc >= 1)
+                {
+                    JOptionPane.showMessageDialog(null, "Bienvenido a Bezel Cruises System");
+                    frmMenuPrincipal prin = new frmMenuPrincipal();
+                    prin.show();
+                    this.dispose();
+                }
+                else
+                {
+                JOptionPane.showMessageDialog(null, "Datos Incorrectos! Porfavor verifique sus Datos Nuevamente.");
+                txtusuario.setText(null);
+                Pswusuario.setText(null);
+                txtusuario.requestFocus();
+                }
+            }
+            
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null, "Error de Conexion" + ex);      
+        }
 
     }//GEN-LAST:event_BtningresarActionPerformed
 

@@ -316,7 +316,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
     private void AbrirForm (javax.swing.JInternalFrame frm)
     {
-         if (ContenedorFrm.getSelectedFrame() != null) 
+         if (ContenedorFrm.getSelectedFrame() != null)
         {
             ContenedorFrm.getSelectedFrame().dispose();
         }
@@ -352,7 +352,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         frmVentas frm = new frmVentas();
         AbrirForm(frm);
-        
+
     }//GEN-LAST:event_btnVentaActionPerformed
 
     private void btnViajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViajesActionPerformed
