@@ -28,6 +28,9 @@ public class frmBuque extends javax.swing.JInternalFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jLabel5 = new javax.swing.JLabel();
+        txtidbuque = new javax.swing.JTextField();
+        txttipobuque = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -39,11 +42,8 @@ public class frmBuque extends javax.swing.JInternalFrame {
         BtnAgregar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        txtidbuque = new javax.swing.JTextField();
         txtnombrebuque = new javax.swing.JTextField();
-        txttipobuque = new javax.swing.JTextField();
         txtnivelesb = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -53,6 +53,21 @@ public class frmBuque extends javax.swing.JInternalFrame {
         jLabel14 = new javax.swing.JLabel();
         txttamañob = new javax.swing.JTextField();
         txtnumcamarot = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+
+        jLabel5.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("ID Buque");
+
+        txtidbuque.setBackground(new java.awt.Color(17, 51, 71));
+        txtidbuque.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        txtidbuque.setForeground(new java.awt.Color(255, 255, 255));
+        txtidbuque.setBorder(null);
+
+        txttipobuque.setBackground(new java.awt.Color(17, 51, 71));
+        txttipobuque.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        txttipobuque.setForeground(new java.awt.Color(255, 255, 255));
+        txttipobuque.setBorder(null);
 
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
@@ -148,12 +163,6 @@ public class frmBuque extends javax.swing.JInternalFrame {
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 830, 120));
 
-        txtidbuque.setBackground(new java.awt.Color(17, 51, 71));
-        txtidbuque.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        txtidbuque.setForeground(new java.awt.Color(255, 255, 255));
-        txtidbuque.setBorder(null);
-        jPanel1.add(txtidbuque, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 160, -1));
-
         txtnombrebuque.setBackground(new java.awt.Color(17, 51, 71));
         txtnombrebuque.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         txtnombrebuque.setForeground(new java.awt.Color(255, 255, 255));
@@ -165,22 +174,11 @@ public class frmBuque extends javax.swing.JInternalFrame {
         });
         jPanel1.add(txtnombrebuque, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 160, -1));
 
-        txttipobuque.setBackground(new java.awt.Color(17, 51, 71));
-        txttipobuque.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        txttipobuque.setForeground(new java.awt.Color(255, 255, 255));
-        txttipobuque.setBorder(null);
-        jPanel1.add(txttipobuque, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 300, 160, -1));
-
         txtnivelesb.setBackground(new java.awt.Color(17, 51, 71));
         txtnivelesb.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         txtnivelesb.setForeground(new java.awt.Color(255, 255, 255));
         txtnivelesb.setBorder(null);
         jPanel1.add(txtnivelesb, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 300, 160, -1));
-
-        jLabel5.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("ID Buque");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -190,7 +188,7 @@ public class frmBuque extends javax.swing.JInternalFrame {
         jLabel10.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Tamaño");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, -1, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -204,7 +202,7 @@ public class frmBuque extends javax.swing.JInternalFrame {
 
         jLabel13.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("ID Tipo de Buque");
+        jLabel13.setText("Tipo de Buque");
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 300, -1, -1));
 
         jComboBox3.setBackground(new java.awt.Color(17, 51, 71));
@@ -222,13 +220,16 @@ public class frmBuque extends javax.swing.JInternalFrame {
         txttamañob.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         txttamañob.setForeground(new java.awt.Color(255, 255, 255));
         txttamañob.setBorder(null);
-        jPanel1.add(txttamañob, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, 160, -1));
+        jPanel1.add(txttamañob, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 160, -1));
 
         txtnumcamarot.setBackground(new java.awt.Color(17, 51, 71));
         txtnumcamarot.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         txtnumcamarot.setForeground(new java.awt.Color(255, 255, 255));
         txtnumcamarot.setBorder(null);
         jPanel1.add(txtnumcamarot, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 230, 160, -1));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 300, 160, -1));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -252,6 +253,7 @@ public class frmBuque extends javax.swing.JInternalFrame {
     private javax.swing.JButton BtnAgregar;
     private javax.swing.JButton BtnEliminar;
     private javax.swing.JButton Btnsalir;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

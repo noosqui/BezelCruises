@@ -358,14 +358,32 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     private void btnViajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViajesActionPerformed
 
         // TODO add your handling code here:
-        frmViajes frm = new frmViajes();
+        
+         try
+        {
+            frmViajes frm = new frmViajes();
         AbrirForm(frm);
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Problemas."+ex);
+        }
+        
     }//GEN-LAST:event_btnViajesActionPerformed
 
     private void btnDestinosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDestinosActionPerformed
         // TODO add your handling code here:
-        frmDestinos frm = new frmDestinos();
-        AbrirForm(frm);
+        
+        try
+        {
+            frmDestinos form = new frmDestinos();
+            AbrirForm(form);
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Problemas."+ex);
+        }
+        
     }//GEN-LAST:event_btnDestinosActionPerformed
 
     private void btnCamarotes1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCamarotes1MouseEntered
