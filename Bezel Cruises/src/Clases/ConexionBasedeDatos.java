@@ -17,37 +17,58 @@ import javax.swing.JOptionPane;
 
 
 public class ConexionBasedeDatos {
-    
+
     static Connection conn = null;
-    
-    //Metodo
-    
+
+    public static boolean status = false;
+
     public static Connection obtenerConexion()
 
     {
         String url = "jdbc:sqlserver://localhost:1433;databaseName=Cruceros";
-        
+
         try
         {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+        }catch (ClassNotFoundException e){
+            JOptionPane.showMessageDialog(null, "No se pudo establece la conexion... revisar Driver" + e.getMessage(),
+            "Error de Conexion",JOptionPane.ERROR_MESSAGE);
         }
-        catch(Exception ex)
-        {
-            JOptionPane.showMessageDialog(null, "Error de Conexion");
-        }
-        
+      
+
         try
         {
             conn = DriverManager.getConnection(url, "sa", "123");
 
             JOptionPane.showMessageDialog(null, "Conexion exitosa");
         }
-        catch(Exception ex)
+          catch(Exception ex)
         {
-            JOptionPane.showMessageDialog(null, "Error de Conexion" + ex);
+            JOptionPane.showMessageDialog(null, "Error de Conexion");
         }
-        
         return conn;
+    }
+
+
+
+
+    public static boolean getstatus(){
+        return  status;
+    }
+
+    public static ResultSet Consulta(String consulta){
+        Connection con = obtenerConexion();
+        Statement declara;
+        try{
+            declara=con.createStatement();
+            ResultSet respuesta = declara.executeQuery(consulta);
+            return respuesta;
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "Error" + e.getMessage(),
+            "Error de Conexion",JOptionPane.ERROR_MESSAGE);
+        }
+        return null;
     }
 
 }

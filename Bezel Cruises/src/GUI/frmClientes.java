@@ -35,14 +35,14 @@ public class frmClientes extends javax.swing.JInternalFrame {
     Statement st;
     ResultSetMetaData rsmd;
     DefaultTableModel model;
-    
-    
-    
+
+
+
     public frmClientes() {
         initComponents();
-        
+
     }
- 
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -356,15 +356,15 @@ public class frmClientes extends javax.swing.JInternalFrame {
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
-    
+
      int id;
      int seleccion;
- 
-     
+
+
     private void bttnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnGuardarActionPerformed
 
-        int dia, mes, año;  
-      
+        int dia, mes, año;
+
         String nombreC = txtNombre.getText().trim();
         String apellidoC = txtApellido.getText().trim();
         String telefono = txtTelefono.getText().trim();
@@ -376,12 +376,12 @@ public class frmClientes extends javax.swing.JInternalFrame {
         mes = jdcFechaNacimiento.getCalendar().get(Calendar.MONTH)+1;
         año = jdcFechaNacimiento.getCalendar().get(Calendar.YEAR);
         String fechaNac = año + "-" + mes + "-" + dia;
-        
-        if (txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty() || txtTelefono.getText().isEmpty() 
+
+        if (txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty() || txtTelefono.getText().isEmpty()
             || txtDirec.getText().isEmpty() || txtDirec2.getText().isEmpty()|| txtCorreo.getText().isEmpty()||jdcFechaNacimiento.getDate()== null) {
             JOptionPane.showMessageDialog(null, "Por favor llenar todos los campos con sus requerimientos", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-        } 
-        else 
+        }
+        else
         {
             try
             {
@@ -412,51 +412,51 @@ public class frmClientes extends javax.swing.JInternalFrame {
                 txtDirec2.setText(null);
                 txtCorreo.setText(null);
                 listarCliente();
-            }    
+            }
     }//GEN-LAST:event_bttnGuardarActionPerformed
     }
-    
+
 
       public Date convertirFecha(String fecha)
     {
         Date result = null;
-        
+
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-        
-        try 
+
+        try
         {
             result = formato.parse(fecha);
-        } catch (ParseException ex) 
+        } catch (ParseException ex)
         {
-            
+
         }
-        
+
         return result;
     }
-     
-    
+
+
     private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
-        
+
     }//GEN-LAST:event_txtApellidoActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-        cn = cone.obtenerConexion(); 
+        cn = cone.obtenerConexion();
         listarCliente();
-        
+
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void bttnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnMostrarActionPerformed
-        
+
         try
         {
             seleccion = tblClientes.getSelectedRow();
-             
+
             if(seleccion == -1)
             {
                 JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila para poder mostrar los datos.");
             }
             else
-            { 
+            {
                 id = (Integer)tblClientes.getValueAt(seleccion, 0);
                 txtNombre.setText((String)tblClientes.getValueAt(seleccion, 1));
                 txtApellido.setText((String)tblClientes.getValueAt(seleccion, 2));
@@ -465,29 +465,29 @@ public class frmClientes extends javax.swing.JInternalFrame {
                 jdcFechaNacimiento.setDate(convertirFecha("" + tblClientes.getValueAt(seleccion, 5)));
                 txtDirec.setText((String)tblClientes.getValueAt(seleccion, 6));
                 txtDirec2.setText((String)tblClientes.getValueAt(seleccion, 7));
-                txtCorreo.setText((String)tblClientes.getValueAt(seleccion, 8));           
-            }     
+                txtCorreo.setText((String)tblClientes.getValueAt(seleccion, 8));
+            }
         }
         catch(Exception ex)
         {
             JOptionPane.showMessageDialog(null, "No se han podido mostrar los datos, Intentelo nuevamente.");
         }
-        
-       
+
+
     }//GEN-LAST:event_bttnMostrarActionPerformed
 
     private void bttnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnModificarActionPerformed
-        
+
          try
-        { 
+        {
             if(seleccion == -1)
             {
                 JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila para poder modificar los datos.");
             }
             else
-            { 
-                int dia, mes, año;  
-      
+            {
+                int dia, mes, año;
+
                 String nombreC = txtNombre.getText().trim();
                 String apellidoC = txtApellido.getText().trim();
                 String telefono = txtTelefono.getText().trim();
@@ -499,11 +499,11 @@ public class frmClientes extends javax.swing.JInternalFrame {
                 mes = jdcFechaNacimiento.getCalendar().get(Calendar.MONTH)+1;
                 año = jdcFechaNacimiento.getCalendar().get(Calendar.YEAR);
                 String fechaNac = año + "-" + mes + "-" + dia;
-            
+
                 try
                 {
                     CallableStatement cmd = cn.prepareCall("{CALL ActualizarCliente(?,?,?,?,?,?,?,?,?)}");
-                    
+
                     cmd.setString(1, ""+id);
                     cmd.setString(2, nombreC);
                     cmd.setString(3, apellidoC);
@@ -514,7 +514,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
                     cmd.setString(8, direccion2);
                     cmd.setString(9, correo);
                     cmd.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Registro de Cliente Modificado Exitosamente");                      
+                    JOptionPane.showMessageDialog(null, "Registro de Cliente Modificado Exitosamente");
                 }
                 catch(SQLException ex)
                 {
@@ -531,25 +531,25 @@ public class frmClientes extends javax.swing.JInternalFrame {
                    txtDirec2.setText(null);
                    txtCorreo.setText(null);
                    listarCliente();
-                  
+
                 }
-                
-            }   
-            
+
+            }
+
         }
         catch(Exception ex)
         {
-            
+
         }
-        
-        
+
+
     }//GEN-LAST:event_bttnModificarActionPerformed
 
     private void bttnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnEliminarActionPerformed
-         
+
         if(seleccion == -1)
             {
-                
+
                 JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila para poder eliminar los datos.");
             }
         else
@@ -561,7 +561,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
                 cmd.setString(1, ""+id);
                 cmd.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Cliente Eliminado Exitosamente");
-                
+
             }
             catch(SQLException ex)
             {
@@ -582,86 +582,86 @@ public class frmClientes extends javax.swing.JInternalFrame {
             }
     }//GEN-LAST:event_bttnEliminarActionPerformed
     }
-        
+
     private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
-       
+
     }//GEN-LAST:event_txtNombreKeyPressed
 
     private void txtApellidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyPressed
-     
+
     }//GEN-LAST:event_txtApellidoKeyPressed
 
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
-       
+
     }//GEN-LAST:event_txtNombreKeyReleased
 
     private void txtApellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyReleased
-     
+
     }//GEN-LAST:event_txtApellidoKeyReleased
 
     private void txtTelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyReleased
-       
+
     }//GEN-LAST:event_txtTelefonoKeyReleased
 
     private void txtDirecKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDirecKeyReleased
-      
+
     }//GEN-LAST:event_txtDirecKeyReleased
 
     private void txtDirec2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDirec2KeyReleased
-       
+
     }//GEN-LAST:event_txtDirec2KeyReleased
 
     private void txtCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyReleased
-       
+
     }//GEN-LAST:event_txtCorreoKeyReleased
 
     private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
-        
+
         char c = evt.getKeyChar();
-        
+
         if(c < '0' || c > '9') evt.consume();
-       
+
     }//GEN-LAST:event_txtTelefonoKeyTyped
 
     private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
-        
+
         char c = evt.getKeyChar();
-        
+
          if((c < 'a' || c > 'z')&& (c < 'A' || c > 'Z') ) evt.consume();
-         
+
     }//GEN-LAST:event_txtApellidoKeyTyped
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-        
+
         char c = evt.getKeyChar();
-        
+
          if((c < 'a' || c > 'z')&& (c < 'A' || c > 'Z') ) evt.consume();
-         
+
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtDirecKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDirecKeyTyped
-        
+
         char c = evt.getKeyChar();
-        
-         if((c < 'a' || c > 'z')&& (c < 'A' || c > 'Z') 
+
+         if((c < 'a' || c > 'z')&& (c < 'A' || c > 'Z')
          && (c!=(char)KeyEvent.VK_BACK_SPACE) && (c!=(char)KeyEvent.VK_SPACE)) evt.consume();
-         
-         
-         
+
+
+
     }//GEN-LAST:event_txtDirecKeyTyped
 
     private void txtDirec2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDirec2KeyTyped
-        
+
         char c = evt.getKeyChar();
-        
+
          if((c < 'a' || c > 'z')&& (c < 'A' || c > 'Z')
          && (c!=(char)KeyEvent.VK_BACK_SPACE) && (c!=(char)KeyEvent.VK_SPACE)) evt.consume();
-         
-         
+
+
     }//GEN-LAST:event_txtDirec2KeyTyped
 
     private void txtCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyTyped
-       
+
     }//GEN-LAST:event_txtCorreoKeyTyped
 
     public boolean isEmail(String correo){
@@ -677,32 +677,32 @@ public class frmClientes extends javax.swing.JInternalFrame {
            return false;
        }
     }
-    
+
     private void txtCorreoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCorreoFocusLost
-        
+
         if(isEmail(txtCorreo.getText()))
         {
-            
+
         }else{
            JOptionPane.showMessageDialog(null, "Correo Electronico incorrecto", "Complete el Email", JOptionPane.INFORMATION_MESSAGE);
            txtCorreo.requestFocus();
         }
     }//GEN-LAST:event_txtCorreoFocusLost
-    
-    
-        
+
+
+
     public void listarCliente()
     {
         model = (DefaultTableModel) tblClientes.getModel();
         model.setRowCount(0);
-        
+
         try
         {
             pp =cn.prepareStatement("SELECT * FROM [dbo].[Clientes]");
             rs = pp.executeQuery();
             rsmd = rs.getMetaData();
             int col = rsmd.getColumnCount();
-            
+
             while(rs.next())
             {
                 Object fil[] = new Object[col];
@@ -717,10 +717,10 @@ public class frmClientes extends javax.swing.JInternalFrame {
         {
             JOptionPane.showMessageDialog(null, "Los datos no se pudieron cargar a la tabla correctamente.");
         }
-             
+
     }
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bttnEliminar;
     private javax.swing.JButton bttnGuardar;
@@ -749,6 +749,6 @@ public class frmClientes extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 
- 
+
 
 }

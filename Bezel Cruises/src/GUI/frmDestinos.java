@@ -84,7 +84,7 @@ public class frmDestinos extends javax.swing.JInternalFrame {
         jLabel17.setBounds(39, 588, 148, 40);
 
         getContentPane().add(jPanel4);
-        jPanel4.setBounds(193, 189, 965, 634);
+        jPanel4.setBounds(193, 189, 0, 0);
 
         jPanel1.setBackground(new java.awt.Color(26, 78, 108));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -107,6 +107,11 @@ public class frmDestinos extends javax.swing.JInternalFrame {
         BtnAgrgar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         BtnAgrgar.setForeground(new java.awt.Color(255, 255, 255));
         BtnAgrgar.setText("Agregar");
+        BtnAgrgar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAgrgarActionPerformed(evt);
+            }
+        });
         jPanel1.add(BtnAgrgar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 120, 60));
 
         jLabel3.setBackground(new java.awt.Color(21, 38, 76));
@@ -184,7 +189,7 @@ public class frmDestinos extends javax.swing.JInternalFrame {
         jPanel1.add(txtidlugardestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 250, 170, -1));
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 60, 880, 491);
+        jPanel1.setBounds(0, 60, 880, 490);
 
         jPanel5.setBackground(new java.awt.Color(38, 116, 162));
 
@@ -217,7 +222,7 @@ public class frmDestinos extends javax.swing.JInternalFrame {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtbuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
@@ -230,6 +235,10 @@ public class frmDestinos extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnAgrgarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgrgarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnAgrgarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -129,6 +129,11 @@ public class frmViajes extends javax.swing.JInternalFrame {
         BtnAgregar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         BtnAgregar.setForeground(new java.awt.Color(255, 255, 255));
         BtnAgregar.setText("Agregar");
+        BtnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAgregarActionPerformed(evt);
+            }
+        });
         jPanel1.add(BtnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, 120, 60));
 
         jLabel3.setBackground(new java.awt.Color(21, 38, 76));
@@ -234,6 +239,10 @@ public class frmViajes extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnAgregarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
