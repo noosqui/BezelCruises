@@ -35,7 +35,7 @@ public class ConexionBasedeDatos {
             JOptionPane.showMessageDialog(null, "No se pudo establece la conexion... revisar Driver" + e.getMessage(),
             "Error de Conexion",JOptionPane.ERROR_MESSAGE);
         }
-      
+
 
         try
         {

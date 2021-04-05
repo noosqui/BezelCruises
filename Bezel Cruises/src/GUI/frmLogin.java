@@ -51,7 +51,6 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         Btningresar = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -154,14 +153,6 @@ public class frmLogin extends javax.swing.JFrame {
         });
         panel4.add(Btningresar);
         Btningresar.setBounds(70, 340, 190, 40);
-
-        jCheckBox1.setBackground(new java.awt.Color(33, 45, 62));
-        jCheckBox1.setFont(new java.awt.Font("Consolas", 0, 10)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setText("Mostrar Contraseña");
-        jCheckBox1.setBorder(null);
-        panel4.add(jCheckBox1);
-        jCheckBox1.setBounds(40, 300, 140, 25);
 
         getContentPane().add(panel4);
         panel4.setBounds(500, 130, 350, 460);
@@ -268,7 +259,6 @@ public class frmLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btningresar;
     private javax.swing.JPasswordField Pswusuario;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

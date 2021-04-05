@@ -20,7 +20,7 @@ import javax.swing.DefaultComboBoxModel;
  */
 public class frmBuque extends javax.swing.JInternalFrame {
 
-  
+
     Connection cn = ConexionBasedeDatos.obtenerConexion();
     DefaultTableModel modelo = new DefaultTableModel();
     PreparedStatement ps = null;
@@ -44,46 +44,60 @@ public class frmBuque extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtidbuque = new javax.swing.JTextField();
+        txttipobuque = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
+        CmbTipobuque = new javax.swing.JComboBox<>();
         Btninsertar = new javax.swing.JButton();
         BtnEliminar = new javax.swing.JButton();
         BtnActualizar = new javax.swing.JButton();
         BtnAgregar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        txtidbuque = new javax.swing.JTextField();
         txtnombrebuque = new javax.swing.JTextField();
-        txtdecrtipobuque = new javax.swing.JTextField();
         txtnivelesb = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        txtnumcamarot = new javax.swing.JTextField();
+        txttamañob = new javax.swing.JTextField();
+        txtdecrtipobuque = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        txttamañob = new javax.swing.JTextField();
-        txtnumcamarot = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         Btnlimpiar1 = new javax.swing.JButton();
-        CmbTipobuque = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
         txtbuscar = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         btnbuscar = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
-        jLabel4.setFont(new java.awt.Font("Candara", 2, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Buscar Buque");
+        jLabel5.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("ID Buque");
+
+        txtidbuque.setBackground(new java.awt.Color(17, 51, 71));
+        txtidbuque.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        txtidbuque.setForeground(new java.awt.Color(255, 255, 255));
+        txtidbuque.setBorder(null);
+
+        txttipobuque.setBackground(new java.awt.Color(17, 51, 71));
+        txttipobuque.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        txttipobuque.setForeground(new java.awt.Color(255, 255, 255));
+        txttipobuque.setBorder(null);
 
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
+
+        CmbTipobuque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(CmbTipobuque);
+        CmbTipobuque.setBounds(560, 400, 140, 26);
 
         Btninsertar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         Btninsertar.setForeground(new java.awt.Color(17, 51, 71));
@@ -96,7 +110,7 @@ public class frmBuque extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(Btninsertar);
-        Btninsertar.setBounds(710, 420, 60, 30);
+        Btninsertar.setBounds(370, 440, 150, 30);
 
         BtnEliminar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         BtnEliminar.setForeground(new java.awt.Color(17, 51, 71));
@@ -169,18 +183,6 @@ public class frmBuque extends javax.swing.JInternalFrame {
         jPanel1.add(jScrollPane2);
         jScrollPane2.setBounds(0, 0, 870, 100);
 
-        txtidbuque.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        txtidbuque.setForeground(new java.awt.Color(51, 51, 51));
-        txtidbuque.setBorder(null);
-        txtidbuque.setEnabled(false);
-        txtidbuque.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtidbuqueKeyTyped(evt);
-            }
-        });
-        jPanel1.add(txtidbuque);
-        txtidbuque.setBounds(240, 240, 160, 30);
-
         txtnombrebuque.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         txtnombrebuque.setForeground(new java.awt.Color(51, 51, 51));
         txtnombrebuque.setBorder(null);
@@ -195,19 +197,7 @@ public class frmBuque extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(txtnombrebuque);
-        txtnombrebuque.setBounds(240, 300, 160, 30);
-
-        txtdecrtipobuque.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        txtdecrtipobuque.setForeground(new java.awt.Color(51, 51, 51));
-        txtdecrtipobuque.setBorder(null);
-        txtdecrtipobuque.setEnabled(false);
-        txtdecrtipobuque.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtdecrtipobuqueKeyTyped(evt);
-            }
-        });
-        jPanel1.add(txtdecrtipobuque);
-        txtdecrtipobuque.setBounds(540, 370, 160, 20);
+        txtnombrebuque.setBounds(120, 280, 160, 30);
 
         txtnivelesb.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         txtnivelesb.setForeground(new java.awt.Color(51, 51, 51));
@@ -218,25 +208,40 @@ public class frmBuque extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(txtnivelesb);
-        txtnivelesb.setBounds(540, 300, 160, 30);
+        txtnivelesb.setBounds(580, 280, 160, 30);
 
-        jLabel5.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("ID Buque");
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(190, 220, 64, 19);
+        txtnumcamarot.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        txtnumcamarot.setForeground(new java.awt.Color(51, 51, 51));
+        txtnumcamarot.setBorder(null);
+        txtnumcamarot.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnumcamarotKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtnumcamarot);
+        txtnumcamarot.setBounds(580, 220, 160, 30);
+
+        txttamañob.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        txttamañob.setForeground(new java.awt.Color(51, 51, 51));
+        txttamañob.setBorder(null);
+        jPanel1.add(txttamañob);
+        txttamañob.setBounds(120, 230, 160, 30);
+
+        txtdecrtipobuque.setBorder(null);
+        jPanel1.add(txtdecrtipobuque);
+        txtdecrtipobuque.setBounds(580, 340, 160, 30);
 
         jLabel8.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Nombre ");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(190, 280, 59, 19);
+        jLabel8.setBounds(40, 280, 59, 19);
 
         jLabel10.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Tamaño");
         jPanel1.add(jLabel10);
-        jLabel10.setBounds(190, 340, 54, 19);
+        jLabel10.setBounds(40, 230, 54, 19);
 
         jLabel11.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -252,26 +257,9 @@ public class frmBuque extends javax.swing.JInternalFrame {
 
         jLabel13.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText(" Descripcion Tipo de Buque");
+        jLabel13.setText("Tipo de Buque");
         jPanel1.add(jLabel13);
-        jLabel13.setBounds(430, 350, 194, 19);
-
-        txttamañob.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        txttamañob.setForeground(new java.awt.Color(51, 51, 51));
-        txttamañob.setBorder(null);
-        jPanel1.add(txttamañob);
-        txttamañob.setBounds(240, 360, 160, 30);
-
-        txtnumcamarot.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        txtnumcamarot.setForeground(new java.awt.Color(51, 51, 51));
-        txtnumcamarot.setBorder(null);
-        txtnumcamarot.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtnumcamarotKeyTyped(evt);
-            }
-        });
-        jPanel1.add(txtnumcamarot);
-        txtnumcamarot.setBounds(540, 240, 160, 30);
+        jLabel13.setBounds(430, 340, 102, 19);
 
         jLabel15.setFont(new java.awt.Font("Gill Sans MT", 1, 36)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
@@ -296,20 +284,6 @@ public class frmBuque extends javax.swing.JInternalFrame {
         jPanel1.add(Btnlimpiar1);
         Btnlimpiar1.setBounds(370, 480, 150, 30);
 
-        CmbTipobuque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        CmbTipobuque.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                CmbTipobuqueItemStateChanged(evt);
-            }
-        });
-        CmbTipobuque.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CmbTipobuqueMouseClicked(evt);
-            }
-        });
-        jPanel1.add(CmbTipobuque);
-        CmbTipobuque.setBounds(540, 420, 160, 30);
-
         jLabel14.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("ID Tipo de Buque");
@@ -319,8 +293,6 @@ public class frmBuque extends javax.swing.JInternalFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/buques.jpg"))); // NOI18N
         jPanel1.add(jLabel3);
         jLabel3.setBounds(0, 0, 870, 710);
-        jPanel1.add(jSeparator1);
-        jSeparator1.setBounds(570, 380, 50, 10);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 60, 870, 566);
@@ -344,6 +316,8 @@ public class frmBuque extends javax.swing.JInternalFrame {
                 btnbuscarActionPerformed(evt);
             }
         });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -382,7 +356,7 @@ public class frmBuque extends javax.swing.JInternalFrame {
     private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
         if (txtnombrebuque.getText().isEmpty() || txttamañob.getText().isEmpty() || txtnumcamarot.getText().isEmpty() || txtdecrtipobuque.getText().isEmpty() || txtnivelesb.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Tienes datos por llenar", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-            
+
         } else {
             try {
                 String Dato = CmbTipobuque.getSelectedItem().toString();
@@ -427,7 +401,7 @@ public class frmBuque extends javax.swing.JInternalFrame {
                 }
                 cargatablebuques();
                 JOptionPane.showMessageDialog(null, "LOS DATOS HAN SIDO ACTUALIZADOS");
-               
+
             }
         }
     }//GEN-LAST:event_BtnActualizarActionPerformed
@@ -494,14 +468,6 @@ public class frmBuque extends javax.swing.JInternalFrame {
         BusquedaBuques(id);
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void CmbTipobuqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CmbTipobuqueMouseClicked
-
-    }//GEN-LAST:event_CmbTipobuqueMouseClicked
-
-    private void CmbTipobuqueItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CmbTipobuqueItemStateChanged
-        BusquedaTipoBuque(CmbTipobuque.getSelectedItem().toString());
-    }//GEN-LAST:event_CmbTipobuqueItemStateChanged
-
 
     ///////////////////
     private void cargatablebuques() {
@@ -565,7 +531,7 @@ public class frmBuque extends javax.swing.JInternalFrame {
 //////////////////
     public DefaultComboBoxModel insercombo() {
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
-         
+
         try {
             CallableStatement dato = ConexionBasedeDatos.obtenerConexion().prepareCall("{call ComboxtipoBuque}");
             rsModelo = dato.executeQuery();
@@ -612,6 +578,7 @@ public class frmBuque extends javax.swing.JInternalFrame {
     private javax.swing.JButton Btnlimpiar1;
     private javax.swing.JComboBox<String> CmbTipobuque;
     private javax.swing.JButton btnbuscar;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -619,7 +586,6 @@ public class frmBuque extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -627,7 +593,6 @@ public class frmBuque extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtbuscar;
     private javax.swing.JTextField txtdecrtipobuque;
@@ -636,5 +601,6 @@ public class frmBuque extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtnombrebuque;
     private javax.swing.JTextField txtnumcamarot;
     private javax.swing.JTextField txttamañob;
+    private javax.swing.JTextField txttipobuque;
     // End of variables declaration//GEN-END:variables
 }
