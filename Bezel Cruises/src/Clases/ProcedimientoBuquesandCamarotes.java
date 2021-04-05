@@ -91,4 +91,9 @@ public class ProcedimientoBuquesandCamarotes {
         dato.setInt(1, id);
         dato.execute();
     }
+    public static void busquedatipoBuque(int id) throws SQLException {
+        CallableStatement dato = ConexionBasedeDatos.getConexion().prepareCall("{call busquedaBuque(?)}");
+        dato.setInt(1, id);
+        dato.execute();
+    }
 }

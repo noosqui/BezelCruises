@@ -29,6 +29,7 @@ public class frminsertabuqe extends javax.swing.JFrame {
     PreparedStatement ps = null;
     Statement stModel = null;
     ResultSet rsModelo = null;
+    String id;
 
     public frminsertabuqe() {
         initComponents();
@@ -160,6 +161,11 @@ public class frminsertabuqe extends javax.swing.JFrame {
             }
         });
         jTable1.setGridColor(new java.awt.Color(255, 255, 255));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane2);
@@ -168,6 +174,7 @@ public class frminsertabuqe extends javax.swing.JFrame {
         txtid.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         txtid.setForeground(new java.awt.Color(51, 51, 51));
         txtid.setBorder(null);
+        txtid.setEnabled(false);
         txtid.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtidKeyTyped(evt);
@@ -345,10 +352,10 @@ public class frminsertabuqe extends javax.swing.JFrame {
             int opc = JOptionPane.showConfirmDialog(this, "¿ESTAS SEGURO QUE DESEA ACTUALIZAR ESTE REGISTRO?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (opc == JOptionPane.YES_OPTION) {
                 try {
-                    ProcedimientoBuquesandCamarotes.Updatetipobuque(Integer.parseInt(txtid.getText()), txtdesc.getText(),txtmarca.getText(), txtmodelo.getText() );
+                    ProcedimientoBuquesandCamarotes.Updatetipobuque(Integer.parseInt(txtid.getText()), txtdesc.getText(), txtmarca.getText(), txtmodelo.getText());
                 } catch (SQLException e) {
                 }
-               cargatipbuque();
+                cargatipbuque();
                 JOptionPane.showMessageDialog(null, "LOS DATOS HAN SIDO ACTUALIZADOS");
                 limpiar();
             }
@@ -405,11 +412,11 @@ public class frminsertabuqe extends javax.swing.JFrame {
     }//GEN-LAST:event_Btnlimpiar1ActionPerformed
 
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
-      this.dispose(); 
+        this.dispose();
     }//GEN-LAST:event_BtnSalirActionPerformed
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
-    BusquedaTipoBuques();
+        BusquedaTipoBuques(txtbuscar.getText());
     }//GEN-LAST:event_btnbuscarActionPerformed
 
     private void BtnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminar1ActionPerformed
@@ -428,6 +435,11 @@ public class frminsertabuqe extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtmodeloKeyTyped
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        id = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+        BusquedaTipoBuques(id);
+    }//GEN-LAST:event_jTable1MouseClicked
 
     private void cargatipbuque() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -457,10 +469,10 @@ public class frminsertabuqe extends javax.swing.JFrame {
 
     }
 
-    private void BusquedaTipoBuques() {
+    public void BusquedaTipoBuques(String id) {
 
-        String consulta = "SELECT * FROM [dbo].[Tipo_Buques]  WHERE [Id-TipoBuque] LIKE '%" + txtbuscar.getText() + "%' "
-                + "OR [DescripcionBuque] LIKE '%" + txtbuscar.getText() + "%'";
+        String consulta = "SELECT * FROM [dbo].[Tipo_Buques]  WHERE [Id-TipoBuque] LIKE '%" + id + "%' "
+                + "OR [DescripcionBuque] LIKE '%" + id + "%'";
 
         Connection conect = ConexionBasedeDatos.getConexion();
         try {
