@@ -2,6 +2,7 @@
 package GUI;
 
 import Clases.ConexionBasedeDatos;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -197,26 +198,61 @@ public class frmAgentes extends javax.swing.JInternalFrame {
         txtnombre.setBackground(new java.awt.Color(26, 78, 108));
         txtnombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtnombre.setBorder(null);
+        txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnombreKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 130, -1));
 
         txtapellido.setBackground(new java.awt.Color(26, 78, 108));
         txtapellido.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtapellido.setBorder(null);
+        txtapellido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtapellidoActionPerformed(evt);
+            }
+        });
+        txtapellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtapellidoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtapellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 130, -1));
 
         txttelefono.setBackground(new java.awt.Color(26, 78, 108));
         txttelefono.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txttelefono.setBorder(null);
+        txttelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txttelefonoActionPerformed(evt);
+            }
+        });
+        txttelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txttelefonoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txttelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 130, -1));
 
         txtdireccion.setBackground(new java.awt.Color(26, 78, 108));
         txtdireccion.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtdireccion.setBorder(null);
+        txtdireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtdireccionKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtdireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, 130, -1));
 
         txtidentidad.setBackground(new java.awt.Color(26, 78, 108));
         txtidentidad.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtidentidad.setBorder(null);
+        txtidentidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtidentidadKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtidentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 130, -1));
 
         txtpais.setBackground(new java.awt.Color(26, 78, 108));
@@ -225,6 +261,11 @@ public class frmAgentes extends javax.swing.JInternalFrame {
         txtpais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtpaisActionPerformed(evt);
+            }
+        });
+        txtpais.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtpaisKeyTyped(evt);
             }
         });
         jPanel1.add(txtpais, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 130, -1));
@@ -239,6 +280,9 @@ public class frmAgentes extends javax.swing.JInternalFrame {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Agentes");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, -1, 40));
+
+        jdcfechanacimiento.setMaxSelectableDate(new java.util.Date(1617865293000L));
+        jdcfechanacimiento.setMinSelectableDate(new java.util.Date(-631123107000L));
         jPanel1.add(jdcfechanacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 70, 180, -1));
 
         cmbpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Gerente de Ventas" }));
@@ -656,6 +700,112 @@ public class frmAgentes extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_btneliminarActionPerformed
+
+    private void txtnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyTyped
+
+    char car = evt.getKeyChar();
+    
+    if(Character.isLetter(car) || car == KeyEvent.VK_BACK_SPACE)
+    {
+
+    }else
+    {
+        JOptionPane.showMessageDialog(null, "Solo puede ingresar letras.");
+        evt.consume();
+        getToolkit().beep();
+    }   
+        
+        
+    }//GEN-LAST:event_txtnombreKeyTyped
+
+    private void txtapellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtapellidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtapellidoActionPerformed
+
+    private void txtapellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtapellidoKeyTyped
+        
+        char car = evt.getKeyChar();
+    
+        if(Character.isLetter(car) || car == KeyEvent.VK_BACK_SPACE)
+        {
+
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Solo puede ingresar letras.");
+            evt.consume();
+            getToolkit().beep();
+        }  
+        
+    }//GEN-LAST:event_txtapellidoKeyTyped
+
+    private void txtpaisKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpaisKeyTyped
+        
+        char car = evt.getKeyChar();
+    
+        if(Character.isLetter(car) || car == KeyEvent.VK_BACK_SPACE)
+        {
+
+        }else
+        {
+            JOptionPane.showMessageDialog(null, "Solo puede ingresar letras.");
+            evt.consume();
+            getToolkit().beep();
+        }  
+        
+    }//GEN-LAST:event_txtpaisKeyTyped
+
+    private void txtdireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdireccionKeyTyped
+        
+        char car = evt.getKeyChar();
+    
+        if(Character.isLetter(car) || Character.isDigit(car) || car == KeyEvent.VK_BACK_SPACE)
+        {
+
+        }else
+        {
+            JOptionPane.showMessageDialog(null, "Solo puede ingresar letras o numeros.");
+            evt.consume();
+            getToolkit().beep();
+        } 
+        
+    }//GEN-LAST:event_txtdireccionKeyTyped
+
+    private void txtidentidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtidentidadKeyTyped
+        
+        char car = evt.getKeyChar();
+    
+        if(Character.isDigit(car) || car == KeyEvent.VK_BACK_SPACE)
+        {
+
+        }else
+        {
+            JOptionPane.showMessageDialog(null, "Solo puede ingresar numeros.");
+            evt.consume();
+            getToolkit().beep();
+        } 
+        
+    }//GEN-LAST:event_txtidentidadKeyTyped
+
+    private void txttelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txttelefonoActionPerformed
+
+    private void txttelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelefonoKeyTyped
+        
+        char car = evt.getKeyChar();
+    
+        if(Character.isDigit(car) || car == KeyEvent.VK_BACK_SPACE )
+        {
+
+        }else
+        {
+            JOptionPane.showMessageDialog(null, "Solo puede ingresar numeros.");
+            evt.consume();
+            getToolkit().beep();
+        } 
+        
+    }//GEN-LAST:event_txttelefonoKeyTyped
 
     public Date convertirFecha(String fecha)
     {
