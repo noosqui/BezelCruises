@@ -68,11 +68,11 @@
                     <Column editable="false" title="Identidad" type="java.lang.Object"/>
                     <Column editable="false" title="Fecha Nacimiento" type="java.lang.Object"/>
                     <Column editable="false" title="Fecha Contratacion" type="java.lang.Object"/>
-                    <Column editable="false" title="Telefono " type="java.lang.Object"/>
-                    <Column editable="false" title="Direccion" type="java.lang.Object"/>
-                    <Column editable="false" title="Pais" type="java.lang.Object"/>
                     <Column editable="false" title="Codigo Puesto" type="java.lang.Object"/>
                     <Column editable="false" title="Codigo Usuario" type="java.lang.Object"/>
+                    <Column editable="false" title="Pais" type="java.lang.Object"/>
+                    <Column editable="false" title="Direccion" type="java.lang.Object"/>
+                    <Column editable="false" title="Telefono " type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

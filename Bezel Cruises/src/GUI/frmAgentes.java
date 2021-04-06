@@ -97,7 +97,7 @@ public class frmAgentes extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Nombre", "Apellido", "Identidad", "Fecha Nacimiento", "Fecha Contratacion", "Telefono ", "Direccion", "Pais", "Codigo Puesto", "Codigo Usuario"
+                "Codigo", "Nombre", "Apellido", "Identidad", "Fecha Nacimiento", "Fecha Contratacion", "Codigo Puesto", "Codigo Usuario", "Pais", "Direccion", "Telefono "
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -325,7 +325,7 @@ public class frmAgentes extends javax.swing.JInternalFrame {
 
       btncrear.show();
       BtnAgregar.hide();
-
+      btnmostrar.show();
     }//GEN-LAST:event_BtnAgregarActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
@@ -343,6 +343,8 @@ public class frmAgentes extends javax.swing.JInternalFrame {
         String user, pass, word, codigo ="";
         int encontrado = 0, encontradouser = 0;
 
+        btnmostrar.hide();
+        
         if(txtnombre.getText().equals(""))
         {
           JOptionPane.showMessageDialog(null, "Por favor ingrese un nombre del agente.");
@@ -503,11 +505,11 @@ public class frmAgentes extends javax.swing.JInternalFrame {
                 txtapellido.setText((String)tblempleados.getValueAt(seleccionada, 2));
                 txtidentidad.setText((String)tblempleados.getValueAt(seleccionada, 3));
                 jdcfechanacimiento.setDate(convertirFecha("" + tblempleados.getValueAt(seleccionada, 4)));
-                txttelefono.setText((String)tblempleados.getValueAt(seleccionada, 6));
-                txtdireccion.setText((String)tblempleados.getValueAt(seleccionada, 7));
+                txttelefono.setText((String)tblempleados.getValueAt(seleccionada, 10));
+                txtdireccion.setText((String)tblempleados.getValueAt(seleccionada, 9));
                 txtpais.setText((String)tblempleados.getValueAt(seleccionada, 8));
-                cmbpuesto.setSelectedIndex((Integer)tblempleados.getValueAt(seleccionada, 9)-1);
-                user = (Integer)tblempleados.getValueAt(seleccionada, 10);
+                cmbpuesto.setSelectedIndex((Integer)tblempleados.getValueAt(seleccionada, 6)-1);
+                user = (Integer)tblempleados.getValueAt(seleccionada, 7);
                 txtcodigousuario.setText("" + user);
 
 
