@@ -13,9 +13,10 @@ import java.util.Calendar;
 import java.sql.CallableStatement;
 import java.text.DateFormat;
 import java.text.ParseException;
-
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -375,8 +376,12 @@ public class frmClientes extends javax.swing.JInternalFrame {
         dia = jdcFechaNacimiento.getCalendar().get(Calendar.DAY_OF_MONTH);
         mes = jdcFechaNacimiento.getCalendar().get(Calendar.MONTH)+1;
         año = jdcFechaNacimiento.getCalendar().get(Calendar.YEAR);
-        String fechaNac = año + "-" + mes + "-" + dia;
-
+        String fechaNac = ""+año +"-"+((mes<=9)? "0"+mes:mes)+"-"+ ((dia<=9)? "0"+dia:dia);
+         
+        
+        JOptionPane.showMessageDialog(this, fechaNac);
+        
+         
         if (txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty() || txtTelefono.getText().isEmpty()
             || txtDirec.getText().isEmpty() || txtDirec2.getText().isEmpty()|| txtCorreo.getText().isEmpty()||jdcFechaNacimiento.getDate()== null) {
             JOptionPane.showMessageDialog(null, "Por favor llenar todos los campos con sus requerimientos", "Informacion", JOptionPane.INFORMATION_MESSAGE);
@@ -679,7 +684,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
     }
 
     private void txtCorreoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCorreoFocusLost
-
+            /*
         if(isEmail(txtCorreo.getText()))
         {
 
@@ -687,6 +692,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
            JOptionPane.showMessageDialog(null, "Correo Electronico incorrecto", "Complete el Email", JOptionPane.INFORMATION_MESSAGE);
            txtCorreo.requestFocus();
         }
+*/
     }//GEN-LAST:event_txtCorreoFocusLost
 
 

@@ -41,7 +41,7 @@ public class ConexionBasedeDatos {
         {
             conn = DriverManager.getConnection(url, "sa", "123");
 
-            JOptionPane.showMessageDialog(null, "Conexion exitosa");
+            //JOptionPane.showMessageDialog(null, "Conexion exitosa");
         }
           catch(Exception ex)
         {

@@ -96,12 +96,18 @@ public class frmBuque extends javax.swing.JInternalFrame {
         jPanel1.setLayout(null);
 
         CmbTipobuque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CmbTipobuque.setBorder(null);
+        CmbTipobuque.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CmbTipobuqueItemStateChanged(evt);
+            }
+        });
         jPanel1.add(CmbTipobuque);
         CmbTipobuque.setBounds(560, 400, 140, 26);
 
         Btninsertar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        Btninsertar.setForeground(new java.awt.Color(17, 51, 71));
-        Btninsertar.setText("insertar");
+        Btninsertar.setForeground(new java.awt.Color(31, 61, 121));
+        Btninsertar.setText("Insertar Tipo Buque");
         Btninsertar.setBorder(null);
         Btninsertar.setBorderPainted(false);
         Btninsertar.addActionListener(new java.awt.event.ActionListener() {
@@ -110,10 +116,10 @@ public class frmBuque extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(Btninsertar);
-        Btninsertar.setBounds(370, 440, 150, 30);
+        Btninsertar.setBounds(560, 440, 150, 30);
 
         BtnEliminar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        BtnEliminar.setForeground(new java.awt.Color(17, 51, 71));
+        BtnEliminar.setForeground(new java.awt.Color(31, 61, 121));
         BtnEliminar.setText("Eliminar");
         BtnEliminar.setBorder(null);
         BtnEliminar.setBorderPainted(false);
@@ -123,10 +129,10 @@ public class frmBuque extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(BtnEliminar);
-        BtnEliminar.setBounds(220, 480, 140, 30);
+        BtnEliminar.setBounds(30, 390, 140, 30);
 
         BtnActualizar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        BtnActualizar.setForeground(new java.awt.Color(17, 51, 71));
+        BtnActualizar.setForeground(new java.awt.Color(31, 61, 121));
         BtnActualizar.setText("Actualizar");
         BtnActualizar.setBorder(null);
         BtnActualizar.setBorderPainted(false);
@@ -136,10 +142,10 @@ public class frmBuque extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(BtnActualizar);
-        BtnActualizar.setBounds(220, 440, 140, 30);
+        BtnActualizar.setBounds(180, 350, 150, 30);
 
         BtnAgregar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        BtnAgregar.setForeground(new java.awt.Color(17, 51, 71));
+        BtnAgregar.setForeground(new java.awt.Color(31, 61, 121));
         BtnAgregar.setText("Agregar");
         BtnAgregar.setBorder(null);
         BtnAgregar.setBorderPainted(false);
@@ -149,7 +155,7 @@ public class frmBuque extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(BtnAgregar);
-        BtnAgregar.setBounds(70, 440, 140, 30);
+        BtnAgregar.setBounds(30, 350, 140, 30);
 
         jTable1.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jTable1.setForeground(new java.awt.Color(51, 51, 51));
@@ -228,6 +234,7 @@ public class frmBuque extends javax.swing.JInternalFrame {
         txttamañob.setBounds(120, 230, 160, 30);
 
         txtdecrtipobuque.setBorder(null);
+        txtdecrtipobuque.setEnabled(false);
         jPanel1.add(txtdecrtipobuque);
         txtdecrtipobuque.setBounds(580, 340, 160, 30);
 
@@ -272,7 +279,7 @@ public class frmBuque extends javax.swing.JInternalFrame {
         jLabel7.setBounds(10, 470, 100, 110);
 
         Btnlimpiar1.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        Btnlimpiar1.setForeground(new java.awt.Color(17, 51, 71));
+        Btnlimpiar1.setForeground(new java.awt.Color(31, 61, 121));
         Btnlimpiar1.setText("Limpiar");
         Btnlimpiar1.setBorder(null);
         Btnlimpiar1.setBorderPainted(false);
@@ -282,7 +289,7 @@ public class frmBuque extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(Btnlimpiar1);
-        Btnlimpiar1.setBounds(370, 480, 150, 30);
+        Btnlimpiar1.setBounds(180, 390, 150, 30);
 
         jLabel14.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
@@ -467,6 +474,11 @@ public class frmBuque extends javax.swing.JInternalFrame {
         id = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 0));
         BusquedaBuques(id);
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void CmbTipobuqueItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CmbTipobuqueItemStateChanged
+        // TODO add your handling code here:
+        BusquedaTipoBuque(CmbTipobuque.getSelectedItem().toString());
+    }//GEN-LAST:event_CmbTipobuqueItemStateChanged
 
 
     ///////////////////

@@ -32,6 +32,10 @@ public class frmVentas extends javax.swing.JInternalFrame {
     public frmVentas() {
         initComponents();
     }
+     public frmVentas(int idEmpleado) {
+        initComponents();
+        this.IdEmpleado=idEmpleado;
+    }
     PreparedStatement pp = null;
     ConexionBasedeDatos conn = new ConexionBasedeDatos();
     Connection cn = conn.obtenerConexion();
@@ -39,6 +43,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
     Statement st;
     ResultSetMetaData rsmd;
     DefaultTableModel model;
+    int IdEmpleado;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -596,8 +601,8 @@ public class frmVentas extends javax.swing.JInternalFrame {
             }
 
             pp = cn.prepareStatement("SELECT FLOOR(DATEDIFF(DAY, Fecha_Nacimiento, GETDATE()) / 365.25) from Clientes\n"
-                    + " where Identidad_Cliente = ?");
-            pp.setString(1, idCli);
+                    + " where Id_Cliente = ?");
+            pp.setInt(1, Integer.parseInt(idCli));
             rs = pp.executeQuery();
             rsmd = rs.getMetaData();
             while (rs.next()) {
@@ -635,8 +640,8 @@ public class frmVentas extends javax.swing.JInternalFrame {
             pp.setDouble(3, Descuento);
             pp.setDouble(4, ISV);
             pp.setDouble(5, ImpPortuario);
-            pp.setInt(6, cmbCliente.getSelectedIndex()+1);
-            pp.setInt(7, 4);
+            pp.setInt(6, Integer.parseInt(idCli));
+            pp.setInt(7, IdEmpleado);
             pp.setInt(8, Integer.parseInt(tabViajes.getValueAt(tabViajes.getSelectedRow(), 0).toString()));
             pp.executeUpdate();
             int idFact = 0;
@@ -793,7 +798,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
 
     public void listarClientes() {
         try {
-            pp = cn.prepareStatement("select concat(Nombre_Cliente,' ',Apellido_Cliente)Nombre,Identidad_Cliente from Clientes");
+            pp = cn.prepareStatement("select concat(Nombre_Cliente,' ',Apellido_Cliente)Nombre,Id_Cliente from Clientes");
             rs = pp.executeQuery();
 
             while (rs.next()) {

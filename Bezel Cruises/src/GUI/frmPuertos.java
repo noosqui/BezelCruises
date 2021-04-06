@@ -26,7 +26,7 @@ public class frmPuertos extends javax.swing.JInternalFrame {
     int codigoS, codigoD;
 
  
-    public frmPuertos() throws SQLException {
+    public frmPuertos()  {
         initComponents();
         
         this.setResizable(false);
@@ -139,8 +139,8 @@ public class frmPuertos extends javax.swing.JInternalFrame {
         jLabel18 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        setClosable(true);
         setTitle("Puerto");
+        setEnabled(false);
         try {
             setSelected(true);
         } catch (java.beans.PropertyVetoException e1) {
@@ -352,7 +352,7 @@ public class frmPuertos extends javax.swing.JInternalFrame {
             .addGroup(PanelSuperiorpuertoLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(jLabel18)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 343, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 341, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtBUSCAR, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)

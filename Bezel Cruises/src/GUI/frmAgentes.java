@@ -287,7 +287,7 @@ public class frmAgentes extends javax.swing.JInternalFrame {
       String fechaNac = año + "-" + mes + "-" + dia;
       String codigoUsuario = txtcodigousuario.getText().trim();
       String puesto = "" + (cmbpuesto.getSelectedIndex()+1);
-
+      
 
       try
       {
@@ -336,9 +336,11 @@ public class frmAgentes extends javax.swing.JInternalFrame {
         listar();
     }//GEN-LAST:event_formInternalFrameOpened
 
+    
+    
+    
     private void btncrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncrearActionPerformed
-
-        String user, pass, word, cod;
+        String user, pass, word, codigo ="";
         int encontrado = 0, encontradouser = 0;
 
         if(txtnombre.getText().equals(""))
@@ -378,39 +380,6 @@ public class frmAgentes extends javax.swing.JInternalFrame {
         }
         else
         {
-
-            do
-           {
-
-                cod = JOptionPane.showInputDialog("Ingrese el codigo del usuario: ");
-
-                try
-                {
-                    pp = cn.prepareStatement("select count(*)[Encontrado] from [dbo].[Usuarios] where Codigo_Usuario = ?");
-                    pp.setString(1, cod);
-                    rs = pp.executeQuery();
-
-                    if(rs.next())
-                    {
-                        encontrado = rs.getInt("Encontrado");
-                    }
-                }
-                catch(Exception ex)
-                {
-
-                }
-
-                if(encontrado == 1)
-                {
-                    JOptionPane.showMessageDialog(null, "El codigo de usuario que ingreso no esta disponible.");
-                }
-
-                if(cod.equals(""))
-                {
-                  JOptionPane.showMessageDialog(null, "No puede dejar el campo vacio.");
-                }
-
-            }while(encontrado == 1 || cod.equals(""));
 
             do
             {
@@ -466,14 +435,12 @@ public class frmAgentes extends javax.swing.JInternalFrame {
 
             try
             {
-                CallableStatement cmd = cn.prepareCall("{CALL insertaruser(?,?,?)}");
-                cmd.setString(1, cod);
-                cmd.setString(2, user);
-                cmd.setString(3, pass);
+                CallableStatement cmd = cn.prepareCall("{CALL insertaruser(?,?)}");
+                cmd.setString(1, user);
+                cmd.setString(2, pass);
                 cmd.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Usuario Creado Exitosamente");
 
-                txtcodigousuario.setText(cod);
                 BtnAgregar.show();
                 btncrear.hide();
             }
@@ -481,9 +448,29 @@ public class frmAgentes extends javax.swing.JInternalFrame {
             {
                 JOptionPane.showMessageDialog(null, "Error al Crear el Usuario " + ex);
             }
+                
+            try
+                {
+                    pp = cn.prepareStatement("Select Codigo_Usuario[Codigo] from [dbo].[Usuarios] where [Nombre_Usuario] = ?");
+                    pp.setString(1, user);
+                    rs = pp.executeQuery();
 
+                    if(rs.next())
+                    {
+                        codigo = rs.getString("Codigo");
+                    }
+                    
+                }
+                catch(Exception ex)
+                {
 
+                }
+            
+             txtcodigousuario.setText(codigo);
         }
+        
+
+        
 
     }//GEN-LAST:event_btncrearActionPerformed
 

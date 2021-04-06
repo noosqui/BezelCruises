@@ -1,4 +1,3 @@
-
 package GUI;
 
 import Clases.ConexionBasedeDatos;
@@ -22,12 +21,12 @@ public class frmLogin extends javax.swing.JFrame {
     public frmLogin() {
         initComponents();
     }
-    
+
     PreparedStatement pp = null;
     ConexionBasedeDatos cone = new ConexionBasedeDatos();
     Connection cn = null;
     ResultSet rs;
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -175,47 +174,40 @@ public class frmLogin extends javax.swing.JFrame {
 
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+
         cn = cone.obtenerConexion();
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     private void BtningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtningresarActionPerformed
 
-        int enc;
+        int idEmpleado;
         
-        try
-        {
-            pp = cn.prepareStatement("Select count(*)[encontrado] from Usuarios where Nombre_Usuario = ? and Contrasenia = ?");
+        try {
+            pp = cn.prepareStatement("select Id_Empleado from Empleados join \n"
+                    + "Usuarios on Empleados.Codigo_Usuario = Usuarios.Codigo_Usuario and Usuarios.Nombre_Usuario=? and Usuarios.Contrasenia=?");
             pp.setString(1, txtusuario.getText());
             pp.setString(2, Pswusuario.getText());
             rs = pp.executeQuery();
-            
-            if(rs.next())
-            {
-                
-                enc = rs.getInt("Encontrado");
-                
-                if(enc >= 1)
-                {
+
+            if (rs.next()) {
+                idEmpleado = rs.getInt(1);
+
+                if (idEmpleado >= 1) {
                     JOptionPane.showMessageDialog(null, "Bienvenido a Bezel Cruises System");
-                    frmMenuPrincipal prin = new frmMenuPrincipal();
+                    frmMenuPrincipal prin = new frmMenuPrincipal(idEmpleado);
                     prin.show();
                     this.dispose();
-                }
-                else
-                {
-                JOptionPane.showMessageDialog(null, "Datos Incorrectos! Porfavor verifique sus Datos Nuevamente.");
-                txtusuario.setText(null);
-                Pswusuario.setText(null);
-                txtusuario.requestFocus();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Datos Incorrectos! Porfavor verifique sus Datos Nuevamente.");
+                    txtusuario.setText(null);
+                    Pswusuario.setText(null);
+                    txtusuario.requestFocus();
                 }
             }
-            
-        }
-        catch(SQLException ex)
-        {
-            JOptionPane.showMessageDialog(null, "Error de Conexion" + ex);      
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de Conexion" + ex);
         }
 
     }//GEN-LAST:event_BtningresarActionPerformed

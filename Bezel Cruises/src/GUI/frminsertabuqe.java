@@ -71,7 +71,7 @@ public class frminsertabuqe extends javax.swing.JFrame {
         Btnlimpiar3 = new javax.swing.JButton();
         BtnSalir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(38, 116, 162));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

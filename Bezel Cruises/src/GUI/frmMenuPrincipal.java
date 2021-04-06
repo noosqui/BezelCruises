@@ -16,8 +16,14 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form MenuPrincipal
      */
+    int idEmpleado;
     public frmMenuPrincipal() {
         initComponents();
+    }
+
+    frmMenuPrincipal(int idEmpleado) {
+          initComponents();
+          this.idEmpleado = idEmpleado;
     }
 
     /**
@@ -38,10 +44,10 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         btnDestinos = new javax.swing.JButton();
         btnVenta = new javax.swing.JButton();
         btnViajes = new javax.swing.JButton();
-        btnReport = new javax.swing.JButton();
         btnCamarotes1 = new javax.swing.JButton();
         btnBuque1 = new javax.swing.JButton();
         btnCliente = new javax.swing.JButton();
+        btnPuertos = new javax.swing.JButton();
         ContenedorFrm = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -122,7 +128,6 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weighty = 0.1;
         jPanel2.add(btnDestinos, gridBagConstraints);
 
         btnVenta.setBackground(new java.awt.Color(32, 98, 136));
@@ -180,29 +185,6 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weighty = 0.1;
         jPanel2.add(btnViajes, gridBagConstraints);
-
-        btnReport.setBackground(new java.awt.Color(32, 98, 136));
-        btnReport.setFont(new java.awt.Font("Gill Sans MT", 1, 18)); // NOI18N
-        btnReport.setForeground(new java.awt.Color(255, 255, 255));
-        btnReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pie-chart.png"))); // NOI18N
-        btnReport.setText("Reportes");
-        btnReport.setBorder(null);
-        btnReport.setBorderPainted(false);
-        btnReport.setContentAreaFilled(false);
-        btnReport.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnReport.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnReport.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btnReport.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnReportMouseEntered(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weighty = 0.1;
-        jPanel2.add(btnReport, gridBagConstraints);
 
         btnCamarotes1.setBackground(new java.awt.Color(32, 98, 136));
         btnCamarotes1.setFont(new java.awt.Font("Gill Sans MT", 1, 18)); // NOI18N
@@ -289,6 +271,33 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         gridBagConstraints.weighty = 0.1;
         jPanel2.add(btnCliente, gridBagConstraints);
 
+        btnPuertos.setBackground(new java.awt.Color(32, 98, 136));
+        btnPuertos.setFont(new java.awt.Font("Gill Sans MT", 1, 18)); // NOI18N
+        btnPuertos.setForeground(new java.awt.Color(255, 255, 255));
+        btnPuertos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/port (1).png"))); // NOI18N
+        btnPuertos.setText("Puertos");
+        btnPuertos.setBorder(null);
+        btnPuertos.setBorderPainted(false);
+        btnPuertos.setContentAreaFilled(false);
+        btnPuertos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPuertos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnPuertos.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnPuertos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnPuertosMouseEntered(evt);
+            }
+        });
+        btnPuertos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPuertosActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel2.add(btnPuertos, gridBagConstraints);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -340,17 +349,13 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDestinosMouseEntered
 
-    private void btnReportMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnReportMouseEntered
-
     private void btnVentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentaMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVentaMouseEntered
 
     private void btnVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaActionPerformed
         // TODO add your handling code here:
-        frmVentas frm = new frmVentas();
+        frmVentas frm = new frmVentas(idEmpleado);
         AbrirForm(frm);
 
     }//GEN-LAST:event_btnVentaActionPerformed
@@ -422,6 +427,16 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         AbrirForm(frm);
     }//GEN-LAST:event_btnClienteActionPerformed
 
+    private void btnPuertosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPuertosMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPuertosMouseEntered
+
+    private void btnPuertosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuertosActionPerformed
+        // TODO add your handling code here:
+       frmPuertos frm = new frmPuertos();
+        AbrirForm(frm);
+    }//GEN-LAST:event_btnPuertosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -434,7 +449,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnCamarotes1;
     private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnDestinos;
-    private javax.swing.JButton btnReport;
+    private javax.swing.JButton btnPuertos;
     private javax.swing.JButton btnVenta;
     private javax.swing.JButton btnViajes;
     private javax.swing.JLabel jLabel1;
