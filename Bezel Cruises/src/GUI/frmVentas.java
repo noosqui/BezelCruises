@@ -5,10 +5,25 @@
  */
 package GUI;
 
-/**
- *
- * @author Andres Martinez
- */
+import Clases.ConexionBasedeDatos;
+import java.awt.event.ItemEvent;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.ResultSetMetaData;
+import java.sql.Statement;
+import java.text.ParseException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.RowFilter;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 public class frmVentas extends javax.swing.JInternalFrame {
 
     /**
@@ -17,6 +32,18 @@ public class frmVentas extends javax.swing.JInternalFrame {
     public frmVentas() {
         initComponents();
     }
+     public frmVentas(int idEmpleado) {
+        initComponents();
+        this.IdEmpleado=idEmpleado;
+    }
+    PreparedStatement pp = null;
+    ConexionBasedeDatos conn = new ConexionBasedeDatos();
+    Connection cn = conn.obtenerConexion();
+    ResultSet rs;
+    Statement st;
+    ResultSetMetaData rsmd;
+    DefaultTableModel model;
+    int IdEmpleado;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,63 +55,64 @@ public class frmVentas extends javax.swing.JInternalFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabVenta = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        cmbSalida = new javax.swing.JComboBox<>();
+        btnSiguiente = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jDateChooser3 = new com.toedter.calendar.JDateChooser();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        tabViajes = new javax.swing.JTable();
+        txtPuertosal = new javax.swing.JTextField();
+        txtBuque = new javax.swing.JTextField();
+        txtOrigen = new javax.swing.JTextField();
+        txtDestino = new javax.swing.JTextField();
+        DcFechaSal = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        cmbCliente = new javax.swing.JComboBox<>();
+        txtDuracion = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        spnMin = new javax.swing.JSpinner();
+        spnHora = new javax.swing.JSpinner();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jLabel12 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
+        tabCamarote = new javax.swing.JTable();
+        txtNumCamarote = new javax.swing.JTextField();
+        txtNumPerson = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        btnSiguiente1 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        cmbTipoCamarote = new javax.swing.JComboBox<>();
+        txtPrecioPers = new javax.swing.JTextField();
+        txtDias = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        txtNumCamas = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
-        jTextField15 = new javax.swing.JTextField();
-        jTextField16 = new javax.swing.JTextField();
+        txtCliente = new javax.swing.JTextField();
+        txtEmpleado = new javax.swing.JTextField();
+        txtISV = new javax.swing.JTextField();
+        txtDescuento = new javax.swing.JTextField();
+        txtSubtotal = new javax.swing.JTextField();
+        txtTotal = new javax.swing.JTextField();
+        txtViaje = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -94,13 +122,37 @@ public class frmVentas extends javax.swing.JInternalFrame {
         jLabel22 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jLabel30 = new javax.swing.JLabel();
+        txtImpuestoPort = new javax.swing.JTextField();
 
         setAutoscrolls(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
+        tabVenta.setAutoscrolls(true);
+        tabVenta.setEnabled(false);
+
+        jPanel1.setAutoscrolls(true);
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jPanel3.setBackground(new java.awt.Color(38, 116, 162));
+        jPanel3.setAutoscrolls(true);
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Gill Sans MT", 1, 36)); // NOI18N
@@ -118,80 +170,101 @@ public class frmVentas extends javax.swing.JInternalFrame {
         jPanel1.add(jPanel3, gridBagConstraints);
 
         jPanel4.setBackground(new java.awt.Color(26, 78, 108));
+        jPanel4.setAutoscrolls(true);
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Cliente");
-        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, -1, -1));
-
         jLabel2.setText("Buque");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 330, -1, -1));
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 310, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel4.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 186, -1));
+        cmbSalida.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbSalidaItemStateChanged(evt);
+            }
+        });
+        jPanel4.add(cmbSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 80, 186, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel4.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 320, 186, -1));
+        btnSiguiente.setText("Siguiente");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 570, 180, 61));
 
-        jButton1.setText("Siguiente");
-        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 610, 180, 61));
-
-        jButton2.setText("Crear");
-        jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 320, -1, -1));
-
-        jButton3.setText("Crear");
-        jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 320, -1, -1));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabViajes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Viaje", "Nombre Buque", "Puerto de salida", "Ciudad Salida", "Pais Salida", "Ciudad Destino", "Pais Destino", "Duracion", "Fecha Partida", "Hora Partida"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, true
+            };
 
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 930, 160));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabViajes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabViajesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabViajes);
 
-        jPanel4.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 520, 120, -1));
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 1030, 160));
 
-        jPanel4.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 520, 120, -1));
-        jPanel4.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 400, 160, -1));
+        txtPuertosal.setEnabled(false);
+        jPanel4.add(txtPuertosal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, 150, -1));
 
-        jPanel4.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 520, 120, -1));
+        txtBuque.setEnabled(false);
+        jPanel4.add(txtBuque, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 300, 120, -1));
 
-        jPanel4.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 520, 120, -1));
-        jPanel4.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 400, 160, -1));
-        jPanel4.add(jDateChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 400, 160, -1));
+        txtOrigen.setEnabled(false);
+        jPanel4.add(txtOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 380, 200, -1));
 
-        jPanel4.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(804, 90, 190, -1));
+        txtDestino.setEnabled(false);
+        jPanel4.add(txtDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 380, 240, -1));
 
-        jLabel3.setText("Viaje");
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 100, -1, -1));
+        DcFechaSal.setEnabled(false);
+        jPanel4.add(DcFechaSal, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 450, 160, -1));
 
-        jLabel4.setText("Puerto Entrada");
-        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 530, -1, -1));
+        jLabel4.setText("Puerto Salida");
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, -1, -1));
 
-        jLabel6.setText("Puerto Salida");
-        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 530, -1, -1));
+        jLabel6.setText("Duracion");
+        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 390, -1, -1));
 
         jLabel7.setText("Origen");
-        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 530, -1, -1));
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 390, -1, -1));
 
         jLabel8.setText("Destino");
-        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 530, -1, -1));
-
-        jLabel9.setText("Fecha de entrada");
-        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, -1, -1));
+        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 390, -1, -1));
 
         jLabel10.setText("Hora de salida");
-        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 410, -1, -1));
+        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 460, -1, -1));
 
         jLabel11.setText("Fecha de Salida");
-        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 410, -1, -1));
+        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 460, -1, -1));
+
+        jPanel4.add(cmbCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 186, -1));
+
+        txtDuracion.setEnabled(false);
+        jPanel4.add(txtDuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 170, -1));
+
+        jLabel25.setText("Cliente");
+        jPanel4.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, -1, -1));
+
+        jLabel26.setText("Saliendo desde: ");
+        jPanel4.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 90, -1, -1));
+
+        spnMin.setEnabled(false);
+        jPanel4.add(spnMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 450, 70, 30));
+
+        spnHora.setEnabled(false);
+        jPanel4.add(spnHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 450, 80, 30));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -203,7 +276,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
         gridBagConstraints.weighty = 10.0;
         jPanel1.add(jPanel4, gridBagConstraints);
 
-        jTabbedPane1.addTab("tab1", jPanel1);
+        tabVenta.addTab("tab1", jPanel1);
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -220,7 +293,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(958, Short.MAX_VALUE))
+                .addContainerGap(1045, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,57 +303,100 @@ public class frmVentas extends javax.swing.JInternalFrame {
                 .addGap(25, 25, 25))
         );
 
-        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1103, -1));
+        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, -1));
 
         jPanel6.setBackground(new java.awt.Color(26, 78, 108));
+        jPanel6.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPanel6FocusGained(evt);
+            }
+        });
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabCamarote.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Num Camarote", "Cantidad Camas", "Descripcion", "PrecioCamarote"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        tabCamarote.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabCamaroteMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tabCamarote);
 
-        jPanel6.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 880, 230));
+        jPanel6.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 990, 230));
 
-        jLabel12.setText("Camarote");
-        jPanel6.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 70, -1, -1));
-        jPanel6.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 60, 180, -1));
+        txtNumCamarote.setEnabled(false);
+        jPanel6.add(txtNumCamarote, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 220, -1));
 
-        jTextField7.setText("jTextField7");
-        jPanel6.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 170, -1));
+        txtNumPerson.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNumPersonKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumPersonKeyTyped(evt);
+            }
+        });
+        jPanel6.add(txtNumPerson, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 350, 180, -1));
 
-        jTextField8.setText("jTextField8");
-        jPanel6.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 350, 190, -1));
-
-        jTextField9.setText("jTextField9");
-        jPanel6.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 350, 160, -1));
-
-        jLabel13.setText("Numero de Camarote");
-        jPanel6.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, -1, -1));
+        jLabel13.setText("Dias en el crucero");
+        jPanel6.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 420, -1, -1));
 
         jLabel14.setText("Tipo de camarote");
-        jPanel6.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 360, -1, -1));
+        jPanel6.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 360, -1, -1));
 
-        jLabel15.setText("No Personas");
-        jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 360, -1, -1));
-
-        jButton4.setText("Siguiente");
-        jPanel6.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 610, 210, 60));
+        btnSiguiente1.setText("Siguiente");
+        btnSiguiente1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguiente1ActionPerformed(evt);
+            }
+        });
+        jPanel6.add(btnSiguiente1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 520, 210, 60));
 
         jButton5.setText("Atras");
-        jPanel6.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 610, 210, 60));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel6.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 520, 210, 60));
 
-        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 82, 1103, 740));
+        cmbTipoCamarote.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Interior", "Vista al Oceano", "Balcon", "Suite" }));
+        cmbTipoCamarote.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbTipoCamaroteItemStateChanged(evt);
+            }
+        });
+        jPanel6.add(cmbTipoCamarote, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 350, 220, -1));
 
-        jTabbedPane1.addTab("tab2", jPanel2);
+        txtPrecioPers.setEnabled(false);
+        jPanel6.add(txtPrecioPers, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, 220, -1));
+
+        txtDias.setEnabled(false);
+        jPanel6.add(txtDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 410, 220, -1));
+
+        jLabel27.setText("Numero de Camarote");
+        jPanel6.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, -1, -1));
+
+        jLabel28.setText("Precio x Persona");
+        jPanel6.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, -1, -1));
+
+        jLabel29.setText("No Personas");
+        jPanel6.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 360, -1, -1));
+
+        jLabel1.setText("Numero de camas");
+        jPanel6.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 420, -1, -1));
+
+        txtNumCamas.setEnabled(false);
+        jPanel6.add(txtNumCamas, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 410, 130, -1));
+
+        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 82, 1190, 740));
+
+        tabVenta.addTab("tab2", jPanel2);
 
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -297,7 +413,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(958, Short.MAX_VALUE))
+                .addContainerGap(1038, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,26 +423,39 @@ public class frmVentas extends javax.swing.JInternalFrame {
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
-        jPanel7.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, -1));
+        jPanel7.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, -1));
 
         jPanel9.setBackground(new java.awt.Color(26, 78, 108));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel9.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 38, 240, -1));
-        jPanel9.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, 240, -1));
-        jPanel9.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 240, -1));
-        jPanel9.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, 240, -1));
 
-        jTextField14.addActionListener(new java.awt.event.ActionListener() {
+        txtCliente.setEnabled(false);
+        jPanel9.add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 240, -1));
+
+        txtEmpleado.setEnabled(false);
+        jPanel9.add(txtEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, 240, -1));
+
+        txtISV.setEnabled(false);
+        jPanel9.add(txtISV, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 330, 240, -1));
+
+        txtDescuento.setEnabled(false);
+        jPanel9.add(txtDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 480, 240, -1));
+
+        txtSubtotal.setEnabled(false);
+        txtSubtotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField14ActionPerformed(evt);
+                txtSubtotalActionPerformed(evt);
             }
         });
-        jPanel9.add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 240, -1));
-        jPanel9.add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 490, 240, -1));
-        jPanel9.add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 250, -1));
+        jPanel9.add(txtSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, 240, -1));
+
+        txtTotal.setEnabled(false);
+        jPanel9.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 560, 240, -1));
+
+        txtViaje.setEnabled(false);
+        jPanel9.add(txtViaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 240, -1));
 
         jLabel16.setText("Cliente");
-        jPanel9.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, -1, -1));
+        jPanel9.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, -1, -1));
 
         jLabel17.setText("Empleado");
         jPanel9.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, -1, -1));
@@ -335,57 +464,382 @@ public class frmVentas extends javax.swing.JInternalFrame {
         jPanel9.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, -1, -1));
 
         jLabel19.setText("Descuento");
-        jPanel9.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 420, -1, -1));
+        jPanel9.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 490, -1, -1));
 
         jLabel20.setText("Subtotal");
         jPanel9.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, -1, -1));
 
         jLabel21.setText("Total");
-        jPanel9.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 500, -1, -1));
+        jPanel9.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 570, -1, -1));
 
         jLabel22.setText("Viaje");
         jPanel9.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, -1, -1));
 
         jButton6.setText("Atras");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         jPanel9.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 620, 210, 60));
 
         jButton7.setText("Impimir");
         jPanel9.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 620, 210, 60));
 
-        jPanel7.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1110, 720));
+        jLabel30.setText("Impuesto Portuario");
+        jPanel9.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 410, -1, -1));
 
-        jTabbedPane1.addTab("tab3", jPanel7);
+        txtImpuestoPort.setEnabled(false);
+        jPanel9.add(txtImpuestoPort, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, 240, -1));
 
-        getContentPane().add(jTabbedPane1);
+        jPanel7.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1190, 720));
+
+        tabVenta.addTab("tab3", jPanel7);
+
+        getContentPane().add(tabVenta);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField14ActionPerformed
+    private void txtSubtotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSubtotalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField14ActionPerformed
 
+    }//GEN-LAST:event_txtSubtotalActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        // TODO add your handling code here:
+
+        listarViajes();
+        listarClientes();
+        listarPaises();
+    }//GEN-LAST:event_formInternalFrameOpened
+
+    private void tabViajesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabViajesMouseClicked
+        // TODO add your handling code here:
+
+        int row = tabViajes.rowAtPoint(evt.getPoint());
+
+        if (row >= 0) {
+            try {
+                String timme = tabViajes.getValueAt(row, 9).toString();
+                String[] time = timme.split(":");
+                int hour = Integer.parseInt(time[0].trim());
+                int min = Integer.parseInt(time[1].trim());
+                Date date = new SimpleDateFormat("yyyy-dd-MM").parse(tabViajes.getValueAt(row, 8).toString());
+                DcFechaSal.setDate(date);
+                spnHora.setValue(hour);
+                spnMin.setValue(min);
+                txtPuertosal.setText(tabViajes.getValueAt(row, 3).toString());
+                txtDuracion.setText(tabViajes.getValueAt(row, 7).toString());
+                txtOrigen.setText(tabViajes.getValueAt(row, 3).toString() + " " + tabViajes.getValueAt(row, 4).toString());
+                txtDestino.setText(tabViajes.getValueAt(row, 5).toString() + " " + tabViajes.getValueAt(row, 6).toString());
+                txtBuque.setText(tabViajes.getValueAt(row, 1).toString());
+            } catch (ParseException ex) {
+                Logger.getLogger(frmVentas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+
+    }//GEN-LAST:event_tabViajesMouseClicked
+
+    private void cmbSalidaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbSalidaItemStateChanged
+        // TODO add your handling code here:
+
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            // do something with object
+            TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(((DefaultTableModel) tabViajes.getModel()));
+            sorter.setRowFilter(RowFilter.regexFilter(String.valueOf(cmbSalida.getSelectedItem()), 4));
+            tabViajes.setRowSorter(sorter);
+        }
+
+    }//GEN-LAST:event_cmbSalidaItemStateChanged
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        // TODO add your handling code here:
+        if (txtPuertosal.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Seleccione un viaje antes de continuar");
+        } else {
+            tabVenta.setSelectedIndex(1);
+            cmbTipoCamarote.setSelectedIndex(0);
+            txtNumPerson.setText("0");
+            txtNumCamarote.setText("");
+            txtDias.setText("");
+            txtNumCamas.setText("");
+            txtPrecioPers.setText("");
+
+            listarCamarotes();
+        }
+    }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void jPanel6FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel6FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel6FocusGained
+    public Double CalculoPagoCliente() {
+        int Edad = 0;
+        double subtotal = 0;
+        double ISV = 0;
+        double ImpPortuario = 0;
+        double Descuento = 0;
+        double total = 0;
+        Date date = new Date();
+
+        String idCli = null;
+        int Dias = 0;
+        try {
+            String idCliente[] = String.valueOf(cmbCliente.getSelectedItem()).split(" ");
+            String NumDias[] = txtDias.getText().split(" ");
+            String Viaje = tabViajes.getValueAt(tabViajes.getSelectedColumn(), 0).toString();
+            for (String S : idCliente) {
+                if (S.matches(".*\\d.*")) {
+                    idCli = S;
+                }
+            }
+            for (String S : NumDias) {
+                if (S.matches(".*\\d.*")) {
+                    Dias = Integer.parseInt(S);
+                }
+            }
+
+            pp = cn.prepareStatement("SELECT FLOOR(DATEDIFF(DAY, Fecha_Nacimiento, GETDATE()) / 365.25) from Clientes\n"
+                    + " where Id_Cliente = ?");
+            pp.setInt(1, Integer.parseInt(idCli));
+            rs = pp.executeQuery();
+            rsmd = rs.getMetaData();
+            while (rs.next()) {
+                Edad = Integer.parseInt(rs.getObject(1).toString());
+
+                if (Edad >= 60) {
+                    Descuento = 0.25;
+                }
+
+                subtotal = Dias * Double.parseDouble(txtPrecioPers.getText()) * Integer.parseInt(txtNumPerson.getText());
+                ISV = subtotal * 0.05;
+                ImpPortuario = subtotal * 0.07;
+                Descuento *= subtotal + ISV + ImpPortuario;
+                total = (subtotal + ISV + ImpPortuario) - Descuento;
+
+                txtSubtotal.setText(subtotal + "");
+                txtISV.setText(ISV + "");
+                txtDescuento.setText(Descuento + "");
+                txtImpuestoPort.setText(ImpPortuario + "");
+                txtCliente.setText(idCli);
+                txtEmpleado.setText("1");
+                txtViaje.setText(Viaje);
+                txtTotal.setText(total + "");
+
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "" + ex);
+        }
+
+        try {
+            pp = cn.prepareStatement("insert into Facturas (Subtotal,Fecha,Descuento,ISV,Imp_Portuarios,Id_Cliente,Id_Empleado,Id_Viaje)\n"
+                 + "values (?,?,?,?,?,?,?,?)");
+            pp.setDouble(1, subtotal);
+            pp.setDate(2, new java.sql.Date(date.getTime()));
+            pp.setDouble(3, Descuento);
+            pp.setDouble(4, ISV);
+            pp.setDouble(5, ImpPortuario);
+            pp.setInt(6, Integer.parseInt(idCli));
+            pp.setInt(7, IdEmpleado);
+            pp.setInt(8, Integer.parseInt(tabViajes.getValueAt(tabViajes.getSelectedRow(), 0).toString()));
+            pp.executeUpdate();
+            int idFact = 0;
+            pp.clearParameters();
+            pp = cn.prepareStatement("SELECT top (1) IDENT_CURRENT('Facturas') fact from Facturas");
+            rs = pp.executeQuery();
+            while (rs.next()) {
+                idFact = Integer.parseInt(rs.getObject(1).toString());
+            }
+            pp.clearParameters();
+            pp = cn.prepareStatement("insert into DetalleFactura (Id_Factura,idCamarote,personas) values\n"
+                    + "(?,?,?)");
+            pp.setInt(1, idFact);
+            pp.setInt(2, Integer.parseInt(txtNumCamarote.getText()));
+            pp.setDouble(3, Integer.parseInt(txtNumPerson.getText()));
+            pp.executeUpdate();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "" + ex);
+        }
+        return 0.0;
+    }
+    private void cmbTipoCamaroteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoCamaroteItemStateChanged
+        // TODO add your handling code here:   
+        txtDias.setText(" ");
+        txtPrecioPers.setText(" ");
+        txtNumCamas.setText(" ");
+        txtNumCamarote.setText(" ");
+
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            // do something with object
+            TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(((DefaultTableModel) tabCamarote.getModel()));
+            sorter.setRowFilter(RowFilter.regexFilter(String.valueOf(cmbTipoCamarote.getSelectedItem()), 2));
+            tabCamarote.setRowSorter(sorter);
+        }
+
+    }//GEN-LAST:event_cmbTipoCamaroteItemStateChanged
+
+    private void tabCamaroteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabCamaroteMouseClicked
+        // TODO add your handling code here:
+        int row = tabCamarote.rowAtPoint(evt.getPoint());
+
+        if (row >= 0) {
+            try {
+                txtNumCamarote.setText(tabCamarote.getValueAt(row, 0).toString());
+                txtDias.setText(tabViajes.getValueAt(tabViajes.getSelectedRow(), 7).toString());
+                txtNumCamas.setText(tabCamarote.getValueAt(row, 1).toString());
+                txtPrecioPers.setText(tabCamarote.getValueAt(row, 3).toString());
+            } catch (Exception ex) {
+                Logger.getLogger(frmVentas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_tabCamaroteMouseClicked
+
+    private void btnSiguiente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguiente1ActionPerformed
+        // TODO add your handling code here:
+        if (!txtNumPerson.getText().isEmpty() && !txtNumCamarote.getText().isEmpty())
+            if (Integer.parseInt(txtNumPerson.getText()) > Integer.parseInt(txtNumCamas.getText()) || Integer.parseInt(txtNumPerson.getText()) <= 0) {
+                txtNumPerson.setText("0");
+                txtNumPerson.requestFocus();
+                JOptionPane.showMessageDialog(this, "Porfavor ingrese una cantidad de personas menor a la cantidad de camas ");
+            } else {
+                tabVenta.setSelectedIndex(2);
+                CalculoPagoCliente();
+            }
+        else
+            JOptionPane.showMessageDialog(this, "Porfavor ingrese una cantidad de personas menor a la cantidad de camas y/o seleccione un Camarote");
+    }//GEN-LAST:event_btnSiguiente1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        tabVenta.setSelectedIndex(0);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here'
+        tabVenta.setSelectedIndex(1);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void txtNumPersonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumPersonKeyPressed
+        // TODO add your handling code here:
+
+        //  if (!Character.isDigit(evt.getKeyChar()) )
+        // evt.consume();
+
+    }//GEN-LAST:event_txtNumPersonKeyPressed
+
+    private void txtNumPersonKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumPersonKeyTyped
+        // TODO add your handling code here:
+        if (!Character.isDigit(evt.getKeyChar()))
+            evt.consume();
+    }//GEN-LAST:event_txtNumPersonKeyTyped
+    public void listarCamarotes() {
+        model = (DefaultTableModel) tabCamarote.getModel();
+        model.setRowCount(0);
+        try {
+            pp = cn.prepareStatement("select Id_Camarote,Cantidad_Camas,Descripcion_Camarote,Precio_Camarote from Camarotes a\n"
+                    + "join Buques b on a.Id_Buque=b.Id_Buque and b.Nombre_Buque = ? ");
+            pp.setString(1, txtBuque.getText());
+
+            rs = pp.executeQuery();
+            rsmd = rs.getMetaData();
+            int col = rsmd.getColumnCount();
+            while (rs.next()) {
+                Object fil[] = new Object[col];
+                for (int i = 0; i < col; i++) {
+                    fil[i] = rs.getObject(i + 1);
+                }
+                model.addRow(fil);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "" + ex);
+        }
+
+    }
+
+    public void listarViajes() {
+        model = (DefaultTableModel) tabViajes.getModel();
+        model.setRowCount(0);
+        try {
+            pp = cn.prepareStatement("select a.Id_Viaje,b.Nombre_Buque,c.Descripcion 'Detalles',f.Nombre_Ciudad 'Ciudad de salida' \n"
+                    + ",e.Nombre_Pais 'Pais de salida',h.Descripcion 'Ciudad de destino'\n"
+                    + ",i.Nombre_Pais  'Pais destino',\n"
+                    + "a.Duracion,Convert(date,a.Fecha_Partida)'Fecha de partida',\n"
+                    + "FORMAT(a.Fecha_Partida,'hh:mm') 'Hora Salida',k.Descripcion from [dbo].[Viajes] a  \n"
+                    + "join Buques b on a.Id_Buque = b.Id_Buque\n"
+                    + "--Salidas\n"
+                    + "join Puertos_Salida c on a.Codigo_PuertoSalida=c.Codigo_PuertoSalida\n"
+                    + "join Lugares d on c.Id_Lugar = d.Id_Lugar\n"
+                    + "join Paises e on d.Codigo_Pais=e.Codigo_Pais\n"
+                    + "join Ciudades f on f.Codigo_Ciudad= d.Codigo_Ciudad\n"
+                    + "--Destinos\n"
+                    + "join Destinos_Turisticos g on g.Codigo_RutaDestino = a.Codigo_RutaDestino\n"
+                    + "join Lugares h on h.Id_Lugar = g.Id_Lugar\n"
+                    + "join Paises i on i.Codigo_Pais=h.Codigo_Pais\n"
+                    + "join Ciudades j on j.Codigo_Ciudad= h.Codigo_Ciudad \n"
+                    + "join Estado_Viaje k on a.Codigo_Estado =k.Codigo_Estado");
+            rs = pp.executeQuery();
+            rsmd = rs.getMetaData();
+            int col = rsmd.getColumnCount();
+            while (rs.next()) {
+                Object fil[] = new Object[col];
+                for (int i = 0; i < col; i++) {
+                    if (rs.getString(11).equalsIgnoreCase("Activo")) {
+                        fil[i] = rs.getObject(i + 1);
+                    }
+                }
+                model.addRow(fil);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "" + ex);
+        }
+    }
+
+    public void listarClientes() {
+        try {
+            pp = cn.prepareStatement("select concat(Nombre_Cliente,' ',Apellido_Cliente)Nombre,Id_Cliente from Clientes");
+            rs = pp.executeQuery();
+
+            while (rs.next()) {
+
+                cmbCliente.addItem(rs.getString(1) + " - " + rs.getString(2));
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "" + ex);
+        }
+    }
+
+    public void listarPaises() {
+        try {
+            pp = cn.prepareStatement("select Nombre_Pais from Paises");
+            rs = pp.executeQuery();
+            while (rs.next()) {
+
+                cmbSalida.addItem(rs.getString(1));
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "" + ex);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private com.toedter.calendar.JDateChooser DcFechaSal;
+    private javax.swing.JButton btnSiguiente;
+    private javax.swing.JButton btnSiguiente1;
+    private javax.swing.JComboBox<String> cmbCliente;
+    private javax.swing.JComboBox<String> cmbSalida;
+    private javax.swing.JComboBox<String> cmbTipoCamarote;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
-    private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -396,13 +850,17 @@ public class frmVentas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -414,24 +872,28 @@ public class frmVentas extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JSpinner spnHora;
+    private javax.swing.JSpinner spnMin;
+    private javax.swing.JTable tabCamarote;
+    private javax.swing.JTabbedPane tabVenta;
+    private javax.swing.JTable tabViajes;
+    private javax.swing.JTextField txtBuque;
+    private javax.swing.JTextField txtCliente;
+    private javax.swing.JTextField txtDescuento;
+    private javax.swing.JTextField txtDestino;
+    private javax.swing.JTextField txtDias;
+    private javax.swing.JTextField txtDuracion;
+    private javax.swing.JTextField txtEmpleado;
+    private javax.swing.JTextField txtISV;
+    private javax.swing.JTextField txtImpuestoPort;
+    private javax.swing.JTextField txtNumCamarote;
+    private javax.swing.JTextField txtNumCamas;
+    private javax.swing.JTextField txtNumPerson;
+    private javax.swing.JTextField txtOrigen;
+    private javax.swing.JTextField txtPrecioPers;
+    private javax.swing.JTextField txtPuertosal;
+    private javax.swing.JTextField txtSubtotal;
+    private javax.swing.JTextField txtTotal;
+    private javax.swing.JTextField txtViaje;
     // End of variables declaration//GEN-END:variables
 }

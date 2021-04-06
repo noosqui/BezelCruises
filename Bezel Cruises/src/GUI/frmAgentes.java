@@ -23,11 +23,11 @@ import javax.swing.table.DefaultTableModel;
 
 public class frmAgentes extends javax.swing.JInternalFrame {
 
-    
+
     public frmAgentes() {
         initComponents();
-    } 
-    
+    }
+
     PreparedStatement pp = null;
     ConexionBasedeDatos cone = new ConexionBasedeDatos();
     Connection cn = null;
@@ -85,7 +85,7 @@ public class frmAgentes extends javax.swing.JInternalFrame {
                 formInternalFrameOpened(evt);
             }
         });
-        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(32, 98, 136));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -266,15 +266,15 @@ public class frmAgentes extends javax.swing.JInternalFrame {
         });
         jPanel1.add(btnmodificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 450, 150, 50));
 
-        getContentPane().add(jPanel1);
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 978, 579));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
-        
-      int dia, mes, año;  
-      
+
+      int dia, mes, año;
+
       String nombre = txtnombre.getText().trim();
       String apellido = txtapellido.getText().trim();
       String telefono = txttelefono.getText().trim();
@@ -288,7 +288,7 @@ public class frmAgentes extends javax.swing.JInternalFrame {
       String codigoUsuario = txtcodigousuario.getText().trim();
       String puesto = "" + (cmbpuesto.getSelectedIndex()+1);
       
-      
+
       try
       {
           CallableStatement cmd = cn.prepareCall("{CALL insertarEmpleado(?,?,?,?,?,?,?,?,?)}");
@@ -321,11 +321,11 @@ public class frmAgentes extends javax.swing.JInternalFrame {
           txtcodigousuario.setText(null);
           listar();
       }
-      
-      
+
+
       btncrear.show();
       BtnAgregar.hide();
-      
+
     }//GEN-LAST:event_BtnAgregarActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
@@ -336,11 +336,13 @@ public class frmAgentes extends javax.swing.JInternalFrame {
         listar();
     }//GEN-LAST:event_formInternalFrameOpened
 
-    private void btncrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncrearActionPerformed
     
-        String user, pass, word, cod;
+    
+    
+    private void btncrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncrearActionPerformed
+        String user, pass, word, codigo ="";
         int encontrado = 0, encontradouser = 0;
-        
+
         if(txtnombre.getText().equals(""))
         {
           JOptionPane.showMessageDialog(null, "Por favor ingrese un nombre del agente.");
@@ -376,104 +378,69 @@ public class frmAgentes extends javax.swing.JInternalFrame {
           JOptionPane.showMessageDialog(null, "Por favor ingrese una fecha de nacimiento valida del agente.");
           jdcfechanacimiento.requestFocus();
         }
-        else 
+        else
         {
-            
-            do
-           {
-               
-                cod = JOptionPane.showInputDialog("Ingrese el codigo del usuario: ");
-                   
-                try
-                {
-                    pp = cn.prepareStatement("select count(*)[Encontrado] from [dbo].[Usuarios] where Codigo_Usuario = ?");
-                    pp.setString(1, cod);
-                    rs = pp.executeQuery();
-            
-                    if(rs.next())
-                    {
-                        encontrado = rs.getInt("Encontrado");
-                    }   
-                }
-                catch(Exception ex)
-                {
-                        
-                }
-                    
-                if(encontrado == 1)
-                {
-                    JOptionPane.showMessageDialog(null, "El codigo de usuario que ingreso no esta disponible.");
-                }
-                
-                if(cod.equals(""))
-                {
-                  JOptionPane.showMessageDialog(null, "No puede dejar el campo vacio.");  
-                }
-                   
-            }while(encontrado == 1 || cod.equals(""));
-            
+
             do
             {
                user = JOptionPane.showInputDialog("Ingrese el nombre de Usuario: ");
-               
+
                try
                 {
                     pp = cn.prepareStatement("select count(*)[Encontrado] from [dbo].[Usuarios] where Nombre_Usuario = ?");
                     pp.setString(1, user);
                     rs = pp.executeQuery();
-            
+
                     if(rs.next())
                     {
                         encontradouser = rs.getInt("Encontrado");
-                    }   
+                    }
                 }
                 catch(Exception ex)
                 {
-                        
+
                 }
-                    
+
                 if(encontradouser == 1)
                 {
                     JOptionPane.showMessageDialog(null, "El Nombre de usuario que ingreso no esta disponible.");
                 }
-                
+
                 if(user.equals(""))
                 {
-                  JOptionPane.showMessageDialog(null, "No puede dejar el campo vacio.");  
+                  JOptionPane.showMessageDialog(null, "No puede dejar el campo vacio.");
                 }
-                
+
             }while(encontradouser == 1 || user.equals(""));
-               
-               
+
+
             do
             {
                do
                {
                    pass = JOptionPane.showInputDialog("Ingrese la contraseña: ");
                }while(pass.equals(null));
-               
+
                do
                {
                    word = JOptionPane.showInputDialog("Verifique la contraseña: ");
                }while(word.equals(null));
-               
+
                if(!pass.equals(word))
                {
                    JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden, vuelva a ingresarlas por favor.");
                }
-               
+
             }while(!pass.equals(word));
-            
+
             try
             {
-                CallableStatement cmd = cn.prepareCall("{CALL insertaruser(?,?,?)}");
-                cmd.setString(1, cod);
-                cmd.setString(2, user);
-                cmd.setString(3, pass);
+                CallableStatement cmd = cn.prepareCall("{CALL insertaruser(?,?)}");
+                cmd.setString(1, user);
+                cmd.setString(2, pass);
                 cmd.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Usuario Creado Exitosamente");
-                
-                txtcodigousuario.setText(cod);
+
                 BtnAgregar.show();
                 btncrear.hide();
             }
@@ -481,10 +448,30 @@ public class frmAgentes extends javax.swing.JInternalFrame {
             {
                 JOptionPane.showMessageDialog(null, "Error al Crear el Usuario " + ex);
             }
+                
+            try
+                {
+                    pp = cn.prepareStatement("Select Codigo_Usuario[Codigo] from [dbo].[Usuarios] where [Nombre_Usuario] = ?");
+                    pp.setString(1, user);
+                    rs = pp.executeQuery();
+
+                    if(rs.next())
+                    {
+                        codigo = rs.getString("Codigo");
+                    }
+                    
+                }
+                catch(Exception ex)
+                {
+
+                }
             
-            
+             txtcodigousuario.setText(codigo);
         }
         
+
+        
+
     }//GEN-LAST:event_btncrearActionPerformed
 
     private void txtpaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpaisActionPerformed
@@ -493,16 +480,16 @@ public class frmAgentes extends javax.swing.JInternalFrame {
 
     //Variable Global
     int codigo, seleccionada;
-    
-    
+
+
     private void btnmostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmostrarActionPerformed
         int user;
-        
-        
+
+
         try
         {
             seleccionada = tblempleados.getSelectedRow();
-            
+
             if(seleccionada == -1)
             {
                 btnmostrar.show();
@@ -510,7 +497,7 @@ public class frmAgentes extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila para poder mostrar los datos.");
             }
             else
-            { 
+            {
                 codigo = (Integer)tblempleados.getValueAt(seleccionada, 0);
                 txtnombre.setText((String)tblempleados.getValueAt(seleccionada, 1));
                 txtapellido.setText((String)tblempleados.getValueAt(seleccionada, 2));
@@ -522,34 +509,34 @@ public class frmAgentes extends javax.swing.JInternalFrame {
                 cmbpuesto.setSelectedIndex((Integer)tblempleados.getValueAt(seleccionada, 9)-1);
                 user = (Integer)tblempleados.getValueAt(seleccionada, 10);
                 txtcodigousuario.setText("" + user);
-                
-                
+
+
                 btncrear.hide();
                 //btnmostrar.hide();
                 btnmodificar.show();
                 btneliminar.show();
                 //tblempleados.clearSelection();
-            }   
-            
+            }
+
         }
         catch(Exception ex)
         {
-            
+
         }
-        
-        
-        
+
+
+
     }//GEN-LAST:event_btnmostrarActionPerformed
 
     private void btnmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarActionPerformed
-           
-        
-      
-        
+
+
+
+
         try
         {
-           
-            
+
+
             if(seleccionada == -1)
             {
                 btnmostrar.show();
@@ -557,9 +544,9 @@ public class frmAgentes extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila para poder modificar los datos.");
             }
             else
-            { 
-                int dia, mes, año;  
-      
+            {
+                int dia, mes, año;
+
                 String nombre = txtnombre.getText().trim();
                 String apellido = txtapellido.getText().trim();
                 String telefono = txttelefono.getText().trim();
@@ -572,11 +559,11 @@ public class frmAgentes extends javax.swing.JInternalFrame {
                 String fechaNac = año + "-" + mes + "-" + dia;
                 String codigoUsuario = txtcodigousuario.getText().trim();
                 String puesto = "" + (cmbpuesto.getSelectedIndex()+1);
-            
+
                 try
                 {
                     CallableStatement cmd = cn.prepareCall("{CALL updateempleado(?,?,?,?,?,?,?,?,?)}");
-                    
+
                     cmd.setString(1, ""+codigo);
                     cmd.setString(2, nombre);
                     cmd.setString(3, apellido);
@@ -609,23 +596,23 @@ public class frmAgentes extends javax.swing.JInternalFrame {
                     btneliminar.hide();
                     listar();
                 }
-                
-                
-            }   
-            
+
+
+            }
+
             btncrear.show();
-            
+
         }
         catch(Exception ex)
         {
-            
+
         }
-        
-        
+
+
     }//GEN-LAST:event_btnmodificarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
-        
+
         if(seleccionada == -1)
             {
                 btnmostrar.show();
@@ -664,39 +651,39 @@ public class frmAgentes extends javax.swing.JInternalFrame {
                 listar();
             }
         }
-        
-        
+
+
     }//GEN-LAST:event_btneliminarActionPerformed
 
     public Date convertirFecha(String fecha)
     {
         Date result = null;
-        
+
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-        
-        try 
+
+        try
         {
             result = formato.parse(fecha);
-        } catch (ParseException ex) 
+        } catch (ParseException ex)
         {
-            
+
         }
-        
+
         return result;
     }
-    
+
     public void listar()
     {
         model = (DefaultTableModel) tblempleados.getModel();
         model.setRowCount(0);
-        
+
         try
         {
             pp =cn.prepareStatement("Select * from [dbo].[Empleados]");
             rs = pp.executeQuery();
             rsmd = rs.getMetaData();
             int col = rsmd.getColumnCount();
-            
+
             while(rs.next())
             {
                 Object fil[] = new Object[col];
@@ -711,11 +698,11 @@ public class frmAgentes extends javax.swing.JInternalFrame {
         {
             JOptionPane.showMessageDialog(null, "Los datos no se pudieron cargar a la tabla correctamente.");
         }
-        
-        
+
+
     }
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAgregar;
     private javax.swing.JButton btncrear;

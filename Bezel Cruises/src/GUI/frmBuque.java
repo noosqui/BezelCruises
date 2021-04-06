@@ -1,9 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
+
+import Clases.ConexionBasedeDatos;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import Clases.ProcedimientoBuquesandCamarotes;
+import java.awt.event.KeyEvent;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -11,12 +20,20 @@ package GUI;
  */
 public class frmBuque extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form Buque
-     */
+
+    Connection cn = ConexionBasedeDatos.obtenerConexion();
+    DefaultTableModel modelo = new DefaultTableModel();
+    PreparedStatement ps = null;
+    Statement stModel = null;
+    ResultSet rsModelo = null;
+    String id;
+
     public frmBuque() {
         initComponents();
+        cargatablebuques();
+        CmbTipobuque.setModel(insercombo());
     }
+    static ResultSet res;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,218 +43,315 @@ public class frmBuque extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtidbuque = new javax.swing.JTextField();
+        txttipobuque = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        Btnsalir = new javax.swing.JButton();
+        CmbTipobuque = new javax.swing.JComboBox<>();
+        Btninsertar = new javax.swing.JButton();
         BtnEliminar = new javax.swing.JButton();
         BtnActualizar = new javax.swing.JButton();
         BtnAgregar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        txtidbuque = new javax.swing.JTextField();
         txtnombrebuque = new javax.swing.JTextField();
-        txttipobuque = new javax.swing.JTextField();
         txtnivelesb = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        txtnumcamarot = new javax.swing.JTextField();
+        txttamañob = new javax.swing.JTextField();
+        txtdecrtipobuque = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        Btnlimpiar1 = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
-        txttamañob = new javax.swing.JTextField();
-        txtnumcamarot = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        txtbuscar = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        btnbuscar = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
-        getContentPane().setLayout(new java.awt.GridBagLayout());
-
-        jPanel2.setBackground(new java.awt.Color(38, 116, 162));
-
-        jTextField1.setBackground(new java.awt.Color(17, 51, 71));
-        jTextField1.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField1.setBorder(null);
-
-        jLabel2.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Buscar Buque");
-
-        jLabel15.setFont(new java.awt.Font("Gill Sans MT", 1, 36)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Buques");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(116, 116, 116)
-                .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 377, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12))
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weighty = 0.1;
-        getContentPane().add(jPanel2, gridBagConstraints);
-
-        jPanel1.setBackground(new java.awt.Color(26, 78, 108));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        Btnsalir.setBackground(new java.awt.Color(17, 51, 71));
-        Btnsalir.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        Btnsalir.setForeground(new java.awt.Color(255, 255, 255));
-        Btnsalir.setText("Salir");
-        jPanel1.add(Btnsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 380, 150, 60));
-
-        BtnEliminar.setBackground(new java.awt.Color(17, 51, 71));
-        BtnEliminar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        BtnEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        BtnEliminar.setText("Eliminar");
-        jPanel1.add(BtnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 380, 140, 60));
-
-        BtnActualizar.setBackground(new java.awt.Color(17, 51, 71));
-        BtnActualizar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        BtnActualizar.setForeground(new java.awt.Color(255, 255, 255));
-        BtnActualizar.setText("Actualizar");
-        jPanel1.add(BtnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 140, 60));
-
-        BtnAgregar.setBackground(new java.awt.Color(17, 51, 71));
-        BtnAgregar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        BtnAgregar.setForeground(new java.awt.Color(255, 255, 255));
-        BtnAgregar.setText("Agregar");
-        jPanel1.add(BtnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, 140, 60));
-
-        jTable1.setBackground(new java.awt.Color(17, 51, 71));
-        jTable1.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(255, 255, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jTable1.setGridColor(new java.awt.Color(17, 51, 71));
-        jScrollPane2.setViewportView(jTable1);
-
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 830, 120));
+        jLabel5.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("ID Buque");
 
         txtidbuque.setBackground(new java.awt.Color(17, 51, 71));
         txtidbuque.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         txtidbuque.setForeground(new java.awt.Color(255, 255, 255));
         txtidbuque.setBorder(null);
-        jPanel1.add(txtidbuque, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 160, -1));
 
-        txtnombrebuque.setBackground(new java.awt.Color(17, 51, 71));
+        txttipobuque.setBackground(new java.awt.Color(17, 51, 71));
+        txttipobuque.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        txttipobuque.setForeground(new java.awt.Color(255, 255, 255));
+        txttipobuque.setBorder(null);
+
+        getContentPane().setLayout(null);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(null);
+
+        CmbTipobuque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CmbTipobuque.setBorder(null);
+        CmbTipobuque.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CmbTipobuqueItemStateChanged(evt);
+            }
+        });
+        jPanel1.add(CmbTipobuque);
+        CmbTipobuque.setBounds(560, 400, 140, 26);
+
+        Btninsertar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        Btninsertar.setForeground(new java.awt.Color(31, 61, 121));
+        Btninsertar.setText("Insertar Tipo Buque");
+        Btninsertar.setBorder(null);
+        Btninsertar.setBorderPainted(false);
+        Btninsertar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtninsertarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Btninsertar);
+        Btninsertar.setBounds(560, 440, 150, 30);
+
+        BtnEliminar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        BtnEliminar.setForeground(new java.awt.Color(31, 61, 121));
+        BtnEliminar.setText("Eliminar");
+        BtnEliminar.setBorder(null);
+        BtnEliminar.setBorderPainted(false);
+        BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEliminarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BtnEliminar);
+        BtnEliminar.setBounds(30, 390, 140, 30);
+
+        BtnActualizar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        BtnActualizar.setForeground(new java.awt.Color(31, 61, 121));
+        BtnActualizar.setText("Actualizar");
+        BtnActualizar.setBorder(null);
+        BtnActualizar.setBorderPainted(false);
+        BtnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnActualizarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BtnActualizar);
+        BtnActualizar.setBounds(180, 350, 150, 30);
+
+        BtnAgregar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        BtnAgregar.setForeground(new java.awt.Color(31, 61, 121));
+        BtnAgregar.setText("Agregar");
+        BtnAgregar.setBorder(null);
+        BtnAgregar.setBorderPainted(false);
+        BtnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAgregarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BtnAgregar);
+        BtnAgregar.setBounds(30, 350, 140, 30);
+
+        jTable1.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        jTable1.setForeground(new java.awt.Color(51, 51, 51));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nombre_Buque", "Tamaño", "Niveles", "Numeros_Camarotes", "ID Buque"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane2);
+        jScrollPane2.setBounds(0, 0, 870, 100);
+
         txtnombrebuque.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        txtnombrebuque.setForeground(new java.awt.Color(255, 255, 255));
+        txtnombrebuque.setForeground(new java.awt.Color(51, 51, 51));
         txtnombrebuque.setBorder(null);
         txtnombrebuque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtnombrebuqueActionPerformed(evt);
             }
         });
-        jPanel1.add(txtnombrebuque, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 160, -1));
+        txtnombrebuque.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnombrebuqueKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtnombrebuque);
+        txtnombrebuque.setBounds(120, 280, 160, 30);
 
-        txttipobuque.setBackground(new java.awt.Color(17, 51, 71));
-        txttipobuque.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        txttipobuque.setForeground(new java.awt.Color(255, 255, 255));
-        txttipobuque.setBorder(null);
-        jPanel1.add(txttipobuque, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 300, 160, -1));
-
-        txtnivelesb.setBackground(new java.awt.Color(17, 51, 71));
         txtnivelesb.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        txtnivelesb.setForeground(new java.awt.Color(255, 255, 255));
+        txtnivelesb.setForeground(new java.awt.Color(51, 51, 51));
         txtnivelesb.setBorder(null);
-        jPanel1.add(txtnivelesb, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 300, 160, -1));
+        txtnivelesb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnivelesbKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtnivelesb);
+        txtnivelesb.setBounds(580, 280, 160, 30);
 
-        jLabel5.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("ID Buque");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
+        txtnumcamarot.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        txtnumcamarot.setForeground(new java.awt.Color(51, 51, 51));
+        txtnumcamarot.setBorder(null);
+        txtnumcamarot.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnumcamarotKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtnumcamarot);
+        txtnumcamarot.setBounds(580, 220, 160, 30);
+
+        txttamañob.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        txttamañob.setForeground(new java.awt.Color(51, 51, 51));
+        txttamañob.setBorder(null);
+        jPanel1.add(txttamañob);
+        txttamañob.setBounds(120, 230, 160, 30);
+
+        txtdecrtipobuque.setBorder(null);
+        txtdecrtipobuque.setEnabled(false);
+        jPanel1.add(txtdecrtipobuque);
+        txtdecrtipobuque.setBounds(580, 340, 160, 30);
 
         jLabel8.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Nombre ");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(40, 280, 59, 19);
 
         jLabel10.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Tamaño");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, -1, -1));
+        jPanel1.add(jLabel10);
+        jLabel10.setBounds(40, 230, 54, 19);
 
         jLabel11.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Niveles");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, -1, -1));
+        jPanel1.add(jLabel11);
+        jLabel11.setBounds(430, 280, 53, 20);
 
         jLabel12.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Numero Camarote");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 230, -1, -1));
+        jLabel12.setText("Numero Camarotes");
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(430, 220, 140, 19);
 
         jLabel13.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("ID Tipo de Buque");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 300, -1, -1));
+        jLabel13.setText("Tipo de Buque");
+        jPanel1.add(jLabel13);
+        jLabel13.setBounds(430, 340, 102, 19);
 
-        jComboBox3.setBackground(new java.awt.Color(17, 51, 71));
-        jComboBox3.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        jComboBox3.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, 210, -1));
+        jLabel15.setFont(new java.awt.Font("Gill Sans MT", 1, 36)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Buques");
+        jPanel1.add(jLabel15);
+        jLabel15.setBounds(380, 130, 129, 40);
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icono100x100_1.png"))); // NOI18N
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(10, 470, 100, 110);
+
+        Btnlimpiar1.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        Btnlimpiar1.setForeground(new java.awt.Color(31, 61, 121));
+        Btnlimpiar1.setText("Limpiar");
+        Btnlimpiar1.setBorder(null);
+        Btnlimpiar1.setBorderPainted(false);
+        Btnlimpiar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btnlimpiar1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Btnlimpiar1);
+        Btnlimpiar1.setBounds(180, 390, 150, 30);
 
         jLabel14.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("Buque");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 30, -1, -1));
+        jLabel14.setText("ID Tipo de Buque");
+        jPanel1.add(jLabel14);
+        jLabel14.setBounds(430, 400, 120, 19);
 
-        txttamañob.setBackground(new java.awt.Color(17, 51, 71));
-        txttamañob.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        txttamañob.setForeground(new java.awt.Color(255, 255, 255));
-        txttamañob.setBorder(null);
-        jPanel1.add(txttamañob, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, 160, -1));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/buques.jpg"))); // NOI18N
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(0, 0, 870, 710);
 
-        txtnumcamarot.setBackground(new java.awt.Color(17, 51, 71));
-        txtnumcamarot.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        txtnumcamarot.setForeground(new java.awt.Color(255, 255, 255));
-        txtnumcamarot.setBorder(null);
-        jPanel1.add(txtnumcamarot, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 230, 160, -1));
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 60, 870, 566);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 126;
-        gridBagConstraints.weighty = 0.1;
-        getContentPane().add(jPanel1, gridBagConstraints);
+        jPanel2.setBackground(new java.awt.Color(38, 116, 162));
+
+        txtbuscar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
+        txtbuscar.setForeground(new java.awt.Color(51, 51, 51));
+        txtbuscar.setBorder(null);
+
+        jLabel6.setFont(new java.awt.Font("Candara", 2, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Buscar Buque");
+
+        btnbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lup32.png"))); // NOI18N
+        btnbuscar.setBorder(null);
+        btnbuscar.setBorderPainted(false);
+        btnbuscar.setContentAreaFilled(false);
+        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbuscarActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(194, 194, 194)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(293, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
+        );
+
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(0, 10, 870, 66);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -246,27 +360,254 @@ public class frmBuque extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtnombrebuqueActionPerformed
 
+    private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
+        if (txtnombrebuque.getText().isEmpty() || txttamañob.getText().isEmpty() || txtnumcamarot.getText().isEmpty() || txtdecrtipobuque.getText().isEmpty() || txtnivelesb.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tienes datos por llenar", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+
+        } else {
+            try {
+                String Dato = CmbTipobuque.getSelectedItem().toString();
+                JOptionPane.showMessageDialog(null, Dato);
+                ProcedimientoBuquesandCamarotes.insertBuque(txtnombrebuque.getText(), txttamañob.getText(), txtnivelesb.getText(), txtnumcamarot.getText(), Dato);
+            } catch (SQLException ex) {
+
+            }
+        }
+        cargatablebuques();
+
+    }//GEN-LAST:event_BtnAgregarActionPerformed
+
+    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
+        if (txtidbuque.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Seleccione el registro para Eliminar", "Error", JOptionPane.ERROR_MESSAGE);
+            limpiar();
+        } else {
+            int opc = JOptionPane.showConfirmDialog(this, "¿ESTAS SEGURO QUE DESEA ELIMINAR ESTE REGISTRO?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (opc == JOptionPane.YES_OPTION) {
+                try {
+                    ProcedimientoBuquesandCamarotes.deletbuque(Integer.parseInt(txtidbuque.getText()));
+                } catch (SQLException e) {
+                }
+                cargatablebuques();
+                limpiar();
+            }
+        }
+    }//GEN-LAST:event_BtnEliminarActionPerformed
+
+    private void BtnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnActualizarActionPerformed
+        if (txtidbuque.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Seleccione el registro para actualizar", "Error", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            int opc = JOptionPane.showConfirmDialog(this, "¿ESTAS SEGURO QUE DESEA ACTUALIZAR ESTE REGISTRO?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (opc == JOptionPane.YES_OPTION) {
+                try {
+                    String Dato = CmbTipobuque.getSelectedItem().toString();
+                    ProcedimientoBuquesandCamarotes.Updatetbuque(Integer.parseInt(txtidbuque.getText()), txtnombrebuque.getText(), txttamañob.getText(), txtnivelesb.getText(), txtnumcamarot.getText(),Dato);
+                } catch (SQLException e) {
+                }
+                cargatablebuques();
+                JOptionPane.showMessageDialog(null, "LOS DATOS HAN SIDO ACTUALIZADOS");
+
+            }
+        }
+    }//GEN-LAST:event_BtnActualizarActionPerformed
+
+    private void BtninsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtninsertarActionPerformed
+        new frminsertabuqe().setVisible(true);
+
+    }//GEN-LAST:event_BtninsertarActionPerformed
+
+    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
+        BusquedaBuques(txtbuscar.getText());
+    }//GEN-LAST:event_btnbuscarActionPerformed
+
+    private void txtidbuqueKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtidbuqueKeyTyped
+        char vali = evt.getKeyChar();
+        if ((vali < '0' || vali > '9') && vali != KeyEvent.VK_BACK_SPACE) {
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo ingrese numeros porfavor");
+        }
+
+
+    }//GEN-LAST:event_txtidbuqueKeyTyped
+
+    private void txtnombrebuqueKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombrebuqueKeyTyped
+        char vali = evt.getKeyChar();
+        if (Character.isDigit(vali) == false) {
+        } else {
+            JOptionPane.showMessageDialog(null, "Solo ingrese Letras porfavor");
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtnombrebuqueKeyTyped
+
+    private void txtnumcamarotKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumcamarotKeyTyped
+        char vali = evt.getKeyChar();
+        if ((vali < '0' || vali > '9') && vali != KeyEvent.VK_BACK_SPACE) {
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo ingrese numeros porfavor");
+        }
+    }//GEN-LAST:event_txtnumcamarotKeyTyped
+
+    private void txtdecrtipobuqueKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdecrtipobuqueKeyTyped
+        char vali = evt.getKeyChar();
+        if ((vali < '0' || vali > '9') && vali != KeyEvent.VK_BACK_SPACE) {
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo ingrese numeros porfavor");
+        }
+    }//GEN-LAST:event_txtdecrtipobuqueKeyTyped
+
+    private void txtnivelesbKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnivelesbKeyTyped
+        char vali = evt.getKeyChar();
+        if ((vali < '0' || vali > '9') && vali != KeyEvent.VK_BACK_SPACE) {
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo ingrese numeros porfavor");
+        }
+    }//GEN-LAST:event_txtnivelesbKeyTyped
+
+    private void Btnlimpiar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btnlimpiar1ActionPerformed
+        limpiar();
+    }//GEN-LAST:event_Btnlimpiar1ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+
+        id = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+        BusquedaBuques(id);
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void CmbTipobuqueItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CmbTipobuqueItemStateChanged
+        // TODO add your handling code here:
+        BusquedaTipoBuque(CmbTipobuque.getSelectedItem().toString());
+    }//GEN-LAST:event_CmbTipobuqueItemStateChanged
+
+
+    ///////////////////
+    private void cargatablebuques() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        res = Clases.ConexionBasedeDatos.Consulta("select * from Buques");
+        try {
+            while (res.next()) {
+                Vector v = new Vector();
+                v.add(res.getInt(1));
+                v.add(res.getString(2));
+                v.add(res.getString(3));
+                v.add(res.getString(4));
+                v.add(res.getString(5));
+                v.add(res.getString(6));
+                model.addRow(v);
+                jTable1.setModel(model);
+            }
+        } catch (SQLException e) {
+        }
+    }
+
+//////////////////
+    private void limpiar() {
+
+        txtidbuque.setText("");
+        txttamañob.setText("");
+        txtnombrebuque.setText("");
+        txtnumcamarot.setText("");
+        txtdecrtipobuque.setText("");
+        txtnivelesb.setText("");
+        txtnombrebuque.requestFocus();
+    }
+//////////////////////////////////
+
+    private void BusquedaBuques(String busqueda) {
+
+        String consulta = "SELECT * FROM [dbo].[Buques]  WHERE [Id_Buque] LIKE '%" + busqueda + "%' "
+                + "OR [Nombre_Buque] LIKE '%" + busqueda + "%'";
+
+        Connection conect = ConexionBasedeDatos.obtenerConexion();
+        try {
+            stModel = (Statement) conect.createStatement();
+            rsModelo = stModel.executeQuery(consulta);
+            while (rsModelo.next()) {
+                txtidbuque.setText(rsModelo.getString(1));
+                txtnombrebuque.setText(rsModelo.getString(2));
+                txttamañob.setText(rsModelo.getString(3));
+                txtnivelesb.setText(rsModelo.getString(4));
+                txtnumcamarot.setText(rsModelo.getString(5));
+               CmbTipobuque.setSelectedItem(rsModelo.getString(6));
+
+                cargatablebuques();
+
+            }
+
+        } catch (SQLException ex) {
+
+        }
+    }
+//////////////////
+    public DefaultComboBoxModel insercombo() {
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+
+        try {
+            CallableStatement dato = ConexionBasedeDatos.obtenerConexion().prepareCall("{call ComboxtipoBuque}");
+            rsModelo = dato.executeQuery();
+            while (rsModelo.next()) {
+                modelo.addElement(rsModelo.getString(1));
+
+            }
+
+        } catch (Exception e) {
+
+        }
+
+        return modelo;
+
+    }
+
+    /////////////////////
+    private void BusquedaTipoBuque(String id) {
+
+        String consulta = "SELECT * FROM [dbo].[Tipo_Buques]  WHERE [Id-TipoBuque] LIKE '%" + id + "%' "
+                + "OR [DescripcionBuque] LIKE '%" + id + "%'";
+
+        Connection conect = ConexionBasedeDatos.obtenerConexion();
+        try {
+            stModel = (Statement) conect.createStatement();
+            rsModelo = stModel.executeQuery(consulta);
+            while (rsModelo.next()) {
+
+                txtdecrtipobuque.setText(rsModelo.getString(2));
+
+            }
+
+        } catch (SQLException ex) {
+
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnActualizar;
     private javax.swing.JButton BtnAgregar;
     private javax.swing.JButton BtnEliminar;
-    private javax.swing.JButton Btnsalir;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JButton Btninsertar;
+    private javax.swing.JButton Btnlimpiar1;
+    private javax.swing.JComboBox<String> CmbTipobuque;
+    private javax.swing.JButton btnbuscar;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtbuscar;
+    private javax.swing.JTextField txtdecrtipobuque;
     private javax.swing.JTextField txtidbuque;
     private javax.swing.JTextField txtnivelesb;
     private javax.swing.JTextField txtnombrebuque;
