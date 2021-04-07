@@ -27,20 +27,31 @@ import javax.swing.table.DefaultTableModel;
 public class frmCamarote extends javax.swing.JInternalFrame {
 
     //////////
-    Connection cn = ConexionBasedeDatos.obtenerConexion();
-    DefaultTableModel modelo = new DefaultTableModel();
-    PreparedStatement ps = null;
-    Statement stModel = null;
-    ResultSet rsModelo = null;
-    String id;
-    String precio;
-    String descripcion;
+    private Connection cn = ConexionBasedeDatos.obtenerConexion();
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private PreparedStatement ps = null;
+    private Statement stModel = null;
+    private ResultSet rsModelo = null;
+    private String id;
+    private String precio;
+    private String descripcion;
+    private int puesto;
+   
     //////////////////////////
 
-    public frmCamarote() {
+    public frmCamarote(int puesto) {
         initComponents();
         cargatablebCamarotes();
         Cmbidbuque.setModel(insercombo());
+        this.puesto = puesto;
+        if (puesto==1)
+        {
+            this.Btnagregar.setVisible(false);
+            this.Btnupdate.setVisible(false);
+            this.Btnlimpiar.setVisible(false);
+            this.Btndelet.setVisible(false);
+            this.CmbDescripcama.setEnabled(false);
+        }
     }
 
     /**

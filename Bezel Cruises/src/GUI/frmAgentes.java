@@ -24,20 +24,33 @@ import javax.swing.table.DefaultTableModel;
 
 public class frmAgentes extends javax.swing.JInternalFrame {
 
-
+    private PreparedStatement pp = null;
+    private ConexionBasedeDatos cone = new ConexionBasedeDatos();
+    private Connection cn = null;
+    private ResultSet rs;
+    private Statement st;
+    private ResultSetMetaData rsmd;
+    private DefaultTableModel model;
+    private int puesto;
     public frmAgentes() {
         initComponents();
 
  
     }
 
-    PreparedStatement pp = null;
-    ConexionBasedeDatos cone = new ConexionBasedeDatos();
-    Connection cn = null;
-    ResultSet rs;
-    Statement st;
-    ResultSetMetaData rsmd;
-    DefaultTableModel model;
+    
+
+    frmAgentes(int Puesto) {
+        initComponents();
+        this.puesto=Puesto;
+        if (Puesto==1)
+        {
+            this.btncrear.setVisible(false);
+            this.BtnAgregar.setVisible(false);
+            this.btneliminar.setVisible(false);
+            this.btnmodificar.setVisible(false);
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -544,7 +557,7 @@ public class frmAgentes extends javax.swing.JInternalFrame {
                 btnmodificar.hide();
                 JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila para poder mostrar los datos.");
             }
-            else
+            else 
             {
                 codigo = (Integer)tblempleados.getValueAt(seleccionada, 0);
                 txtnombre.setText((String)tblempleados.getValueAt(seleccionada, 1));
@@ -558,12 +571,14 @@ public class frmAgentes extends javax.swing.JInternalFrame {
                 user = (Integer)tblempleados.getValueAt(seleccionada, 7);
                 txtcodigousuario.setText("" + user);
 
-
+                if (puesto!=1)
+                {
                 btncrear.hide();
                 //btnmostrar.hide();
                 btnmodificar.show();
                 btneliminar.show();
-                //tblempleados.clearSelection();
+                tblempleados.clearSelection();
+                }
             }
 
         }

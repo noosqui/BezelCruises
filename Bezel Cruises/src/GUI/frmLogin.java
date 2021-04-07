@@ -1,11 +1,23 @@
 package GUI;
 
 import Clases.ConexionBasedeDatos;
-
+import java.awt.Cursor;
+import java.sql.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 
 import javax.swing.JOptionPane;
 
@@ -50,6 +62,7 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         Btningresar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -153,6 +166,24 @@ public class frmLogin extends javax.swing.JFrame {
         panel4.add(Btningresar);
         Btningresar.setBounds(70, 340, 190, 40);
 
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Olvide mi contraseña");
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel1MouseExited(evt);
+            }
+        });
+        panel4.add(jLabel1);
+        jLabel1.setBounds(100, 410, 180, 20);
+
         getContentPane().add(panel4);
         panel4.setBounds(500, 130, 350, 460);
 
@@ -181,21 +212,23 @@ public class frmLogin extends javax.swing.JFrame {
 
     private void BtningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtningresarActionPerformed
 
-        int idEmpleado;
+        int idEmpleado =0;
+        int puesto=0;
         
         try {
-            pp = cn.prepareStatement("select Id_Empleado from Empleados join \n"
-                    + "Usuarios on Empleados.Codigo_Usuario = Usuarios.Codigo_Usuario and Usuarios.Nombre_Usuario=? and Usuarios.Contrasenia=?");
+            pp = cn.prepareStatement("select Id_Empleado,Codigo_Puesto from Empleados join Usuarios on Empleados.Codigo_Usuario = Usuarios.Codigo_Usuario and Usuarios.Nombre_Usuario=? and Usuarios.Contrasenia=?");
             pp.setString(1, txtusuario.getText());
             pp.setString(2, Pswusuario.getText());
             rs = pp.executeQuery();
 
-            if (rs.next()) {
+            if (rs.next()) 
+            {
                 idEmpleado = rs.getInt(1);
-
-                if (idEmpleado >= 1) {
+                puesto = rs.getInt(2);
+            } 
+                if (idEmpleado != 0 && puesto!=0) {
                     JOptionPane.showMessageDialog(null, "Bienvenido a Bezel Cruises System");
-                    frmMenuPrincipal prin = new frmMenuPrincipal(idEmpleado);
+                    frmMenuPrincipal prin = new frmMenuPrincipal(idEmpleado,puesto);
                     prin.show();
                     this.dispose();
                 } else {
@@ -204,13 +237,198 @@ public class frmLogin extends javax.swing.JFrame {
                     Pswusuario.setText(null);
                     txtusuario.requestFocus();
                 }
-            }
+            
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error de Conexion" + ex);
         }
 
     }//GEN-LAST:event_BtningresarActionPerformed
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        
+       String user, telefono, id, email, code = "", recibido = "", pass,word;
+        int encontradouser = 0, intentos = 0;
+        
+        do
+        {
+            user = JOptionPane.showInputDialog("Ingrese el usuario del cual desea recuperar la contraseña: ");
+            
+            if(user == null)
+            {
+                break;
+            }
+            
+            telefono = JOptionPane.showInputDialog("Ingrese el telefono vinculado al usuario: ");
+            
+            if(telefono == null)
+            {
+                break;
+            }
+            
+            id = JOptionPane.showInputDialog("Ingrese el numero de identidad vinculado al usuario: ");
+            
+            if(id == null)
+            {
+                break;
+            }
+            
+            try
+            {
+                pp = cn.prepareStatement("Select count(*)[Encontrado] from\n" +
+                        "[dbo].[Empleados] a join [dbo].[Usuarios] b on a.Codigo_Usuario = b.Codigo_Usuario\n" +
+                        "where a.Identidad = ? and a.Telefono = ? and b.Nombre_Usuario = ?");
+                pp.setString(1, id);
+                pp.setString(2, telefono);
+                pp.setString(3, user);
+                rs = pp.executeQuery();
+
+                if(rs.next())
+                {
+                    encontradouser = rs.getInt("Encontrado");
+                }
+            }
+            catch(Exception ex)
+            {
+                
+            }
+            
+            if(encontradouser == 0)
+            {
+                JOptionPane.showMessageDialog(null, "Datos Ingresados Incorrectos, intentelo nuevamente.");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Usuario Verificado.");
+            }
+            
+        }while(encontradouser == 0);
+        
+        if(encontradouser == 1)
+        {
+            try
+            {
+                CallableStatement cmd = cn.prepareCall("{CALL recuperar}");
+                cmd.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Codigo de Recuperacion Generado Exitosamente");
+            }
+            catch(Exception ex)
+            {
+                JOptionPane.showMessageDialog(null, "Error al Generar el codigo" + ex);
+            }
+        
+            try
+                {
+                    pp = cn.prepareStatement("select top 1 codigo from recuperacion order by id desc");
+                    rs = pp.executeQuery();
+
+                    if(rs.next())
+                    {
+                        code = rs.getString("codigo");
+                    }
+                }
+                catch(Exception ex)
+                {
+
+                }
+
+            email = JOptionPane.showInputDialog("Ingrese el correo de Recuperacion: ");
+
+            Properties propiedad = new Properties();
+            propiedad.setProperty("mail.smtp.host", "smtp.gmail.com");
+            propiedad.setProperty("mail.smtp.starttls.enable", "true");
+            propiedad.setProperty("mail.smtp.port", "587");
+            propiedad.setProperty("mail.smtp.auth", "true");
+
+            Session sesion = Session.getDefaultInstance(propiedad);
+
+            String correoenvia = "bezelcruises@gmail.com";
+            String contra = "programacion";
+            String Destinatario = email;
+            String asunto = "Codigo Recuperacion";
+            String Mensaje = "El codigo de recuperacion es: " + code;
+
+            MimeMessage mail  = new MimeMessage(sesion);
+
+            try {
+                mail.setFrom(new InternetAddress(correoenvia));
+                mail.addRecipient(Message.RecipientType.TO, new InternetAddress(Destinatario));
+                mail.setSubject(asunto);
+                mail.setText(Mensaje);
+
+                Transport transporte = sesion.getTransport("smtp");
+                transporte.connect(correoenvia,contra);
+                transporte.sendMessage(mail, mail.getRecipients(Message.RecipientType.TO));
+                transporte.close();
+
+                JOptionPane.showMessageDialog(null, "Correo Enviado");
+            } catch (AddressException ex) {
+                Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (MessagingException ex) {
+                Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            do
+            {
+                recibido = JOptionPane.showInputDialog("Ingrese el codigo de verificacion: ");
+
+                if(!recibido.equals(code))
+                {
+                    JOptionPane.showMessageDialog(null, "El codigo ingresado no coincide, intentelo nuevamente.");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "El codigo ingresado es correcto.");
+
+                }
+                    
+            }while(!recibido.equals(code));
+
+            do
+                {
+                   do
+                   {
+                       pass = JOptionPane.showInputDialog("Ingrese la nueva contraseña: ");
+                   }while(pass.equals(null));
+
+                   do
+                   {
+                       word = JOptionPane.showInputDialog("Verifique la nueva contraseña: ");
+                   }while(word.equals(null));
+
+                   if(!pass.equals(word))
+                   {
+                       JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden, vuelva a ingresarlas por favor.");
+                   }
+
+                }while(!pass.equals(word));
+
+             try
+             {
+                CallableStatement cmd = cn.prepareCall("{CALL cambiocontra(?,?)}");
+
+                cmd.setString(1, user);
+                cmd.setString(2, pass);
+                cmd.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Contraseña Modificada Exitosamente");
+            }
+            catch(SQLException ex)
+            {
+                JOptionPane.showMessageDialog(null, "Error al modificar la Contraseña! " + ex);
+            }
+        }
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
+        // TODO add your handling code here:
+        jLabel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_jLabel1MouseEntered
+
+    private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
+        // TODO add your handling code here:
+        jLabel1.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_jLabel1MouseExited
 
     /**
      * @param args the command line arguments
@@ -251,6 +469,7 @@ public class frmLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btningresar;
     private javax.swing.JPasswordField Pswusuario;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

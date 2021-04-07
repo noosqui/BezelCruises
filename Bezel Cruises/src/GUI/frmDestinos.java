@@ -19,21 +19,22 @@ import javax.swing.table.DefaultTableModel;
 
 public class frmDestinos extends javax.swing.JInternalFrame {
 
-    DefaultTableModel dtm = new DefaultTableModel();
-    ClassDestinos cd = new ClassDestinos();
-    String IdL, IdD;
-    String Salida, Destino;
-    int codigoS, codigoD;
+    private DefaultTableModel dtm = new DefaultTableModel();
+    private ClassDestinos cd = new ClassDestinos();
+    private String IdL, IdD;
+    private String Salida, Destino;
+    private int codigoS, codigoD,puesto;
 
     /**
      * Creates new form Destinos
      */
-    public frmDestinos() throws SQLException {
+    public frmDestinos(int puesto) throws SQLException {
         initComponents();
         TABLADestinos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         BtnAgregar.setEnabled(false);
         BtnActualizar.setEnabled(false);
         Btneliminar.setEnabled(false);
+        this.puesto =puesto;
         try {
             String[] titulo = new String[]{"Informacion Promocional", "Destino Turistico", "Pais que se encuentra", "Ciudad que pertenece", "ID VIAJE", "ID DESTINO"};
             dtm.setColumnIdentifiers(titulo);
@@ -45,6 +46,13 @@ public class frmDestinos extends javax.swing.JInternalFrame {
             ocultarColumna(5);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Vuelva a intentarlo mas tarde...\nVuelva a intentarlo mas tarde");
+        }
+        if (this.puesto==1)
+        {
+            this.Btneliminar.setVisible(false);
+            this.BtnActualizar.setVisible(false);
+            this.BtnAgregar.setVisible(false);
+           
         }
 
     }

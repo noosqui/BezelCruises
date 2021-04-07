@@ -57,7 +57,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         tabVenta = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        pagina1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -83,7 +83,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
         jLabel26 = new javax.swing.JLabel();
         spnMin = new javax.swing.JSpinner();
         spnHora = new javax.swing.JSpinner();
-        jPanel2 = new javax.swing.JPanel();
+        Pagina2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -121,7 +121,6 @@ public class frmVentas extends javax.swing.JInternalFrame {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jLabel30 = new javax.swing.JLabel();
         txtImpuestoPort = new javax.swing.JTextField();
@@ -150,8 +149,8 @@ public class frmVentas extends javax.swing.JInternalFrame {
         tabVenta.setAutoscrolls(true);
         tabVenta.setEnabled(false);
 
-        jPanel1.setAutoscrolls(true);
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        pagina1.setAutoscrolls(true);
+        pagina1.setLayout(new java.awt.GridBagLayout());
 
         jPanel3.setBackground(new java.awt.Color(38, 116, 162));
         jPanel3.setAutoscrolls(true);
@@ -160,16 +159,15 @@ public class frmVentas extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Gill Sans MT", 1, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Venta");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 130, 30));
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 130, 30));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 100;
-        gridBagConstraints.ipady = 25;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel1.add(jPanel3, gridBagConstraints);
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        pagina1.add(jPanel3, gridBagConstraints);
 
         jPanel4.setBackground(new java.awt.Color(26, 78, 108));
         jPanel4.setAutoscrolls(true);
@@ -272,15 +270,13 @@ public class frmVentas extends javax.swing.JInternalFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 50;
-        gridBagConstraints.weightx = 0.2;
-        gridBagConstraints.weighty = 10.0;
-        jPanel1.add(jPanel4, gridBagConstraints);
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        pagina1.add(jPanel4, gridBagConstraints);
 
-        tabVenta.addTab("tab1", jPanel1);
+        tabVenta.addTab("tab1", pagina1);
 
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Pagina2.setLayout(new java.awt.GridBagLayout());
 
         jPanel5.setBackground(new java.awt.Color(38, 116, 162));
 
@@ -305,7 +301,16 @@ public class frmVentas extends javax.swing.JInternalFrame {
                 .addGap(25, 25, 25))
         );
 
-        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 1039;
+        gridBagConstraints.ipady = 21;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 17);
+        Pagina2.add(jPanel5, gridBagConstraints);
 
         jPanel6.setBackground(new java.awt.Color(26, 78, 108));
         jPanel6.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -396,11 +401,18 @@ public class frmVentas extends javax.swing.JInternalFrame {
         txtNumCamas.setEnabled(false);
         jPanel6.add(txtNumCamas, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 410, 130, -1));
 
-        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 82, 1190, 740));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 120;
+        gridBagConstraints.ipady = 160;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 17);
+        Pagina2.add(jPanel6, gridBagConstraints);
 
-        tabVenta.addTab("tab2", jPanel2);
+        tabVenta.addTab("tab2", Pagina2);
 
-        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel7.setLayout(new java.awt.GridBagLayout());
 
         jPanel8.setBackground(new java.awt.Color(38, 116, 162));
 
@@ -413,48 +425,61 @@ public class frmVentas extends javax.swing.JInternalFrame {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1038, Short.MAX_VALUE))
+                .addContainerGap(1059, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(58, 58, 58)
                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
-        jPanel7.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        jPanel7.add(jPanel8, gridBagConstraints);
 
         jPanel9.setBackground(new java.awt.Color(26, 78, 108));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        txtCliente.setForeground(new java.awt.Color(255, 255, 255));
         txtCliente.setEnabled(false);
-        jPanel9.add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 240, -1));
+        jPanel9.add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, 270, 40));
 
+        txtEmpleado.setForeground(new java.awt.Color(255, 255, 255));
         txtEmpleado.setEnabled(false);
-        jPanel9.add(txtEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, 240, -1));
+        jPanel9.add(txtEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 270, 40));
 
+        txtISV.setForeground(new java.awt.Color(255, 255, 255));
         txtISV.setEnabled(false);
-        jPanel9.add(txtISV, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 330, 240, -1));
+        jPanel9.add(txtISV, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 314, 270, 40));
 
+        txtDescuento.setForeground(new java.awt.Color(255, 255, 255));
         txtDescuento.setEnabled(false);
-        jPanel9.add(txtDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 480, 240, -1));
+        jPanel9.add(txtDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 480, 270, 40));
 
+        txtSubtotal.setForeground(new java.awt.Color(255, 255, 255));
         txtSubtotal.setEnabled(false);
         txtSubtotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSubtotalActionPerformed(evt);
             }
         });
-        jPanel9.add(txtSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, 240, -1));
+        jPanel9.add(txtSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 250, 270, 40));
 
+        txtTotal.setForeground(new java.awt.Color(255, 255, 255));
         txtTotal.setEnabled(false);
-        jPanel9.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 560, 240, -1));
+        jPanel9.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 560, 270, 30));
 
+        txtViaje.setForeground(new java.awt.Color(255, 255, 255));
         txtViaje.setEnabled(false);
-        jPanel9.add(txtViaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 240, -1));
+        jPanel9.add(txtViaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 270, 40));
 
         jLabel16.setText("Cliente");
         jPanel9.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, -1, -1));
@@ -466,7 +491,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
         jPanel9.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, -1, -1));
 
         jLabel19.setText("Descuento");
-        jPanel9.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 490, -1, -1));
+        jPanel9.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 490, -1, -1));
 
         jLabel20.setText("Subtotal");
         jPanel9.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, -1, -1));
@@ -477,22 +502,20 @@ public class frmVentas extends javax.swing.JInternalFrame {
         jLabel22.setText("Viaje");
         jPanel9.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, -1, -1));
 
-        jButton6.setText("Atras");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jButton7.setText("Impimir");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jButton7ActionPerformed(evt);
             }
         });
-        jPanel9.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 620, 210, 60));
-
-        jButton7.setText("Impimir");
         jPanel9.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 620, 210, 60));
 
         jLabel30.setText("Impuesto Portuario");
-        jPanel9.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 410, -1, -1));
+        jPanel9.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 410, -1, -1));
 
+        txtImpuestoPort.setForeground(new java.awt.Color(255, 255, 255));
         txtImpuestoPort.setEnabled(false);
-        jPanel9.add(txtImpuestoPort, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, 240, -1));
+        jPanel9.add(txtImpuestoPort, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 400, 270, 40));
 
         jButton1.setBackground(new java.awt.Color(0, 153, 204));
         jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -505,7 +528,13 @@ public class frmVentas extends javax.swing.JInternalFrame {
         });
         jPanel9.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 160, 110, 60));
 
-        jPanel7.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1190, 720));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        jPanel7.add(jPanel9, gridBagConstraints);
 
         tabVenta.addTab("tab3", jPanel7);
 
@@ -531,7 +560,6 @@ public class frmVentas extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 
         int row = tabViajes.rowAtPoint(evt.getPoint());
-
         if (row >= 0) {
             try {
                 String timme = tabViajes.getValueAt(row, 9).toString();
@@ -601,7 +629,9 @@ public class frmVentas extends javax.swing.JInternalFrame {
         try {
             String idCliente[] = String.valueOf(cmbCliente.getSelectedItem()).split(" ");
             String NumDias[] = txtDias.getText().split(" ");
-            String Viaje = tabViajes.getValueAt(tabViajes.getSelectedColumn(), 0).toString();
+            
+            String Viaje = tabViajes.getValueAt(tabViajes.getSelectedRow() , 0).toString();
+          
             for (String S : idCliente) {
                 if (S.matches(".*\\d.*")) {
                     idCli = S;
@@ -612,7 +642,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
                     Dias = Integer.parseInt(S);
                 }
             }
-
+           
             pp = cn.prepareStatement("SELECT FLOOR(DATEDIFF(DAY, Fecha_Nacimiento, GETDATE()) / 365.25) from Clientes\n"
                     + " where Id_Cliente = ?");
             pp.setInt(1, Integer.parseInt(idCli));
@@ -624,7 +654,8 @@ public class frmVentas extends javax.swing.JInternalFrame {
                 if (Edad >= 60) {
                     Descuento = 0.25;
                 }
-
+                
+                
                 subtotal = Dias * Double.parseDouble(txtPrecioPers.getText()) * Integer.parseInt(txtNumPerson.getText());
                 ISV = subtotal * 0.05;
                 ImpPortuario = subtotal * 0.07;
@@ -639,7 +670,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
                 txtEmpleado.setText("1");
                 txtViaje.setText(Viaje);
                 txtTotal.setText(total + "");
-
+                JOptionPane.showMessageDialog(null,txtTotal.getText());
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "" + ex);
@@ -673,6 +704,13 @@ public class frmVentas extends javax.swing.JInternalFrame {
             pp.executeUpdate();
             Facturacion fact=new Facturacion();
             fact.setCodigoFactura(idFact);
+            pp.clearParameters();
+            pp = cn.prepareStatement("insert into Itinerario_Viaje  values (?,?,?,?)");
+            pp.setInt(1, Integer.parseInt(idCli));
+            pp.setInt(2,idFact);
+            pp.setInt(3,Integer.parseInt(tabViajes.getValueAt(tabViajes.getSelectedRow(), 0).toString()));
+            pp.setDate(4,new java.sql.Date(date.getTime()) );
+            pp.executeUpdate();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "" + ex);
@@ -731,11 +769,6 @@ public class frmVentas extends javax.swing.JInternalFrame {
         tabVenta.setSelectedIndex(0);
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here'
-        tabVenta.setSelectedIndex(1);
-    }//GEN-LAST:event_jButton6ActionPerformed
-
     private void txtNumPersonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumPersonKeyPressed
         // TODO add your handling code here:
 
@@ -754,6 +787,11 @@ public class frmVentas extends javax.swing.JInternalFrame {
         FRMitinerario iti = new FRMitinerario();
         iti.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        tabVenta.setSelectedIndex(0);
+    }//GEN-LAST:event_jButton7ActionPerformed
     public void listarCamarotes() {
         model = (DefaultTableModel) tabCamarote.getModel();
         model.setRowCount(0);
@@ -847,6 +885,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser DcFechaSal;
+    private javax.swing.JPanel Pagina2;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JButton btnSiguiente1;
     private javax.swing.JComboBox<String> cmbCliente;
@@ -854,7 +893,6 @@ public class frmVentas extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cmbTipoCamarote;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -882,8 +920,6 @@ public class frmVentas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -893,6 +929,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel pagina1;
     private javax.swing.JSpinner spnHora;
     private javax.swing.JSpinner spnMin;
     private javax.swing.JTable tabCamarote;

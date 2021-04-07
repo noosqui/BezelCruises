@@ -7,26 +7,23 @@ package GUI;
 
 import Clases.ClassDestinos;
 import Clases.ConexionBasedeDatos;
-import com.microsoft.sqlserver.jdbc.StringUtils;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 public class frmPuertos extends javax.swing.JInternalFrame {
 
-    DefaultTableModel dtm = new DefaultTableModel();
-    ClassDestinos cd = new ClassDestinos();
-    String IdL, IdD;
-    String Salida, Destino;
-    int codigoS, codigoD;
-
+    private DefaultTableModel dtm = new DefaultTableModel();
+    private ClassDestinos cd = new ClassDestinos();
+    private String IdL, IdD;
+    protected String Salida, Destino;
+    private int puesto,codigoS, codigoD;
+    
  
-    public frmPuertos()  {
+    public frmPuertos(int puesto)  {
         initComponents();
         
         this.setResizable(false);
@@ -34,6 +31,7 @@ public class frmPuertos extends javax.swing.JInternalFrame {
         BtnAgregar.setEnabled(false);
         BtnActualizar.setEnabled(false);
         Btneliminar.setEnabled(false);
+        this.puesto = puesto;
         
         try {
             String[] titulo = new String[]{"Informacion Promocional", "Puerto Salida", "Pais que se encuentra", "Ciudad que pertenece", "ID VIAJE", "ID PUERTO"};
@@ -47,7 +45,12 @@ public class frmPuertos extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Vuelva a intentarlo mas tarde...\nVuelva a intentarlo mas tarde");
         }
-
+        if (this.puesto == 1)
+        {
+            this.BtnActualizar.setVisible(false);
+            this.Btneliminar.setVisible(false);
+            this.BtnAgregar.setVisible(false);
+        }
     }
 
     public void validarText() {

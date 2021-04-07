@@ -1,4 +1,4 @@
-/*
+
 package Clases;
 
 import java.sql.*;
@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  * @author andrea
  */
 
-/*
+
 public class ConexionBasedeDatos {
 
     static Connection conn = null;
@@ -25,7 +25,7 @@ public class ConexionBasedeDatos {
     public static Connection obtenerConexion()
 
     {
-        String url = "jdbc:sqlserver://DESKTOP-7ENJGBO:1433;databaseName=Crucero";
+        String url = "jdbc:sqlserver://localhost:1433;databaseName=Cruceros";
 
         try
         {
@@ -39,7 +39,7 @@ public class ConexionBasedeDatos {
 
         try
         {
-            conn = DriverManager.getConnection(url, "sa", "Dios");
+            conn = DriverManager.getConnection(url, "sa", "123");
 
             //JOptionPane.showMessageDialog(null, "Conexion exitosa");
         }
@@ -72,9 +72,9 @@ public class ConexionBasedeDatos {
     }
 
 
-}*/
+}
 
-
+/*
 package Clases;
 
 import java.sql.*;
@@ -107,4 +107,4 @@ public class ConexionBasedeDatos {
         return conn;
     }
     
-}
+}*/

@@ -21,19 +21,30 @@ import javax.swing.DefaultComboBoxModel;
 public class frmBuque extends javax.swing.JInternalFrame {
 
 
-    Connection cn = ConexionBasedeDatos.obtenerConexion();
-    DefaultTableModel modelo = new DefaultTableModel();
-    PreparedStatement ps = null;
-    Statement stModel = null;
-    ResultSet rsModelo = null;
-    String id;
-
-    public frmBuque() {
+    private Connection cn = ConexionBasedeDatos.obtenerConexion();
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private PreparedStatement ps = null;
+    private Statement stModel = null;
+    private ResultSet rsModelo = null;
+    private String id;
+    private int puesto;
+    protected static ResultSet res;
+    
+    public frmBuque(int puesto) {
         initComponents();
         cargatablebuques();
         CmbTipobuque.setModel(insercombo());
+        this.puesto=puesto;
+        if (this.puesto==1)
+        {
+            this.BtnActualizar.setVisible(false);
+            this.BtnAgregar.setVisible(false);
+            this.BtnEliminar.setVisible(false);
+            this.BtnActualizar.setVisible(false);
+            
+        }
     }
-    static ResultSet res;
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,7 +60,6 @@ public class frmBuque extends javax.swing.JInternalFrame {
         txttipobuque = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         CmbTipobuque = new javax.swing.JComboBox<>();
-        Btninsertar = new javax.swing.JButton();
         BtnEliminar = new javax.swing.JButton();
         BtnActualizar = new javax.swing.JButton();
         BtnAgregar = new javax.swing.JButton();
@@ -104,19 +114,6 @@ public class frmBuque extends javax.swing.JInternalFrame {
         });
         jPanel1.add(CmbTipobuque);
         CmbTipobuque.setBounds(560, 400, 140, 26);
-
-        Btninsertar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
-        Btninsertar.setForeground(new java.awt.Color(31, 61, 121));
-        Btninsertar.setText("Insertar Tipo Buque");
-        Btninsertar.setBorder(null);
-        Btninsertar.setBorderPainted(false);
-        Btninsertar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtninsertarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(Btninsertar);
-        Btninsertar.setBounds(560, 440, 150, 30);
 
         BtnEliminar.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         BtnEliminar.setForeground(new java.awt.Color(31, 61, 121));
@@ -272,7 +269,7 @@ public class frmBuque extends javax.swing.JInternalFrame {
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Buques");
         jPanel1.add(jLabel15);
-        jLabel15.setBounds(380, 130, 129, 40);
+        jLabel15.setBounds(380, 130, 123, 40);
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icono100x100_1.png"))); // NOI18N
         jPanel1.add(jLabel7);
@@ -412,11 +409,6 @@ public class frmBuque extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_BtnActualizarActionPerformed
-
-    private void BtninsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtninsertarActionPerformed
-        new frminsertabuqe().setVisible(true);
-
-    }//GEN-LAST:event_BtninsertarActionPerformed
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
         BusquedaBuques(txtbuscar.getText());
@@ -586,7 +578,6 @@ public class frmBuque extends javax.swing.JInternalFrame {
     private javax.swing.JButton BtnActualizar;
     private javax.swing.JButton BtnAgregar;
     private javax.swing.JButton BtnEliminar;
-    private javax.swing.JButton Btninsertar;
     private javax.swing.JButton Btnlimpiar1;
     private javax.swing.JComboBox<String> CmbTipobuque;
     private javax.swing.JButton btnbuscar;

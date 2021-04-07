@@ -16,9 +16,16 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form MenuPrincipal
      */
-    int idEmpleado;
+    private int idEmpleado;
+    private int Puesto;
     public frmMenuPrincipal() {
         initComponents();
+    }
+     public frmMenuPrincipal(int idEmpleado,int Puesto) {
+        initComponents();
+        this.idEmpleado = idEmpleado;
+        this.Puesto=Puesto;
+   
     }
 
     frmMenuPrincipal(int idEmpleado) {
@@ -44,14 +51,16 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         btnDestinos = new javax.swing.JButton();
         btnVenta = new javax.swing.JButton();
         btnViajes = new javax.swing.JButton();
-        btnCamarotes1 = new javax.swing.JButton();
-        btnBuque1 = new javax.swing.JButton();
+        btnCamarotes = new javax.swing.JButton();
+        btnBuque = new javax.swing.JButton();
         btnCliente = new javax.swing.JButton();
         btnPuertos = new javax.swing.JButton();
         ContenedorFrm = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
+        setMinimumSize(new java.awt.Dimension(1200, 720));
+        setPreferredSize(new java.awt.Dimension(1200, 720));
         setSize(new java.awt.Dimension(1200, 720));
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
@@ -72,8 +81,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
-        gridBagConstraints.weighty = 0.3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jPanel3, gridBagConstraints);
 
         btnAgente.setBackground(new java.awt.Color(32, 98, 136));
@@ -186,25 +194,25 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         gridBagConstraints.weighty = 0.1;
         jPanel2.add(btnViajes, gridBagConstraints);
 
-        btnCamarotes1.setBackground(new java.awt.Color(32, 98, 136));
-        btnCamarotes1.setFont(new java.awt.Font("Gill Sans MT", 1, 18)); // NOI18N
-        btnCamarotes1.setForeground(new java.awt.Color(255, 255, 255));
-        btnCamarotes1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bed.png"))); // NOI18N
-        btnCamarotes1.setText("Camarotes");
-        btnCamarotes1.setBorder(null);
-        btnCamarotes1.setBorderPainted(false);
-        btnCamarotes1.setContentAreaFilled(false);
-        btnCamarotes1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCamarotes1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnCamarotes1.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btnCamarotes1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnCamarotes.setBackground(new java.awt.Color(32, 98, 136));
+        btnCamarotes.setFont(new java.awt.Font("Gill Sans MT", 1, 18)); // NOI18N
+        btnCamarotes.setForeground(new java.awt.Color(255, 255, 255));
+        btnCamarotes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bed.png"))); // NOI18N
+        btnCamarotes.setText("Camarotes");
+        btnCamarotes.setBorder(null);
+        btnCamarotes.setBorderPainted(false);
+        btnCamarotes.setContentAreaFilled(false);
+        btnCamarotes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCamarotes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnCamarotes.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnCamarotes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnCamarotes1MouseEntered(evt);
+                btnCamarotesMouseEntered(evt);
             }
         });
-        btnCamarotes1.addActionListener(new java.awt.event.ActionListener() {
+        btnCamarotes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCamarotes1ActionPerformed(evt);
+                btnCamarotesActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -213,27 +221,27 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
-        jPanel2.add(btnCamarotes1, gridBagConstraints);
+        jPanel2.add(btnCamarotes, gridBagConstraints);
 
-        btnBuque1.setBackground(new java.awt.Color(32, 98, 136));
-        btnBuque1.setFont(new java.awt.Font("Gill Sans MT", 1, 18)); // NOI18N
-        btnBuque1.setForeground(new java.awt.Color(255, 255, 255));
-        btnBuque1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ship.png"))); // NOI18N
-        btnBuque1.setText("Buque");
-        btnBuque1.setBorder(null);
-        btnBuque1.setBorderPainted(false);
-        btnBuque1.setContentAreaFilled(false);
-        btnBuque1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnBuque1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnBuque1.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btnBuque1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnBuque.setBackground(new java.awt.Color(32, 98, 136));
+        btnBuque.setFont(new java.awt.Font("Gill Sans MT", 1, 18)); // NOI18N
+        btnBuque.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuque.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ship.png"))); // NOI18N
+        btnBuque.setText("Buque");
+        btnBuque.setBorder(null);
+        btnBuque.setBorderPainted(false);
+        btnBuque.setContentAreaFilled(false);
+        btnBuque.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuque.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnBuque.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnBuque.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnBuque1MouseEntered(evt);
+                btnBuqueMouseEntered(evt);
             }
         });
-        btnBuque1.addActionListener(new java.awt.event.ActionListener() {
+        btnBuque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuque1ActionPerformed(evt);
+                btnBuqueActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -241,7 +249,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weighty = 0.1;
-        jPanel2.add(btnBuque1, gridBagConstraints);
+        jPanel2.add(btnBuque, gridBagConstraints);
 
         btnCliente.setBackground(new java.awt.Color(32, 98, 136));
         btnCliente.setFont(new java.awt.Font("Gill Sans MT", 1, 18)); // NOI18N
@@ -302,8 +310,6 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        gridBagConstraints.weightx = 1.3;
         gridBagConstraints.insets = new java.awt.Insets(0, 1, 0, 1);
         jPanel1.add(jPanel2, gridBagConstraints);
 
@@ -366,7 +372,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         
          try
         {
-            frmViajes frm = new frmViajes();
+            frmViajes frm = new frmViajes(this.Puesto);
         AbrirForm(frm);
         }
         catch(Exception ex)
@@ -381,7 +387,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         
         try
         {
-            frmDestinos form = new frmDestinos();
+            frmDestinos form = new frmDestinos(this.Puesto);
             AbrirForm(form);
         }
         catch(Exception ex)
@@ -391,31 +397,31 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnDestinosActionPerformed
 
-    private void btnCamarotes1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCamarotes1MouseEntered
+    private void btnCamarotesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCamarotesMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCamarotes1MouseEntered
+    }//GEN-LAST:event_btnCamarotesMouseEntered
 
-    private void btnCamarotes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCamarotes1ActionPerformed
+    private void btnCamarotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCamarotesActionPerformed
         // TODO add your handling code here:
-        frmCamarote frm = new frmCamarote();
+        frmCamarote frm = new frmCamarote(this.Puesto);
         AbrirForm(frm);
-    }//GEN-LAST:event_btnCamarotes1ActionPerformed
+    }//GEN-LAST:event_btnCamarotesActionPerformed
 
-    private void btnBuque1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuque1MouseEntered
+    private void btnBuqueMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuqueMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuque1MouseEntered
+    }//GEN-LAST:event_btnBuqueMouseEntered
 
     private void btnAgenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgenteActionPerformed
         // TODO add your handling code here:
-        frmAgentes frm = new frmAgentes();
+        frmAgentes frm = new frmAgentes(this.Puesto);
         AbrirForm(frm);
     }//GEN-LAST:event_btnAgenteActionPerformed
 
-    private void btnBuque1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuque1ActionPerformed
+    private void btnBuqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuqueActionPerformed
         // TODO add your handling code here:
-        frmBuque frm = new frmBuque();
+        frmBuque frm = new frmBuque(this.Puesto);
         AbrirForm(frm);
-    }//GEN-LAST:event_btnBuque1ActionPerformed
+    }//GEN-LAST:event_btnBuqueActionPerformed
 
     private void btnClienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClienteMouseEntered
         // TODO add your handling code here:
@@ -423,7 +429,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
         // TODO add your handling code here:
-        frmClientes frm = new frmClientes();
+        frmClientes frm = new frmClientes(this.Puesto);
         AbrirForm(frm);
     }//GEN-LAST:event_btnClienteActionPerformed
 
@@ -433,7 +439,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
     private void btnPuertosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuertosActionPerformed
         // TODO add your handling code here:
-       frmPuertos frm = new frmPuertos();
+       frmPuertos frm = new frmPuertos(this.Puesto);
         AbrirForm(frm);
     }//GEN-LAST:event_btnPuertosActionPerformed
 
@@ -445,8 +451,8 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane ContenedorFrm;
     private javax.swing.JButton btnAgente;
-    private javax.swing.JButton btnBuque1;
-    private javax.swing.JButton btnCamarotes1;
+    private javax.swing.JButton btnBuque;
+    private javax.swing.JButton btnCamarotes;
     private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnDestinos;
     private javax.swing.JButton btnPuertos;

@@ -13,19 +13,20 @@ import java.util.Date;
 
 public class frmViajes extends javax.swing.JInternalFrame {
 
-    DefaultTableModel dtm = new DefaultTableModel();
-    ClaseViajes cv = new ClaseViajes();
+    private DefaultTableModel dtm = new DefaultTableModel();
+    private ClaseViajes cv = new ClaseViajes();
 
 
-    String Duracion;
-    String id_viaje;
-    int codigoestado = 1;
-    String FechaSeleccionada;
+    private String Duracion;
+    private String id_viaje;
+    private int codigoestado = 1;
+    private String FechaSeleccionada;
+    private int Puesto;
 
 
-    public frmViajes() throws SQLException {
+    public frmViajes(int puesto) throws SQLException {
         initComponents();
-
+        this.Puesto=puesto;
         TablaVIAJES.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         ListaDuracion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -49,7 +50,12 @@ public class frmViajes extends javax.swing.JInternalFrame {
 
         }
 
-       
+       if (this.Puesto==1)
+       {
+           this.Btneliminar.setVisible(false);
+           this.BtnModificar.setVisible(false);
+           this.BtnAgregar.setVisible(false);
+       }
 
     }
 
@@ -153,7 +159,7 @@ public class frmViajes extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 402, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 411, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtBUSCAR, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -178,7 +184,7 @@ public class frmViajes extends javax.swing.JInternalFrame {
         );
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 0, 1000, 60);
+        jPanel2.setBounds(0, 0, 1010, 60);
 
         jPanel1.setBackground(new java.awt.Color(26, 78, 108));
         jPanel1.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
@@ -426,7 +432,7 @@ public class frmViajes extends javax.swing.JInternalFrame {
         jPanel1.add(btnVER, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 60, 1000, 510);
+        jPanel1.setBounds(0, 60, 1020, 510);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -560,7 +566,7 @@ public class frmViajes extends javax.swing.JInternalFrame {
             String f = String.valueOf(TablaVIAJES.getValueAt(TablaVIAJES.getSelectedRow(), 0));
             cmbBuques.setSelectedItem(String.valueOf(TablaVIAJES.getValueAt(i, 1)));
             cmbSalida.setSelectedItem(String.valueOf(TablaVIAJES.getValueAt(i, 2)));
-            cmbDestino.setSelectedItem(String.valueOf(TablaVIAJES.getValueAt(i, 3)));
+            cmbDestino.setSelectedItem(String.valueOf(TablaVIAJES.getValueAt(i, 3)).trim());
             Duracion = String.valueOf(TablaVIAJES.getValueAt(TablaVIAJES.getSelectedRow(), 4));
             String estado = String.valueOf(TablaVIAJES.getValueAt(TablaVIAJES.getSelectedRow(), 5));
             id_viaje = String.valueOf(TablaVIAJES.getValueAt(TablaVIAJES.getSelectedRow(), 6));

@@ -7,6 +7,7 @@ package Clases;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
@@ -38,7 +39,7 @@ public class Facturacion {
      {
          t.setText(" ");
          java.sql.Connection conectar = null;
-         String query = "execute [InformacionItinerario]";
+         String query = "execute [InformacionItinerario] "+codigoFactura;
          
          try
          {

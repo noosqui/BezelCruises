@@ -28,17 +28,22 @@ import javax.swing.table.DefaultTableModel;
  */
 public class frmClientes extends javax.swing.JInternalFrame {
 
-    PreparedStatement pp = null;
-    ConexionBasedeDatos cone = new ConexionBasedeDatos();
-    Connection cn = null;
-    ResultSet rs;
-    Statement st;
-    ResultSetMetaData rsmd;
-    DefaultTableModel model;
-
-    public frmClientes() {
+    private  PreparedStatement pp = null;
+    private  ConexionBasedeDatos cone = new ConexionBasedeDatos();
+    private Connection cn = null;
+    private ResultSet rs;
+    private Statement st;
+    private ResultSetMetaData rsmd;
+    private DefaultTableModel model;
+    private int puesto;
+    public frmClientes(int puesto) {
         initComponents();
-
+        this.puesto = puesto;
+        if (puesto==1)
+        {
+            this.bttnEliminar.setVisible(false);
+            this.bttnModificar.setVisible(false);
+        }
     }
 
     @SuppressWarnings("unchecked")
