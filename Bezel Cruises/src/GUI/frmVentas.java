@@ -6,6 +6,7 @@
 package GUI;
 
 import Clases.ConexionBasedeDatos;
+import Clases.Facturacion;
 import java.awt.event.ItemEvent;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
@@ -124,6 +125,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
         jButton7 = new javax.swing.JButton();
         jLabel30 = new javax.swing.JLabel();
         txtImpuestoPort = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setAutoscrolls(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -492,6 +494,17 @@ public class frmVentas extends javax.swing.JInternalFrame {
         txtImpuestoPort.setEnabled(false);
         jPanel9.add(txtImpuestoPort, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, 240, -1));
 
+        jButton1.setBackground(new java.awt.Color(0, 153, 204));
+        jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Itinerario");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel9.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 160, 110, 60));
+
         jPanel7.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1190, 720));
 
         tabVenta.addTab("tab3", jPanel7);
@@ -658,6 +671,8 @@ public class frmVentas extends javax.swing.JInternalFrame {
             pp.setInt(2, Integer.parseInt(txtNumCamarote.getText()));
             pp.setDouble(3, Integer.parseInt(txtNumPerson.getText()));
             pp.executeUpdate();
+            Facturacion fact=new Facturacion();
+            fact.setCodigoFactura(idFact);
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "" + ex);
@@ -734,6 +749,11 @@ public class frmVentas extends javax.swing.JInternalFrame {
         if (!Character.isDigit(evt.getKeyChar()))
             evt.consume();
     }//GEN-LAST:event_txtNumPersonKeyTyped
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        FRMitinerario iti = new FRMitinerario();
+        iti.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
     public void listarCamarotes() {
         model = (DefaultTableModel) tabCamarote.getModel();
         model.setRowCount(0);
@@ -832,6 +852,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cmbCliente;
     private javax.swing.JComboBox<String> cmbSalida;
     private javax.swing.JComboBox<String> cmbTipoCamarote;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
