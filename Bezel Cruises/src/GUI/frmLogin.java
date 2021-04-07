@@ -1,9 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
+
+import Clases.ConexionBasedeDatos;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,6 +22,11 @@ public class frmLogin extends javax.swing.JFrame {
         initComponents();
     }
 
+    PreparedStatement pp = null;
+    ConexionBasedeDatos cone = new ConexionBasedeDatos();
+    Connection cn = null;
+    ResultSet rs;
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,7 +37,6 @@ public class frmLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         panel1 = new java.awt.Panel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         panel4 = new java.awt.Panel();
@@ -42,19 +50,20 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         Btningresar = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1098, 678));
+        setSize(new java.awt.Dimension(1098, 678));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         panel1.setBackground(new java.awt.Color(0, 90, 130));
         panel1.setLayout(null);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ICONO.png"))); // NOI18N
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panel1.add(jLabel1);
-        jLabel1.setBounds(10, 90, 0, 0);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ICONO.png"))); // NOI18N
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -76,7 +85,7 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Iniciar Sesión");
         panel4.add(jLabel3);
-        jLabel3.setBounds(126, 42, 128, 28);
+        jLabel3.setBounds(126, 42, 143, 32);
         jLabel3.getAccessibleContext().setAccessibleName("Iniciar_Sesion");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -136,16 +145,13 @@ public class frmLogin extends javax.swing.JFrame {
         Btningresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/btningresar.png"))); // NOI18N
         Btningresar.setBorderPainted(false);
         Btningresar.setContentAreaFilled(false);
+        Btningresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtningresarActionPerformed(evt);
+            }
+        });
         panel4.add(Btningresar);
         Btningresar.setBounds(70, 340, 190, 40);
-
-        jCheckBox1.setBackground(new java.awt.Color(33, 45, 62));
-        jCheckBox1.setFont(new java.awt.Font("Consolas", 0, 10)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setBorder(null);
-        jCheckBox1.setLabel("Recordar");
-        panel4.add(jCheckBox1);
-        jCheckBox1.setBounds(50, 300, 90, 25);
 
         getContentPane().add(panel4);
         panel4.setBounds(500, 130, 350, 460);
@@ -153,7 +159,7 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/crucero.jpg"))); // NOI18N
         jLabel8.setText("jLabel8");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(0, 0, 1100, 690);
+        jLabel8.setBounds(0, 0, 1100, 680);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -166,6 +172,46 @@ public class frmLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtusuarioAncestorAdded
 
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+
+        cn = cone.obtenerConexion();
+
+    }//GEN-LAST:event_formWindowOpened
+
+    private void BtningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtningresarActionPerformed
+
+        int idEmpleado;
+        
+        try {
+            pp = cn.prepareStatement("select Id_Empleado from Empleados join \n"
+                    + "Usuarios on Empleados.Codigo_Usuario = Usuarios.Codigo_Usuario and Usuarios.Nombre_Usuario=? and Usuarios.Contrasenia=?");
+            pp.setString(1, txtusuario.getText());
+            pp.setString(2, Pswusuario.getText());
+            rs = pp.executeQuery();
+
+            if (rs.next()) {
+                idEmpleado = rs.getInt(1);
+
+                if (idEmpleado >= 1) {
+                    JOptionPane.showMessageDialog(null, "Bienvenido a Bezel Cruises System");
+                    frmMenuPrincipal prin = new frmMenuPrincipal(idEmpleado);
+                    prin.show();
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Datos Incorrectos! Porfavor verifique sus Datos Nuevamente.");
+                    txtusuario.setText(null);
+                    Pswusuario.setText(null);
+                    txtusuario.requestFocus();
+                }
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de Conexion" + ex);
+        }
+
+    }//GEN-LAST:event_BtningresarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -173,7 +219,7 @@ public class frmLogin extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -205,8 +251,6 @@ public class frmLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btningresar;
     private javax.swing.JPasswordField Pswusuario;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
