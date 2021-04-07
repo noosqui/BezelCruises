@@ -39,7 +39,7 @@ public class ConexionBasedeDatos {
 
         try
         {
-            conn = DriverManager.getConnection(url, "sa", "jete2017");
+            conn = DriverManager.getConnection(url, "sa", "123");
 
             //JOptionPane.showMessageDialog(null, "Conexion exitosa");
         }

@@ -27,6 +27,8 @@ public class frmAgentes extends javax.swing.JInternalFrame {
 
     public frmAgentes() {
         initComponents();
+
+ 
     }
 
     PreparedStatement pp = null;
@@ -281,8 +283,8 @@ public class frmAgentes extends javax.swing.JInternalFrame {
         jLabel10.setText("Agentes");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, -1, 40));
 
-        jdcfechanacimiento.setMaxSelectableDate(new java.util.Date(1617865293000L));
-        jdcfechanacimiento.setMinSelectableDate(new java.util.Date(-631123107000L));
+        jdcfechanacimiento.setMaxSelectableDate(new java.util.Date(1049785293000L));
+        jdcfechanacimiento.setMinSelectableDate(new java.util.Date(-788889507000L));
         jPanel1.add(jdcfechanacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 70, 180, -1));
 
         cmbpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Gerente de Ventas" }));

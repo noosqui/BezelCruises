@@ -77,6 +77,23 @@ public class frmCamarote extends javax.swing.JInternalFrame {
         CmbDescripcama = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
 
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         jPanel1.setBackground(new java.awt.Color(26, 78, 108));
@@ -288,7 +305,7 @@ public class frmCamarote extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel11);
         jLabel11.setBounds(560, 270, 45, 19);
 
-        Cmbidbuque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Cmbidbuque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar" }));
         Cmbidbuque.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 CmbidbuqueItemStateChanged(evt);
@@ -324,8 +341,8 @@ public class frmCamarote extends javax.swing.JInternalFrame {
 
     private void BtnagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnagregarActionPerformed
 
-        if (txtxantdadCamar.getText().isEmpty() || txtprecio1.getText().isEmpty() || txtdescrpBuque.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Tienes datos por llenar", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+        if (txtxantdadCamar.getText().isEmpty() || txtprecio1.getText().isEmpty() || txtdescrpBuque.getText().isEmpty() || Cmbidbuque.getSelectedIndex()==0 ) {
+            JOptionPane.showMessageDialog(this, "Tienes datos por llenar y/o Seleccione el tipo de buque", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 
         } else {
             try {
@@ -469,6 +486,13 @@ public class frmCamarote extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_CmbDescripcamaItemStateChanged
 
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        // TODO add your handling code here:
+        
+        
+        CmbDescripcamaItemStateChanged(null);
+    }//GEN-LAST:event_formInternalFrameOpened
+
 ///////////////
     private void cargatablebCamarotes() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -529,7 +553,7 @@ public class frmCamarote extends javax.swing.JInternalFrame {
 /////////////////
 
     public DefaultComboBoxModel insercombo() {
-        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        DefaultComboBoxModel modelo =(DefaultComboBoxModel) Cmbidbuque.getModel();
 
         try {
             CallableStatement dato = ConexionBasedeDatos.obtenerConexion().prepareCall("{call ComboxBuque}");
@@ -564,7 +588,7 @@ public class frmCamarote extends javax.swing.JInternalFrame {
             }
 
         } catch (SQLException ex) {
-
+                JOptionPane.showMessageDialog(this, ex);    
         }
     }
 

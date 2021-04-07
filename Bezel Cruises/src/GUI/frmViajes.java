@@ -49,7 +49,7 @@ public class frmViajes extends javax.swing.JInternalFrame {
 
         }
 
-        chEstado.setEnabled(false);
+       
 
     }
 
@@ -513,7 +513,7 @@ public class frmViajes extends javax.swing.JInternalFrame {
             CargarData();
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error al Agregar el viaje compruebe su conexion/campos");
+            JOptionPane.showMessageDialog(null, "Error al Agregar el viaje compruebe su conexion/campos"+ex);
 
         }
          tarea_ubicacion.setText(null);
@@ -622,7 +622,7 @@ public class frmViajes extends javax.swing.JInternalFrame {
             CargarData();
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al modificar el viaje compruebe su conexion/campos");
+            JOptionPane.showMessageDialog(null, "Error al modificar el viaje compruebe su conexion/campos"+e);
         }
     }//GEN-LAST:event_BtnModificarActionPerformed
 
