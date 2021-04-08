@@ -22,7 +22,7 @@ public class ClaseViajes {
      {
          java.sql.Connection conectar = null;
          
-         String query = "SELECT Nombre_Buque FROM Buques ORDER BY Id_Buque asc";
+         String query = "SELECT Id_Buque,Nombre_Buque FROM Buques ORDER BY Id_Buque asc";
          
          try
          {
@@ -33,7 +33,7 @@ public class ClaseViajes {
              
              while(resultado.next())
              {
-                 cmb.addItem(resultado.getString("Nombre_Buque"));
+                 cmb.addItem(resultado.getString(1)+" - "+resultado.getString("Nombre_Buque"));
              }
          }
          catch (Exception ex)
@@ -71,7 +71,7 @@ public class ClaseViajes {
              
              while(resultado.next())
              {
-                 cmb.addItem(resultado.getString("Descripcion"));
+                 cmb.addItem(resultado.getString(1)+" - "+resultado.getString("Descripcion"));
                  
              }
          }
@@ -111,7 +111,7 @@ public class ClaseViajes {
              
              while(resultado.next())
              {
-                 cmb.addItem(resultado.getString(""+campo+""));
+                 cmb.addItem(resultado.getString(1)+" - "+resultado.getString(""+campo+""));
              }
          }
          catch (Exception ex)

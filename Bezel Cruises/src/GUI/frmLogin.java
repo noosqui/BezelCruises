@@ -216,7 +216,7 @@ public class frmLogin extends javax.swing.JFrame {
         int puesto=0;
         
         try {
-            pp = cn.prepareStatement("select Id_Empleado,Codigo_Puesto from Empleados join Usuarios on Empleados.Codigo_Usuario = Usuarios.Codigo_Usuario and Usuarios.Nombre_Usuario=? and Usuarios.Contrasenia=?");
+            pp = cn.prepareStatement("select Id_Empleado,Codigo_Puesto from Empleados join Usuarios on Empleados.Codigo_Usuario = Usuarios.Codigo_Usuario and Usuarios.Nombre_Usuario=? and Usuarios.Contrasenia=? and Usuarios.Estado = 1");
             pp.setString(1, txtusuario.getText());
             pp.setString(2, Pswusuario.getText());
             rs = pp.executeQuery();

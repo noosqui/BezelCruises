@@ -58,9 +58,7 @@ public class frmDestinos extends javax.swing.JInternalFrame {
     }
 
     public void validarText() {
-        if (Descripcion.getText().length() == 0) {
-            JOptionPane.showMessageDialog(null, "No deje la informacion promocional Vacia");
-        }
+       
         if (Descripcion.getText().length() >= 47) {
             JOptionPane.showMessageDialog(null, "No debe ingresar mas caracteres\n Ha alcanzado el maximo");
             Descripcion.getText().replaceFirst(".$", "");
@@ -69,9 +67,7 @@ public class frmDestinos extends javax.swing.JInternalFrame {
     }
 
     public void validarText1() {
-        if (txtLugar.getText().length() == 0) {
-            JOptionPane.showMessageDialog(null, "No deje el Lugar Vacio");
-        }
+
         if (txtLugar.getText().length() >= 247) {
             JOptionPane.showMessageDialog(null, "No debe ingresar mas caracteres\n Ha alcanzado el maximo");
             txtLugar.getText().replaceFirst(".$", "");
@@ -164,19 +160,19 @@ public class frmDestinos extends javax.swing.JInternalFrame {
         txtbuscar2.setForeground(new java.awt.Color(255, 255, 255));
         txtbuscar2.setBorder(null);
         jPanel4.add(txtbuscar2);
-        txtbuscar2.setBounds(690, 607, 265, 19);
+        txtbuscar2.setBounds(690, 607, 265, 17);
 
         jLabel6.setFont(new java.awt.Font("Gill Sans MT", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Buscar Destino");
         jPanel4.add(jLabel6);
-        jLabel6.setBounds(579, 607, 107, 19);
+        jLabel6.setBounds(579, 607, 99, 17);
 
         jLabel17.setFont(new java.awt.Font("Gill Sans MT", 1, 36)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Destinos");
         jPanel4.add(jLabel17);
-        jLabel17.setBounds(39, 588, 148, 40);
+        jLabel17.setBounds(39, 588, 146, 40);
 
         getContentPane().add(jPanel4);
         jPanel4.setBounds(193, 189, 0, 0);
@@ -341,6 +337,11 @@ public class frmDestinos extends javax.swing.JInternalFrame {
         btnVER.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnVER.setForeground(new java.awt.Color(255, 255, 255));
         btnVER.setText("Ver Eliminados");
+        btnVER.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                btnVERItemStateChanged(evt);
+            }
+        });
         btnVER.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnVERMouseClicked(evt);
@@ -509,38 +510,26 @@ public class frmDestinos extends javax.swing.JInternalFrame {
         //insertar destino
         validarText();
         revisar();
-
+        
         try {
+             if (revisar()==true)
+             {
             Statement stm = ConexionBasedeDatos.obtenerConexion().createStatement();
 
             stm.execute("execute RegistrarDestinosTuristicos " + codigoS + "," + codigoD + ",'" + txtLugar.getText().toString() + "','" + Descripcion.getText().toString() + "'");
 
             CargarData();
+             }
+             else throw new Exception ("No deje campos vacios ");
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "\n Error al Agregar");
+            JOptionPane.showMessageDialog(null, "\n Error al Agregar ");
         }
 
     }//GEN-LAST:event_BtnAgregarMouseClicked
 
     private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
-        //agregar
-
-        validarText();
-        validarText1();
-        revisar();
-
-        try {
-            Statement stm = ConexionBasedeDatos.obtenerConexion().createStatement();
-
-            stm.execute("execute RegistrarDestinosTuristicos " + codigoS + "," + codigoD + ",'" + txtLugar.getText().toString() + "','" + Descripcion.getText().toString() + "'");
-
-            CargarData();
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error\n Error al Insertar");
-        }
-
+ 
 
     }//GEN-LAST:event_BtnAgregarActionPerformed
 
@@ -590,13 +579,27 @@ public class frmDestinos extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_btnVERActionPerformed
-    public void revisar() {
+    public boolean revisar() {
+        boolean estado = true;
+         if (Descripcion.getText().trim().isBlank()) {
+            JOptionPane.showMessageDialog(null, "No deje la informacion promocional Vacia");
+            estado=false;
+        }
+           if (txtLugar.getText().trim().isBlank()) {
+            JOptionPane.showMessageDialog(null, "No deje el Lugar Vacio");
+            estado=false;
+        }
+           
         if (cmbPais.getSelectedIndex() <= 0) {
             JOptionPane.showMessageDialog(null, "Seleccione un Pais de la lista desplegable");
+            estado=false;
         }
         if (cmbCiudad.getSelectedIndex() <= 0) {
             JOptionPane.showMessageDialog(null, "Seleccione una Ciudad de la lista desplegable");
+            estado=false;
         }
+        JOptionPane.showMessageDialog(null, estado);
+        return estado;
     }
 
     private void BtnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnActualizarActionPerformed
@@ -653,6 +656,20 @@ public class frmDestinos extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_txtLugarKeyTyped
+
+    private void btnVERItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_btnVERItemStateChanged
+        // TODO add your handling code here:
+         if (this.btnVER.isSelected())
+        {
+            this.BtnAgregar.setVisible(false);
+            this.Btneliminar.setVisible(false);
+        }
+        else 
+        {
+           this.BtnAgregar.setVisible(true);
+            this.Btneliminar.setVisible(true); 
+        }
+    }//GEN-LAST:event_btnVERItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

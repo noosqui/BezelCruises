@@ -103,7 +103,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
         jLabel29 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtNumCamas = new javax.swing.JTextField();
-        jPanel7 = new javax.swing.JPanel();
+        Pagina3 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
@@ -125,8 +125,11 @@ public class frmVentas extends javax.swing.JInternalFrame {
         jLabel30 = new javax.swing.JLabel();
         txtImpuestoPort = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel31 = new javax.swing.JLabel();
+        txtPropina = new javax.swing.JTextField();
 
         setAutoscrolls(true);
+        setPreferredSize(new java.awt.Dimension(1220, 870));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -154,19 +157,32 @@ public class frmVentas extends javax.swing.JInternalFrame {
 
         jPanel3.setBackground(new java.awt.Color(38, 116, 162));
         jPanel3.setAutoscrolls(true);
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Gill Sans MT", 1, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Venta");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 130, 30));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.weightx = 0.2;
+        gridBagConstraints.weighty = 0.2;
         pagina1.add(jPanel3, gridBagConstraints);
 
         jPanel4.setBackground(new java.awt.Color(26, 78, 108));
@@ -270,8 +286,8 @@ public class frmVentas extends javax.swing.JInternalFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.weightx = 0.2;
+        gridBagConstraints.weighty = 0.2;
         pagina1.add(jPanel4, gridBagConstraints);
 
         tabVenta.addTab("tab1", pagina1);
@@ -291,12 +307,12 @@ public class frmVentas extends javax.swing.JInternalFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1045, Short.MAX_VALUE))
+                .addContainerGap(1068, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap(191, Short.MAX_VALUE)
                 .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
@@ -305,11 +321,8 @@ public class frmVentas extends javax.swing.JInternalFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 1039;
-        gridBagConstraints.ipady = 21;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 17);
         Pagina2.add(jPanel5, gridBagConstraints);
 
         jPanel6.setBackground(new java.awt.Color(26, 78, 108));
@@ -404,15 +417,14 @@ public class frmVentas extends javax.swing.JInternalFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 120;
-        gridBagConstraints.ipady = 160;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 17);
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
         Pagina2.add(jPanel6, gridBagConstraints);
 
         tabVenta.addTab("tab2", Pagina2);
 
-        jPanel7.setLayout(new java.awt.GridBagLayout());
+        Pagina3.setLayout(new java.awt.GridBagLayout());
 
         jPanel8.setBackground(new java.awt.Color(38, 116, 162));
 
@@ -427,14 +439,14 @@ public class frmVentas extends javax.swing.JInternalFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1059, Short.MAX_VALUE))
+                .addContainerGap(1065, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -443,7 +455,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
-        jPanel7.add(jPanel8, gridBagConstraints);
+        Pagina3.add(jPanel8, gridBagConstraints);
 
         jPanel9.setBackground(new java.awt.Color(26, 78, 108));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -458,11 +470,11 @@ public class frmVentas extends javax.swing.JInternalFrame {
 
         txtISV.setForeground(new java.awt.Color(255, 255, 255));
         txtISV.setEnabled(false);
-        jPanel9.add(txtISV, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 314, 270, 40));
+        jPanel9.add(txtISV, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 380, 270, 40));
 
         txtDescuento.setForeground(new java.awt.Color(255, 255, 255));
         txtDescuento.setEnabled(false);
-        jPanel9.add(txtDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 480, 270, 40));
+        jPanel9.add(txtDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 540, 270, 40));
 
         txtSubtotal.setForeground(new java.awt.Color(255, 255, 255));
         txtSubtotal.setEnabled(false);
@@ -475,7 +487,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
 
         txtTotal.setForeground(new java.awt.Color(255, 255, 255));
         txtTotal.setEnabled(false);
-        jPanel9.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 560, 270, 30));
+        jPanel9.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 490, 270, 30));
 
         txtViaje.setForeground(new java.awt.Color(255, 255, 255));
         txtViaje.setEnabled(false);
@@ -488,16 +500,16 @@ public class frmVentas extends javax.swing.JInternalFrame {
         jPanel9.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, -1, -1));
 
         jLabel18.setText("ISV");
-        jPanel9.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, -1, -1));
+        jPanel9.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 400, -1, -1));
 
         jLabel19.setText("Descuento");
-        jPanel9.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 490, -1, -1));
+        jPanel9.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 550, -1, -1));
 
         jLabel20.setText("Subtotal");
         jPanel9.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, -1, -1));
 
         jLabel21.setText("Total");
-        jPanel9.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 570, -1, -1));
+        jPanel9.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 500, -1, -1));
 
         jLabel22.setText("Viaje");
         jPanel9.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, -1, -1));
@@ -508,14 +520,14 @@ public class frmVentas extends javax.swing.JInternalFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel9.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 620, 210, 60));
+        jPanel9.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 540, 210, 60));
 
         jLabel30.setText("Impuesto Portuario");
-        jPanel9.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 410, -1, -1));
+        jPanel9.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 470, -1, -1));
 
         txtImpuestoPort.setForeground(new java.awt.Color(255, 255, 255));
         txtImpuestoPort.setEnabled(false);
-        jPanel9.add(txtImpuestoPort, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 400, 270, 40));
+        jPanel9.add(txtImpuestoPort, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 460, 270, 40));
 
         jButton1.setBackground(new java.awt.Color(0, 153, 204));
         jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -526,7 +538,14 @@ public class frmVentas extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel9.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 160, 110, 60));
+        jPanel9.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 540, 110, 60));
+
+        jLabel31.setText("Propina");
+        jPanel9.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 320, -1, 30));
+
+        txtPropina.setForeground(new java.awt.Color(255, 255, 255));
+        txtPropina.setEnabled(false);
+        jPanel9.add(txtPropina, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, 270, 40));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -534,9 +553,9 @@ public class frmVentas extends javax.swing.JInternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
-        jPanel7.add(jPanel9, gridBagConstraints);
+        Pagina3.add(jPanel9, gridBagConstraints);
 
-        tabVenta.addTab("tab3", jPanel7);
+        tabVenta.addTab("tab3", Pagina3);
 
         getContentPane().add(tabVenta);
 
@@ -650,28 +669,29 @@ public class frmVentas extends javax.swing.JInternalFrame {
             rsmd = rs.getMetaData();
             while (rs.next()) {
                 Edad = Integer.parseInt(rs.getObject(1).toString());
-
+                JOptionPane.showMessageDialog(null,""+Edad);
                 if (Edad >= 60) {
                     Descuento = 0.25;
                 }
+            }
                 
                 
                 subtotal = Dias * Double.parseDouble(txtPrecioPers.getText()) * Integer.parseInt(txtNumPerson.getText());
-                ISV = subtotal * 0.05;
-                ImpPortuario = subtotal * 0.07;
-                Descuento *= subtotal + ISV + ImpPortuario;
+                Descuento *= subtotal ;
+                ISV = (subtotal-Descuento) * 0.07;
+                ImpPortuario = (subtotal-Descuento) * 0.05;
                 total = (subtotal + ISV + ImpPortuario) - Descuento;
 
                 txtSubtotal.setText(subtotal + "");
                 txtISV.setText(ISV + "");
+                txtPropina.setText(subtotal*0.10+"");
                 txtDescuento.setText(Descuento + "");
                 txtImpuestoPort.setText(ImpPortuario + "");
                 txtCliente.setText(idCli);
                 txtEmpleado.setText("1");
                 txtViaje.setText(Viaje);
-                txtTotal.setText(total + "");
-                JOptionPane.showMessageDialog(null,txtTotal.getText());
-            }
+                txtTotal.setText(total +(subtotal*0.10)+ "");
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "" + ex);
         }
@@ -886,6 +906,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser DcFechaSal;
     private javax.swing.JPanel Pagina2;
+    private javax.swing.JPanel Pagina3;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JButton btnSiguiente1;
     private javax.swing.JComboBox<String> cmbCliente;
@@ -915,6 +936,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -924,7 +946,6 @@ public class frmVentas extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
@@ -949,6 +970,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNumPerson;
     private javax.swing.JTextField txtOrigen;
     private javax.swing.JTextField txtPrecioPers;
+    private javax.swing.JTextField txtPropina;
     private javax.swing.JTextField txtPuertosal;
     private javax.swing.JTextField txtSubtotal;
     private javax.swing.JTextField txtTotal;

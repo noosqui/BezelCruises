@@ -32,6 +32,7 @@ public class frmAgentes extends javax.swing.JInternalFrame {
     private ResultSetMetaData rsmd;
     private DefaultTableModel model;
     private int puesto;
+    private int idEmpleado;
     public frmAgentes() {
         initComponents();
 
@@ -43,6 +44,19 @@ public class frmAgentes extends javax.swing.JInternalFrame {
     frmAgentes(int Puesto) {
         initComponents();
         this.puesto=Puesto;
+        if (Puesto==1)
+        {
+            this.btncrear.setVisible(false);
+            this.BtnAgregar.setVisible(false);
+            this.btneliminar.setVisible(false);
+            this.btnmodificar.setVisible(false);
+        }
+    }
+
+    frmAgentes(int Puesto, int idEmpleado) {
+            initComponents();
+        this.puesto=Puesto;
+        this.idEmpleado=idEmpleado;
         if (Puesto==1)
         {
             this.btncrear.setVisible(false);
@@ -101,7 +115,7 @@ public class frmAgentes extends javax.swing.JInternalFrame {
                 formInternalFrameOpened(evt);
             }
         });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         jPanel1.setBackground(new java.awt.Color(32, 98, 136));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -300,7 +314,7 @@ public class frmAgentes extends javax.swing.JInternalFrame {
         jdcfechanacimiento.setMinSelectableDate(new java.util.Date(-788889507000L));
         jPanel1.add(jdcfechanacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 70, 180, -1));
 
-        cmbpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Gerente de Ventas" }));
+        cmbpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerente de Ventas", "Administrador" }));
         jPanel1.add(cmbpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 120, 180, -1));
 
         btncrear.setBackground(new java.awt.Color(26, 78, 108));
@@ -325,7 +339,7 @@ public class frmAgentes extends javax.swing.JInternalFrame {
         });
         jPanel1.add(btnmodificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 450, 150, 50));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 978, 579));
+        getContentPane().add(jPanel1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -676,7 +690,11 @@ public class frmAgentes extends javax.swing.JInternalFrame {
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
 
-        if(seleccionada == -1)
+       int user,emp; 
+        
+        user = (Integer)tblempleados.getValueAt(seleccionada, 7);
+        emp = (Integer)  tblempleados.getValueAt(seleccionada, 0);
+        if(seleccionada == -1 || emp == idEmpleado)
             {
                 btnmostrar.show();
                 btnmodificar.hide();
@@ -690,7 +708,13 @@ public class frmAgentes extends javax.swing.JInternalFrame {
 
                 cmd.setString(1, ""+codigo);
                 cmd.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Empleado Eliminado Exitosamente");
+           
+                CallableStatement cma = cn.prepareCall("{CALL eliminarusuario(?)}");
+                cma.setInt(1, emp);
+                cma.executeUpdate();
+                
+                 JOptionPane.showMessageDialog(null, "Empleado y su usuario Eliminados Exitosamente");
+                
                 btncrear.show();
             }
             catch(SQLException ex)
@@ -848,7 +872,7 @@ public class frmAgentes extends javax.swing.JInternalFrame {
 
         try
         {
-            pp =cn.prepareStatement("Select * from [dbo].[Empleados]");
+            pp =cn.prepareStatement("Select Id_Empleado,Nombre_Empleado,Apellido_Empleado,Identidad,Fecha_Nacimiento,Fecha_Contratacion,Codigo_Puesto,Codigo_Usuario,Pais,Direccion,Telefono from [dbo].[Empleados] where Estado=1");
             rs = pp.executeQuery();
             rsmd = rs.getMetaData();
             int col = rsmd.getColumnCount();

@@ -54,9 +54,7 @@ public class frmPuertos extends javax.swing.JInternalFrame {
     }
 
     public void validarText() {
-        if (InfoPUERTO.getText().length() == 0) {
-            JOptionPane.showMessageDialog(null, "No deje la informacion promocional Vacia");
-        }
+      
         if (InfoPUERTO.getText().length() >= 47) {
             JOptionPane.showMessageDialog(null, "No debe ingresar mas caracteres\n Ha alcanzado el maximo");
             InfoPUERTO.getText().replaceFirst(".$", "");
@@ -65,9 +63,7 @@ public class frmPuertos extends javax.swing.JInternalFrame {
     }
 
     public void validarText1() {
-        if (txtLugarPuerto.getText().length() == 0) {
-            JOptionPane.showMessageDialog(null, "No deje el Lugar Vacio");
-        }
+   
         if (txtLugarPuerto.getText().length() >= 247) {
             JOptionPane.showMessageDialog(null, "No debe ingresar mas caracteres\n Ha alcanzado el maximo");
             txtLugarPuerto.getText().replaceFirst(".$", "");
@@ -313,6 +309,11 @@ public class frmPuertos extends javax.swing.JInternalFrame {
         btnVER.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnVER.setForeground(new java.awt.Color(255, 255, 255));
         btnVER.setText("Ver Eliminados");
+        btnVER.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                btnVERItemStateChanged(evt);
+            }
+        });
         btnVER.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnVERMouseClicked(evt);
@@ -480,17 +481,20 @@ public class frmPuertos extends javax.swing.JInternalFrame {
     private void BtnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAgregarMouseClicked
         //insertar destino
         validarText();
-        revisar();
+        
 
         try {
+            if (revisar())
+            {
             Statement stm = ConexionBasedeDatos.obtenerConexion().createStatement();
 
             stm.execute("execute RegistrarPuertos " + codigoS + "," + codigoD + ",'" + txtLugarPuerto.getText().toString() + "','" + InfoPUERTO.getText().toString() + "'");
 
             CargarData();
-
+            }
+            else throw new Exception ("No deje campos vacios");
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "\n Error al Agregar");
+            JOptionPane.showMessageDialog(null, "\n Error al Agregar ");
         }
 
     }//GEN-LAST:event_BtnAgregarMouseClicked
@@ -498,25 +502,6 @@ public class frmPuertos extends javax.swing.JInternalFrame {
     private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
         //agregar 
         
-            validarText();
-            validarText1();
-            revisar();
-
-         
-        
-            try {
-                Statement stm = ConexionBasedeDatos.obtenerConexion().createStatement();
-
-                stm.execute("execute RegistrarPuertos " + codigoS + "," + codigoD + ",'" + txtLugarPuerto.getText().toString() + "','" + InfoPUERTO.getText().toString() + "'");
-
-                CargarData();
-
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Error\n Error al Insertar");
-            }
-        
-
-
     }//GEN-LAST:event_BtnAgregarActionPerformed
 
     private void BtneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtneliminarActionPerformed
@@ -565,13 +550,28 @@ public class frmPuertos extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_btnVERActionPerformed
-    public void revisar() {
+    public boolean revisar() {
+        
+        boolean estado = true;
+             if (txtLugarPuerto.getText().length() == 0) {
+            JOptionPane.showMessageDialog(null, "No deje el Lugar Vacio");
+            estado = false;
+        }
+             
+          if (InfoPUERTO.getText().length() == 0) {
+            JOptionPane.showMessageDialog(null, "No deje la informacion promocional Vacia");
+            estado = false;
+          }
+          
         if (cmbPais.getSelectedIndex() <= 0) {
             JOptionPane.showMessageDialog(null, "Seleccione un Pais de la lista desplegable");
+            estado = false;
         }
         if (cmbCiudad.getSelectedIndex() <= 0) {
             JOptionPane.showMessageDialog(null, "Seleccione una Ciudad de la lista desplegable");
+        estado = false;
         }
+        return estado;
     }
 
     private void BtnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnActualizarActionPerformed
@@ -629,6 +629,21 @@ public class frmPuertos extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_txtLugarPuertoKeyTyped
+
+    private void btnVERItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_btnVERItemStateChanged
+        // TODO add your handling code here:
+         if (this.btnVER.isSelected())
+        {
+            this.BtnAgregar.setVisible(false);
+            this.Btneliminar.setVisible(false);
+        }
+        else 
+        {
+           this.BtnAgregar.setVisible(true);
+            this.Btneliminar.setVisible(true); 
+        }
+         
+    }//GEN-LAST:event_btnVERItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

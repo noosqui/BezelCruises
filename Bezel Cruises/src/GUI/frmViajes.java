@@ -42,8 +42,8 @@ public class frmViajes extends javax.swing.JInternalFrame {
             CargarData();
             ListaDuracion.setSelectedIndex(1);
             cv.combobox(cmbBuques);
-            cv.combobox(cmbDestino, "SELECT Codigo_RutaDestino, Descripcion FROM  Destinos_Turisticos ORDER BY Codigo_RutaDestino asc ");
-            cv.combobox(cmbSalida, "SELECT Descripcion FROM Puertos_Salida ORDER BY Codigo_PuertoSalida asc", "Descripcion");
+            cv.combobox(cmbDestino, "SELECT Codigo_RutaDestino, Descripcion FROM  Destinos_Turisticos  Where Descripcion NOT LIKE '%Informacion Promocional no disponible%' ORDER BY Codigo_RutaDestino asc ");
+            cv.combobox(cmbSalida, "SELECT Codigo_PuertoSalida,Descripcion FROM Puertos_Salida where Descripcion not like '%Puerto Eliminado%' ORDER BY Codigo_PuertoSalida asc", "Descripcion");
         } catch (Exception ex) {
 
             JOptionPane.showMessageDialog(null, "Algo no anda bien");
@@ -419,6 +419,11 @@ public class frmViajes extends javax.swing.JInternalFrame {
         btnVER.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnVER.setForeground(new java.awt.Color(255, 255, 255));
         btnVER.setText("Ver Eliminados");
+        btnVER.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                btnVERItemStateChanged(evt);
+            }
+        });
         btnVER.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnVERMouseClicked(evt);
@@ -514,14 +519,18 @@ public class frmViajes extends javax.swing.JInternalFrame {
         validar();
         Statement stm;
         try {
+             String idBuque[] = String.valueOf(cmbBuques.getSelectedItem()).split(" ");
+              String idSalida[] = String.valueOf(cmbSalida.getSelectedItem()).split(" ");
+               String idDestino[] = String.valueOf(cmbDestino.getSelectedItem()).split(" ");
             stm = ConexionBasedeDatos.obtenerConexion().createStatement();
-            stm.execute("execute [InsertarViaje] " + cmbBuques.getSelectedIndex() + "," + cmbSalida.getSelectedIndex() + "," + cmbDestino.getSelectedIndex() + ",'" + ListaDuracion.getSelectedValue() + "','" + fechaS().toString() + "','" + codigoestado + "'");
+            stm.execute("execute [InsertarViaje] " + idBuque[0] + "," + idSalida[0] + "," + idDestino[0] + ",'" + ListaDuracion.getSelectedValue() + "','" + fechaS().toString() + "','" + codigoestado + "'");
             CargarData();
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error al Agregar el viaje compruebe su conexion/campos"+ex);
 
         }
+        
          tarea_ubicacion.setText(null);
          cmbBuques.setSelectedIndex(0);
          cmbSalida.setSelectedIndex(0);
@@ -623,10 +632,15 @@ public class frmViajes extends javax.swing.JInternalFrame {
         validar();
         Statement stm;
         try {
+            if (TablaVIAJES.getValueAt(TablaVIAJES.getSelectedRow() ,2 )=="Puerto Eliminado" &&TablaVIAJES.getValueAt(TablaVIAJES.getSelectedRow() ,3 )=="Cancelado" )
+            {
             stm = ConexionBasedeDatos.obtenerConexion().createStatement();
             stm.execute("execute ModificarViaje " + id_viaje + "," + cmbBuques.getSelectedIndex() + "," + cmbSalida.getSelectedIndex() + "," + cmbDestino.getSelectedIndex() + ",'" + ListaDuracion.getSelectedValue() + "','" + fechaS().toString() + "','" + codigoestado + "'");
             CargarData();
-
+            }
+            else
+                throw new Exception ("No se puede modificar viajes con puertos o destinos no disponibles");
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al modificar el viaje compruebe su conexion/campos"+e);
         }
@@ -736,6 +750,21 @@ public class frmViajes extends javax.swing.JInternalFrame {
             BtnAgregar.setEnabled(false);
         }
     }//GEN-LAST:event_FechaPartidaPropertyChange
+
+    private void btnVERItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_btnVERItemStateChanged
+        // TODO add your handling code here:
+        
+        if (this.btnVER.isSelected())
+        {
+            this.BtnAgregar.setVisible(false);
+            this.Btneliminar.setVisible(false);
+        }
+        else 
+        {
+           this.BtnAgregar.setVisible(true);
+            this.Btneliminar.setVisible(true); 
+        }
+    }//GEN-LAST:event_btnVERItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -59,9 +59,9 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
-        setMinimumSize(new java.awt.Dimension(1200, 720));
-        setPreferredSize(new java.awt.Dimension(1200, 720));
-        setSize(new java.awt.Dimension(1200, 720));
+        setMinimumSize(new java.awt.Dimension(1400, 850));
+        setPreferredSize(new java.awt.Dimension(1400, 850));
+        setSize(new java.awt.Dimension(1400, 850));
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         jPanel1.setBackground(new java.awt.Color(32, 98, 136));
@@ -109,6 +109,8 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
         jPanel2.add(btnAgente, gridBagConstraints);
 
         btnDestinos.setBackground(new java.awt.Color(32, 98, 136));
@@ -136,6 +138,8 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
         jPanel2.add(btnDestinos, gridBagConstraints);
 
         btnVenta.setBackground(new java.awt.Color(32, 98, 136));
@@ -163,6 +167,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
         jPanel2.add(btnVenta, gridBagConstraints);
 
@@ -191,6 +196,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
         jPanel2.add(btnViajes, gridBagConstraints);
 
@@ -248,6 +254,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
         jPanel2.add(btnBuque, gridBagConstraints);
 
@@ -276,6 +283,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
         jPanel2.add(btnCliente, gridBagConstraints);
 
@@ -304,13 +312,14 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
         jPanel2.add(btnPuertos, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(0, 1, 0, 1);
         jPanel1.add(jPanel2, gridBagConstraints);
 
         ContenedorFrm.setLayout(new javax.swing.BoxLayout(ContenedorFrm, javax.swing.BoxLayout.LINE_AXIS));
@@ -413,7 +422,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
     private void btnAgenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgenteActionPerformed
         // TODO add your handling code here:
-        frmAgentes frm = new frmAgentes(this.Puesto);
+        frmAgentes frm = new frmAgentes(this.Puesto,this.idEmpleado);
         AbrirForm(frm);
     }//GEN-LAST:event_btnAgenteActionPerformed
 
