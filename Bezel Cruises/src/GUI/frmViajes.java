@@ -550,15 +550,17 @@ public class frmViajes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbBuquesActionPerformed
 
     private void cmbDestinoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDestinoItemStateChanged
-        String Destino = (String) cmbDestino.getSelectedItem();
-        int codigo = cmbDestino.getSelectedIndex();
-        cv.Ubicacion(Destino, codigo, tarea_ubicacion);
+        
+               String idDestino[] = String.valueOf(cmbDestino.getSelectedItem()).split(" ");
+               if (!idDestino[0].equalsIgnoreCase("seleccione"))
+        cv.Ubicacion(idDestino[2], Integer.parseInt(idDestino[0]), tarea_ubicacion);
     }//GEN-LAST:event_cmbDestinoItemStateChanged
 
     private void cmbSalidaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbSalidaItemStateChanged
-        String Salida = (String) cmbSalida.getSelectedItem();
-        int codigo = cmbSalida.getSelectedIndex();
-        cv.PuertoSalida(Salida, codigo, tarea_ubicacion);
+ 
+              String idSalida[] = String.valueOf(cmbSalida.getSelectedItem()).split(" ");
+          if (!idSalida[0].equalsIgnoreCase("seleccione"))     
+        cv.PuertoSalida(idSalida[2], Integer.parseInt(idSalida[0]), tarea_ubicacion);
     }//GEN-LAST:event_cmbSalidaItemStateChanged
 
     private void ListaDuracionValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaDuracionValueChanged
@@ -567,7 +569,6 @@ public class frmViajes extends javax.swing.JInternalFrame {
 
     private void TablaVIAJESMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaVIAJESMouseClicked
         int i = TablaVIAJES.rowAtPoint(evt.getPoint());
-
         chEstado.setEnabled(true);
         Btneliminar.setEnabled(true);
 

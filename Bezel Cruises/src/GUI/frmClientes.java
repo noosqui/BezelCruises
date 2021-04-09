@@ -668,7 +668,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
         model.setRowCount(0);
 
         try {
-            pp = cn.prepareStatement("SELECT * FROM [dbo].[Clientes]");
+            pp = cn.prepareStatement("SELECT * FROM [dbo].[Clientes] where Estado = 1");
             rs = pp.executeQuery();
             rsmd = rs.getMetaData();
             int col = rsmd.getColumnCount();

@@ -508,7 +508,12 @@ public class frmDestinos extends javax.swing.JInternalFrame {
 
     private void BtnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAgregarMouseClicked
         //insertar destino
-        validarText();
+       
+
+    }//GEN-LAST:event_BtnAgregarMouseClicked
+
+    private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
+ validarText();
         revisar();
         
         try {
@@ -524,12 +529,7 @@ public class frmDestinos extends javax.swing.JInternalFrame {
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "\n Error al Agregar ");
-        }
-
-    }//GEN-LAST:event_BtnAgregarMouseClicked
-
-    private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
- 
+        } 
 
     }//GEN-LAST:event_BtnAgregarActionPerformed
 
@@ -598,7 +598,6 @@ public class frmDestinos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Seleccione una Ciudad de la lista desplegable");
             estado=false;
         }
-        JOptionPane.showMessageDialog(null, estado);
         return estado;
     }
 

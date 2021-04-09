@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
-//herencia
+
 public class ClassDestinos extends ClaseViajes {
-    //polimorfismo
+
     @Override
     public void comboboxDestino (JComboBox cmb)
   {

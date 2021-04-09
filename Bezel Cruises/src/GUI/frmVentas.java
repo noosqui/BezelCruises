@@ -37,14 +37,14 @@ public class frmVentas extends javax.swing.JInternalFrame {
         initComponents();
         this.IdEmpleado=idEmpleado;
     }
-    PreparedStatement pp = null;
-    ConexionBasedeDatos conn = new ConexionBasedeDatos();
-    Connection cn = conn.obtenerConexion();
-    ResultSet rs;
-    Statement st;
-    ResultSetMetaData rsmd;
-    DefaultTableModel model;
-    int IdEmpleado;
+    private PreparedStatement pp = null;
+     private ConexionBasedeDatos conn = new ConexionBasedeDatos();
+    private Connection cn = conn.obtenerConexion();
+    private ResultSet rs;
+    private Statement st;
+    private ResultSetMetaData rsmd;
+    private DefaultTableModel model;
+    private int IdEmpleado;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -669,7 +669,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
             rsmd = rs.getMetaData();
             while (rs.next()) {
                 Edad = Integer.parseInt(rs.getObject(1).toString());
-                JOptionPane.showMessageDialog(null,""+Edad);
+                
                 if (Edad >= 60) {
                     Descuento = 0.25;
                 }
@@ -777,8 +777,19 @@ public class frmVentas extends javax.swing.JInternalFrame {
                 txtNumPerson.requestFocus();
                 JOptionPane.showMessageDialog(this, "Porfavor ingrese una cantidad de personas menor a la cantidad de camas ");
             } else {
+            try {
+                pp.clearParameters();
+                pp = cn.prepareStatement("Update Camarotes set Estado = 0 where Id_Camarote=?"
+                       );
+                pp.setInt(1, Integer.parseInt(txtNumCamarote.getText()));
+                pp.executeUpdate();
                 tabVenta.setSelectedIndex(2);
+                
+                
                 CalculoPagoCliente();
+            } catch (SQLException ex) {
+                Logger.getLogger(frmVentas.class.getName()).log(Level.SEVERE, null, ex);
+            }
             }
         else
             JOptionPane.showMessageDialog(this, "Porfavor ingrese una cantidad de personas menor a la cantidad de camas y/o seleccione un Camarote");
@@ -817,7 +828,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
         model.setRowCount(0);
         try {
             pp = cn.prepareStatement("select Id_Camarote,Cantidad_Camas,Descripcion_Camarote,Precio_Camarote from Camarotes a\n"
-                    + "join Buques b on a.Id_Buque=b.Id_Buque and b.Nombre_Buque = ? ");
+                    + "join Buques b on a.Id_Buque=b.Id_Buque and b.Nombre_Buque = ? and Estado =1");
             pp.setString(1, txtBuque.getText());
 
             rs = pp.executeQuery();
@@ -856,7 +867,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
                     + "join Lugares h on h.Id_Lugar = g.Id_Lugar\n"
                     + "join Paises i on i.Codigo_Pais=h.Codigo_Pais\n"
                     + "join Ciudades j on j.Codigo_Ciudad= h.Codigo_Ciudad \n"
-                    + "join Estado_Viaje k on a.Codigo_Estado =k.Codigo_Estado");
+                    + "join Estado_Viaje k on a.Codigo_Estado =k.Codigo_Estado ");
             rs = pp.executeQuery();
             rsmd = rs.getMetaData();
             int col = rsmd.getColumnCount();
@@ -876,7 +887,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
 
     public void listarClientes() {
         try {
-            pp = cn.prepareStatement("select concat(Nombre_Cliente,' ',Apellido_Cliente)Nombre,Id_Cliente from Clientes");
+            pp = cn.prepareStatement("select concat(Nombre_Cliente,' ',Apellido_Cliente)Nombre,Id_Cliente from Clientes where Estado=1");
             rs = pp.executeQuery();
 
             while (rs.next()) {

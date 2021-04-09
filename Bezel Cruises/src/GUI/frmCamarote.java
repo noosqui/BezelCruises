@@ -495,7 +495,7 @@ public class frmCamarote extends javax.swing.JInternalFrame {
     private void cargatablebCamarotes() {
         DefaultTableModel model = (DefaultTableModel) tabCamarote.getModel();
         model.setRowCount(0);
-        res = Clases.ConexionBasedeDatos.Consulta("select * from Camarotes");
+        res = Clases.ConexionBasedeDatos.Consulta("select * from Camarotes join Buques on  Camarotes.Id_Buque = Buques.Id_Buque and Buques.Estado=1");
         try {
             while (res.next()) {
                 Vector v = new Vector();

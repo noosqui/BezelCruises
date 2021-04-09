@@ -462,7 +462,7 @@ public class frmAgentes extends javax.swing.JInternalFrame {
 
                try
                 {
-                    pp = cn.prepareStatement("select count(*)[Encontrado] from [dbo].[Usuarios] where Nombre_Usuario = ?");
+                    pp = cn.prepareStatement("select count(*)[Encontrado] from [dbo].[Usuarios] where Nombre_Usuario = ? and Estado =1 ");
                     pp.setString(1, user);
                     rs = pp.executeQuery();
 
@@ -526,13 +526,13 @@ public class frmAgentes extends javax.swing.JInternalFrame {
                 
             try
                 {
-                    pp = cn.prepareStatement("Select Codigo_Usuario[Codigo] from [dbo].[Usuarios] where [Nombre_Usuario] = ?");
-                    pp.setString(1, user);
+                    pp.clearParameters();
+                    pp = cn.prepareStatement("Select top(1) Codigo_Usuario[Codigo] from [dbo].[Usuarios] order by Codigo_Usuario desc");
                     rs = pp.executeQuery();
 
                     if(rs.next())
                     {
-                        codigo = rs.getString("Codigo");
+                        codigo = rs.getString(1);
                     }
                     
                 }

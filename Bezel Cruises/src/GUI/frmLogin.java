@@ -305,7 +305,7 @@ public class frmLogin extends javax.swing.JFrame {
             
         }while(encontradouser == 0);
         
-        if(encontradouser == 1)
+        if(encontradouser != 0)
         {
             try
             {

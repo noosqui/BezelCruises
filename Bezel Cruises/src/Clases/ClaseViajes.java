@@ -17,7 +17,7 @@ public class ClaseViajes {
     
     
      
-     //sobrecarga
+
      public void combobox (JComboBox cmb)
      {
          java.sql.Connection conectar = null;
@@ -134,12 +134,12 @@ public class ClaseViajes {
          }
      //
      }
-        //sobrecarga
+
       public void Ubicacion (String Lugar, int Codigo, JTextArea t)
      {
          t.setText(" ");
          java.sql.Connection conectar = null;
-         String query = "execute [UbicacionViaje] "+Codigo+",'"+Lugar+"'";
+         String query = "execute [UbicacionViaje] "+Codigo;
          
          try
          {
@@ -179,7 +179,7 @@ public class ClaseViajes {
      {
          t.setText(" ");
          java.sql.Connection conectar = null;
-         String query = "execute [UbicacionPuertoSalida] "+Codigo+",'"+Lugar+"'";
+         String query = "execute [UbicacionPuertoSalida] "+Codigo;
          
          try
          {
@@ -213,9 +213,7 @@ public class ClaseViajes {
              }
          }
 }
-//
 
-       //polimorfismo
   public void comboboxDestino (JComboBox cmb)
   {}
 

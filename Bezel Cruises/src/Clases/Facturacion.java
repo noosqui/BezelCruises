@@ -25,7 +25,6 @@ public class Facturacion {
     
      protected static int codigoFactura; 
 
-     //encapsulamiento
     public int getCodigoFactura() {
         return codigoFactura;
     }

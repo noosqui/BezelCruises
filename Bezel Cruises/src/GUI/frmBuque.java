@@ -376,13 +376,12 @@ public class frmBuque extends javax.swing.JInternalFrame {
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
         if (txtidbuque.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Seleccione el registro para Eliminar", "Error", JOptionPane.ERROR_MESSAGE);
             limpiar();
         } else {
             int opc = JOptionPane.showConfirmDialog(this, "¿ESTAS SEGURO QUE DESEA ELIMINAR ESTE REGISTRO?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (opc == JOptionPane.YES_OPTION) {
                 try {
-                    ProcedimientoBuquesandCamarotes.deletbuque(Integer.parseInt(txtidbuque.getText()));
+                    ProcedimientoBuquesandCamarotes.deletbuque(Integer.parseInt(id));
                 } catch (SQLException e) {
                 }
                 cargatablebuques();
@@ -477,7 +476,7 @@ public class frmBuque extends javax.swing.JInternalFrame {
     private void cargatablebuques() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
-        res = Clases.ConexionBasedeDatos.Consulta("select * from Buques");
+        res = Clases.ConexionBasedeDatos.Consulta("select * from Buques where Estado=1");
         try {
             while (res.next()) {
                 Vector v = new Vector();
